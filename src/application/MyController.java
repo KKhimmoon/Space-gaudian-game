@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -10,10 +11,15 @@ import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,6 +28,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.transform.Rotate;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MyController implements Initializable {
@@ -32,7 +39,10 @@ public class MyController implements Initializable {
 	private Media media;
 	private MediaPlayer mediaplayer;
 	@FXML
-	private Button myButton;
+	private Button StartButton;
+	
+	@FXML
+	private Button HowtoplayButton;
 
 	@FXML
 	private TextField outputField;
@@ -42,6 +52,13 @@ public class MyController implements Initializable {
 	
 	@FXML
 	private ImageView Meteorite;
+	
+	@FXML
+	private ImageView StartImage;
+	
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -75,23 +92,32 @@ public class MyController implements Initializable {
 		//fade
 		//scale
 		
-		String media_path = ClassLoader.getSystemResource("SpaceBg.mp4").toString();
+		String media_path = ClassLoader.getSystemResource("SpaceBg2.gif").toString();
 		media = new Media(media_path);
 		mediaplayer = new MediaPlayer(media);
 		mediaplayer.play();
 		BackgroundMedia.setMediaPlayer(mediaplayer);
 	}
 
-	// When user click on myButton
-	// this method will be called.
-	public void showDateTime(ActionEvent event) {
-		System.out.println("Button Clicked!");
-		Date now = new Date();
-		DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
-		// Model Data
-		String dateTimeString = df.format(now);
-		// Show in VIEW
-		outputField.setText(dateTimeString);
+	public void switchToHome(ActionEvent event) throws IOException {
+		 Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		 scene = new Scene(root);
+		 stage.setScene(scene);
+		 stage.show();
 	}
+	public void switchToSelectedScene(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("SelectedScene.fxml"));
+		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		 scene = new Scene(root);
+		 stage.setScene(scene);
+		 stage.show();
+	}
+	
+//	@FXML
+//	public void pop(ActionEvent event) throws IOException {
+//		System.out.println("Mouse");
+//		StartImage.resize(2, 2);
+//	}
 
 }

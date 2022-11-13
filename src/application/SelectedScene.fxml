@@ -5,7 +5,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-
 <Pane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="613.0" fitWidth="803.0" pickOnBounds="true" preserveRatio="true">
@@ -13,11 +12,38 @@
             <Image url="@../../../../OneDrive/รูปภาพ/mygame/space.png" />
          </image>
       </ImageView>
-      <Button layoutX="332.0" layoutY="455.0" mnemonicParsing="false" style="-fx-background-color: none;">
+      <Button fx:id="PLayButton" layoutX="326.0" layoutY="456.0" mnemonicParsing="false" style="-fx-background-color: none;">
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../OneDrive/รูปภาพ/mygame/text-1668336560572.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="Space1Btn" layoutX="75.0" layoutY="171.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;">
+         <graphic>
+            <ImageView fitHeight="105.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../OneDrive/รูปภาพ/mygame/295ef468535024b2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="Space2Btn" layoutX="334.0" layoutY="168.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;">
+         <graphic>
+            <ImageView fitHeight="105.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../OneDrive/รูปภาพ/mygame/4ced2fc5b95a6026.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="Space3Btn" layoutX="566.0" layoutY="164.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;">
+         <graphic>
+            <ImageView fitHeight="105.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../OneDrive/รูปภาพ/mygame/295ef468535024b2.png" />
                </image>
             </ImageView>
          </graphic>
