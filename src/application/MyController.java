@@ -14,6 +14,7 @@ import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -32,29 +34,28 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MyController implements Initializable {
+	
 	@FXML
 	private MediaView BackgroundMedia;
 	
-	private File file;
 	private Media media;
 	private MediaPlayer mediaplayer;
+	
 	@FXML
 	private Button StartButton;
-	
 	@FXML
 	private Button HowtoplayButton;
-
-	@FXML
-	private TextField outputField;
-
+	
 	@FXML
 	private ImageView MySpaceShip;
-	
 	@FXML
 	private ImageView Meteorite;
-	
 	@FXML
 	private ImageView StartImage;
+	@FXML
+	private ImageView HowtoplayImage;
+	@FXML
+	private ImageView TitleImage;
 	
 	private Stage stage;
 	private Scene scene;
@@ -91,12 +92,74 @@ public class MyController implements Initializable {
 		
 		//fade
 		//scale
+//		ScaleTransition scale = new ScaleTransition();
+//		scale.setNode(StartImage);
+//		scale.setDuration(Duration.millis(2000));
+//		scale.setInterpolator(Interpolator.LINEAR);
+//		scale.setByX(1);
+//		scale.setByY(1);
+//		scale.play();
 		
-		String media_path = ClassLoader.getSystemResource("SpaceBg2.gif").toString();
+		String media_path = ClassLoader.getSystemResource("spacebg.mp4").toString();
 		media = new Media(media_path);
 		mediaplayer = new MediaPlayer(media);
+		mediaplayer.setCycleCount(mediaplayer.INDEFINITE);
 		mediaplayer.play();
 		BackgroundMedia.setMediaPlayer(mediaplayer);
+		
+		String startbtn_path = ClassLoader.getSystemResource("text-1668334301790.png").toString();
+		Image startbtn = new Image(startbtn_path);
+		StartImage.setImage(startbtn);
+		
+		String htpbtn_path = ClassLoader.getSystemResource("text-1668334352822.png").toString();
+		Image htpbtn = new Image(htpbtn_path);
+		HowtoplayImage.setImage(htpbtn);
+		
+		String spaceship1_path = ClassLoader.getSystemResource("295ef468535024b2.png").toString();
+		Image spaceship1img = new Image(spaceship1_path);
+		MySpaceShip.setImage(spaceship1img);
+		
+		String title_path = ClassLoader.getSystemResource("text-1668333657199.png").toString();
+		Image titleimg = new Image(title_path);
+		TitleImage.setImage(titleimg);
+		
+		StartButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				StartImage.setScaleX(1.2);
+				StartImage.setScaleY(1.2);
+			}
+		});
+		
+		StartButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				StartImage.setScaleX(1);
+				StartImage.setScaleY(1);
+			}
+		});
+		HowtoplayButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				HowtoplayImage.setScaleX(1.2);
+				HowtoplayImage.setScaleY(1.2);
+			}
+		});
+		HowtoplayButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				HowtoplayImage.setScaleX(1);
+				HowtoplayImage.setScaleY(1);
+			}
+		});
 	}
 
 	public void switchToHome(ActionEvent event) throws IOException {
@@ -114,10 +177,5 @@ public class MyController implements Initializable {
 		 stage.show();
 	}
 	
-//	@FXML
-//	public void pop(ActionEvent event) throws IOException {
-//		System.out.println("Mouse");
-//		StartImage.resize(2, 2);
-//	}
 
 }
