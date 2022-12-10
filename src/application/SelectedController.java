@@ -298,7 +298,7 @@ public class SelectedController implements Initializable {
 	        }
 		}
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new GameScene();
+		scene = new SpaceInvaders();
 		stage.setScene(scene);
 		stage.show();
 		 
