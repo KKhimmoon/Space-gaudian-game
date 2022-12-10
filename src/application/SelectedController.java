@@ -6,6 +6,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
@@ -22,7 +23,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -60,11 +64,22 @@ public class SelectedController implements Initializable {
 	@FXML
 	private ImageView BackHomeimg;
 	
-	private Button Selected;
+	private static Image selectedSpaceShip;
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	private boolean isSelected1;
+	private boolean isSelected2;
+	private boolean isSelected3;
 	
+	public SelectedController() {
+		super();
+		setSelectedSpaceShip(null);
+		setSelected1(false);
+		setSelected2(false);
+		setSelected3(false);
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -117,7 +132,8 @@ public class SelectedController implements Initializable {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");
+				if(isSelected1()) Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				else{Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
 			}
 		});
 		
@@ -126,15 +142,31 @@ public class SelectedController implements Initializable {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				if(isSelected1()) Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				else{Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
 			}
 		});
+		Space1Btn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				setSelected1(true);
+				setSelected2(false);
+				setSelected3(false);
+				setSelectedSpaceShip(spaceship1img);
+				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+			}
+		}); 
 		Space2Btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");
+				if(isSelected2()) Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				else{Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
 			}
 		});
 		
@@ -143,15 +175,31 @@ public class SelectedController implements Initializable {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				if(isSelected2()) Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				else{Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
 			}
 		});
+		Space2Btn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				setSelected1(false);
+				setSelected2(true);
+				setSelected3(false);
+				setSelectedSpaceShip(spaceship2img);
+				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+			}
+		}); 
 		Space3Btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");
+				if(isSelected3()) Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				else {Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
 			}
 		});
 		
@@ -160,10 +208,67 @@ public class SelectedController implements Initializable {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				if(isSelected3()) Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				else {Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
 			}
 		});
-	
+		Space3Btn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				setSelected1(false);
+				setSelected2(false);
+				setSelected3(true);
+				setSelectedSpaceShip(spaceship3img);
+				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+			}
+		}); 
+		PlayButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					switchToGame(arg0);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public boolean isSelected1() {
+		return isSelected1;
+	}
+
+	public void setSelected1(boolean isSelected1) {
+		this.isSelected1 = isSelected1;
+	}
+	public boolean isSelected2() {
+		return isSelected2;
+	}
+
+	public void setSelected2(boolean isSelected2) {
+		this.isSelected2 = isSelected2;
+	}
+	public boolean isSelected3() {
+		return isSelected3;
+	}
+
+	public void setSelected3(boolean isSelected3) {
+		this.isSelected3 = isSelected3;
+	}
+
+	public static Image getSelectedSpaceShip() {
+		return selectedSpaceShip;
+	}
+
+	public void setSelectedSpaceShip(Image selectedSpaceShip) {
+		this.selectedSpaceShip = selectedSpaceShip;
 	}
 
 	public void switchToHome(ActionEvent event) throws IOException {
@@ -180,13 +285,22 @@ public class SelectedController implements Initializable {
 		 stage.setScene(scene);
 		 stage.show();
 	}
-	public void onClickHandler(ActionEvent event,Button b,int size) throws IOException {
-		this.Selected = b;
-		Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		 scene = new Scene(root);
-		 stage.setScene(scene);
-		 stage.show();
+	public void switchToGame(ActionEvent event) throws IOException {
+		if(getSelectedSpaceShip()==null) {
+			String dialogueString = "You have to choose a Spaceship before PLAY";
+			Alert alert = new Alert(AlertType.CONFIRMATION, dialogueString, ButtonType.OK);
+	        alert.setHeaderText("Warning");
+	        alert.setTitle("Selected Warning");
+	        Optional<ButtonType> result = alert.showAndWait();
+	        
+	        if (result.get() == ButtonType.OK) {
+	            return ;
+	        }
+		}
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new GameScene();
+		stage.setScene(scene);
+		stage.show();
 		 
 	}
 	

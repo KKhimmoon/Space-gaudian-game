@@ -132,7 +132,7 @@ public class MyController implements Initializable {
 				StartImage.setScaleY(1.2);
 			}
 		});
-		
+
 		StartButton.setOnMouseExited(new EventHandler<MouseEvent>() {
 
 			@Override
