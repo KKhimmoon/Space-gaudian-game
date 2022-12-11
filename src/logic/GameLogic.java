@@ -1,19 +1,28 @@
 package logic;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
+
+import application.BombPane;
+import application.Pause;
+import application.TimeAndScorePane;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -22,7 +31,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import sharedObject.RenderableHolder;
 
-public class GameLogic extends Application {
+public class GameLogic extends Scene {
+
 	private Rocket player;
 	private ArrayList<Shot> shots;
 	private ArrayList<Enemy> enemys;
@@ -30,7 +40,7 @@ public class GameLogic extends Application {
 	private ArrayList<BulletItem> bulletitems;
 	public int countBomb;
 	public static int BulletState;
-	private int score;
+	private static int score;
 	private static final Random RAND = new Random(); // private
 	static final int WIDTH = 800;
 	static final int HEIGHT = 600;
@@ -39,6 +49,10 @@ public class GameLogic extends Application {
 	boolean gameOver = false;
 	private GraphicsContext gc;
 	private double mouseX;
+	
+	public static Pane root;
+	public static Parent modal;
+	public static Parent pausescene;
 	
 	
 	public void InitializeGame() {
@@ -67,7 +81,7 @@ public class GameLogic extends Application {
 
 
 	public void setScore(int score) {
-		this.score = score;
+		GameLogic.score = score;
 	}
 	public static void InitializeIngredient() {
 
@@ -80,9 +94,10 @@ public class GameLogic extends Application {
 		return new BombItem(50 + RAND.nextInt(WIDTH-100),0,PLAYER_SIZE);
 		
 	}
-	@Override
-	public void start(Stage stage) throws Exception {
+
+	public GameLogic() {
 		// TODO Auto-generated method stub
+		super(new Pane(),WIDTH,HEIGHT);
 		Canvas canvas = new Canvas(WIDTH,HEIGHT);
 		gc = canvas.getGraphicsContext2D();
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),e-> run(gc)));
@@ -117,9 +132,34 @@ public class GameLogic extends Application {
 			}
 		});
 		InitializeGame();
-		stage.setScene(new Scene(new StackPane(canvas)));
-		stage.setTitle("Space Gaurdian");
-		stage.show();
+		
+		root = new Pane();
+		TimeAndScorePane timerAndScorePane = new TimeAndScorePane();
+		timerAndScorePane.setAlignment(Pos.TOP_RIGHT);
+		BombPane bombpane = new BombPane();
+		bombpane.setAlignment(Pos.BOTTOM_RIGHT);
+		
+		try {
+			modal = FXMLLoader.load(getClass().getClassLoader().getResource("application/EndgameScene.fxml"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			pausescene = FXMLLoader.load(getClass().getClassLoader().getResource("application/PauseScene.fxml"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Pause pause = new Pause();
+		pause.setTranslateX(10);
+		pause.setTranslateY(10);
+		pausescene.setVisible(false);
+		modal.setVisible(false);
+		bombpane.setTranslateX(700);
+		bombpane.setTranslateY(520);
+		root.getChildren().addAll(canvas,timerAndScorePane,bombpane,modal,pause,pausescene);
+		this.setRoot(root);
 	}
 	
 	private void run(GraphicsContext gc) {
@@ -181,9 +221,6 @@ public class GameLogic extends Application {
 //		}
 		gameOver = player.isDestroyed();
 	}
-	public static void main(String[] args) {
-		launch(args);
-	}
-	
+
 
 }

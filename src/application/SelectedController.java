@@ -37,6 +37,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import logic.GameLogic;
 
 public class SelectedController implements Initializable {
 	
@@ -298,7 +299,7 @@ public class SelectedController implements Initializable {
 	        }
 		}
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new SpaceInvaders();
+		scene = new logic.GameLogic();
 		stage.setScene(scene);
 		stage.show();
 		 

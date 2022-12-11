@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logic.GameLogic;
 
 public class Pause extends Pane implements Initializable{
 	
@@ -51,7 +52,7 @@ public class Pause extends Pane implements Initializable{
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				SpaceInvaders.pausescene.setVisible(true);
+				logic.GameLogic.pausescene.setVisible(true);
 			}
 		});
 //		this.resumeBtn.setCursor(Cursor.HAND);
@@ -92,7 +93,7 @@ public class Pause extends Pane implements Initializable{
 		exitIMG.setImage(exit);
 	}
 	public void onClickResume(ActionEvent event) throws IOException {
-		SpaceInvaders.pausescene.setVisible(false);
+		logic.GameLogic.pausescene.setVisible(false);
 	}
 	public void onClickExit(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));

@@ -33,7 +33,7 @@ public class Timer extends Canvas{
 			public void handle(long now) {
 				// TODO Auto-generated method stub
 				if(currentTime <= 0 ) {
-					SpaceInvaders.modal.setVisible(true);
+					logic.GameLogic.modal.setVisible(true);
 					return ;
 				}
 				lastTimeTriggered = (lastTimeTriggered < 0 ? now : lastTimeTriggered);

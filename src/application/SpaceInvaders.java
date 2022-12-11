@@ -160,7 +160,7 @@ public class SpaceInvaders extends Scene {
 			gc.fillText("Game Over" + score,WIDTH/2,HEIGHT/2.5);
 		}
 		
-		if(RAND.nextInt(10) >8) {
+		if(RAND.nextInt(10) <3) {
 			enemys.add(newEnemy());
 			
 		}
