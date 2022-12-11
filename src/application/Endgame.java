@@ -71,6 +71,7 @@ public class Endgame implements Initializable{
 			@Override
 			public void handle(long arg0) {
 				// TODO Auto-generated method stub
+				
 				yourScoreText.setText("Your Score : "+SpaceInvaders.getScore());
 			}
 		};

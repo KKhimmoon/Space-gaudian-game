@@ -1,5 +1,6 @@
 package logic;
 
+import application.SelectedController;
 import entity.base.Collidable;
 import entity.base.Entity;
 import entity.base.Updateable;
@@ -10,10 +11,10 @@ public class Rocket extends Entity implements Updateable,Collidable{
 	private int size;
 	private boolean exploding;
 	private int explosionStep;
-	private final String img;
+	private final Image img;
 	private int radius;
 	public Rocket(int posX,int posY,int size) {
-		this.img = "295ef468535024b2.png";
+		this.img = SelectedController.getSelectedSpaceShip();
 		setPosX(posX);
 		setPosY(posY);
 		setSize(size);
@@ -91,9 +92,7 @@ public class Rocket extends Entity implements Updateable,Collidable{
 //					SpaceInvaders.EXPLOSION_H,getPosX(),getPosY(),getSize(),getSize());
 //			
 		}else {
-			String image_path = ClassLoader.getSystemResource(this.img).toString();
-			Image image = new Image(image_path);
-			gc.drawImage(image,getPosX(),getPosY(),getSize(),getSize());
+			gc.drawImage(this.img,getPosX(),getPosY(),getSize(),getSize());
 		}
 		
 	}
