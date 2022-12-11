@@ -11,10 +11,9 @@ public class BombItem extends Item{
 	public BombItem(int posX, int posY, int size) {
 		super(posX, posY, size);
 		this.img = "shield.png";
-		setSpeed(5);
+		setSpeed(1);
 		// TODO Auto-generated constructor stub
 	}
-	
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
@@ -22,10 +21,7 @@ public class BombItem extends Item{
 			String image_path = ClassLoader.getSystemResource(this.img).toString();
 			Image image = new Image(image_path);
 			gc.drawImage(image,getPosX(),getPosY(),getSize(),getSize());
-			setPosY(getPosY()+5);
+			setPosY(getPosY()+getSpeed());
 		}
-		
 	}
-	
-
 }

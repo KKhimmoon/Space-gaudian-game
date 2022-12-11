@@ -9,8 +9,7 @@ public class Enemy extends Rocket {
 		public Enemy(int posX, int posY, int size) {
 			super(posX,posY,size);
 			this.img = "35cc4b0f4226a0f1.png";
-			setSpeed(1);
-		
+			setSpeed(2);
 			// TODO Auto-generated constructor stub
 		}
 
@@ -34,7 +33,9 @@ public class Enemy extends Rocket {
 				String image_path = ClassLoader.getSystemResource(this.img).toString();
 				Image image = new Image(image_path);
 				gc.drawImage(image,getPosX(),getPosY(),getSize(),getSize());
-				setPosY(getPosY()+5);
+//				if(getPosY() != 150) {
+					setPosY(getPosY()+ getSpeed());
+//				}
 		}
 	}
 }

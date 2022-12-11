@@ -11,7 +11,6 @@ public class Shot implements Updateable,Collidable {
 	private int posY;
 	private int speed;
 	static final int size = 6;
-	private int radius;
 	public Shot(int posX,int posY) {
 		super();
 		setPosX(posX);
@@ -23,7 +22,6 @@ public class Shot implements Updateable,Collidable {
 		gc.setFill(Color.RED);
 		if (GameLogic.BulletState >= 20) {
 			gc.setFill(Color.YELLOWGREEN);
-			speed = 50;
 			gc.fillOval(posX, posY, size, size);
 		} else {
 		gc.fillOval(posX, posY, size, size);
@@ -59,20 +57,15 @@ public class Shot implements Updateable,Collidable {
 	@Override
 	public boolean colide(Rocket other) {
 		// TODO Auto-generated method stub
-		return Math.hypot(this.getPosX()- other.getPosX(), this.getPosY()- other.getPosY()) <= this.radius+ other.getRadius();
+		int d = GameLogic.distance(this.getPosX() + size/5,this.posY + size/5, other.getPosX() + other.getSize()/5,other.getPosY() + other.getSize()/5);
+		return d < other.getSize()/3 + other.getSize()/3;
 	}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		setPosY(getPosY()-getSpeed());
-		
 	}
-	public int getRadius() {
-		return radius;
-	}
-	public void setRadius(int radius) {
-		this.radius = radius;
-	}
+
 
 }

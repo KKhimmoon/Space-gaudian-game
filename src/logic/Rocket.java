@@ -12,7 +12,6 @@ public class Rocket extends Entity implements Updateable,Collidable{
 	private boolean exploding;
 	private int explosionStep;
 	private final Image img;
-	private int radius;
 	public Rocket(int posX,int posY,int size) {
 		this.img = SelectedController.getSelectedSpaceShip();
 		setPosX(posX);
@@ -21,13 +20,13 @@ public class Rocket extends Entity implements Updateable,Collidable{
 		setExplosionStep(0);
 		setDestroyed(false);
 		setExploding(false);
-		setRadius(20);
 		
 		// TODO Auto-generated constructor stub
 	}
 
 	public boolean colide(Rocket other) {
-		return Math.hypot(this.getPosX()- other.getPosX(), this.getPosY()- other.getPosY()) <= this.radius+ other.getRadius();
+		int d = GameLogic.distance(this.getPosX() + size/2,this.posY + size/2, other.getPosX() + other.getSize()/2,other.getPosY() + other.getSize()/2);
+		return d < other.getSize()/2 + other.getSize()/2;
 	}
 
 	@Override
@@ -70,19 +69,9 @@ public class Rocket extends Entity implements Updateable,Collidable{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-
-	public int getRadius() {
-		return radius;
-	}
-
-	public void setRadius(int radius) {
-		this.radius = radius;
-	}
 	public Shot shoot() {
 		return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY() - Shot.size);
 	}
-
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
@@ -90,6 +79,7 @@ public class Rocket extends Entity implements Updateable,Collidable{
 //			gc.drawImage(SpaceInvaders.EXPLOSION_IMG, getExplosionStep() % SpaceInvaders.EXPLOSION_COL * SpaceInvaders.EXPLOSION_W,
 //					(getExplosionStep()/SpaceInvaders.EXPLOSION_ROWS)*SpaceInvaders.EXPLOSION_H +1,SpaceInvaders.EXPLOSION_W,
 //					SpaceInvaders.EXPLOSION_H,getPosX(),getPosY(),getSize(),getSize());
+			gc.drawImage(this.img,getPosX(),getPosY(),getSize(),getSize());
 //			
 		}else {
 			gc.drawImage(this.img,getPosX(),getPosY(),getSize(),getSize());
