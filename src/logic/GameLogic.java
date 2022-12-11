@@ -61,6 +61,7 @@ public class GameLogic extends Scene {
 	public static Parent modal;
 	public static Parent pausescene;
 	
+	private static TimeAndScorePane timerAndScorePane;
 	
 	public void InitializeGame() {
 		shots = new ArrayList<>();
@@ -89,7 +90,7 @@ public class GameLogic extends Scene {
 	}
 
 
-	public int getScore() {
+	public static int getScore() {
 		return score;
 	}
 	public static int distance(int x1,int y1,int x2,int y2) {
@@ -99,9 +100,6 @@ public class GameLogic extends Scene {
 
 	public void setScore(int score) {
 		GameLogic.score = score;
-	}
-	public static void InitializeIngredient() {
-
 	}
 	public static Enemy newEnemy() {
 		return new Enemy(50 + RAND.nextInt(WIDTH-100),0,PLAYER_SIZE);
@@ -151,8 +149,8 @@ public class GameLogic extends Scene {
 		InitializeGame();
 		
 		root = new Pane();
-		TimeAndScorePane timerAndScorePane = new TimeAndScorePane();
-		timerAndScorePane.setAlignment(Pos.TOP_RIGHT);
+		timerAndScorePane = new TimeAndScorePane();
+		timerAndScorePane.setTranslateX(680);
 		BombPane bombpane = new BombPane();
 		bombpane.setAlignment(Pos.BOTTOM_RIGHT);
 		
@@ -180,12 +178,13 @@ public class GameLogic extends Scene {
 	}
 	
 	public static void run(GraphicsContext gc) {
+		timerAndScorePane.updateScore(timerAndScorePane.getGc());
 		gc.setFill(Color.grayRgb(20));
 		gc.fillRect(0, 0, WIDTH, HEIGHT);
 		gc.setTextAlign(TextAlignment.CENTER);
-		gc.setFont(Font.font(20));
-		gc.setFill(Color.WHITE);
-		gc.fillText("Score" + score,60,20);
+//		gc.setFont(Font.font(20));
+//		gc.setFill(Color.WHITE);
+//		gc.fillText("Score" + score,60,20);
 		
 		if(gameOver) {
 			gc.setFont(Font.font(35));
@@ -235,6 +234,14 @@ public class GameLogic extends Scene {
 //			}
 //		}
 		gameOver = player.isDestroyed();
+	}
+
+	public static TimeAndScorePane getTimerAndScorePane() {
+		return timerAndScorePane;
+	}
+
+	public static void setTimerAndScorePane(TimeAndScorePane timerAndScorePane) {
+		GameLogic.timerAndScorePane = timerAndScorePane;
 	}
 
 

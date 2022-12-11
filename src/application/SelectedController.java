@@ -104,9 +104,10 @@ public class SelectedController implements Initializable {
 		Image selectedbgimg = new Image(selectedbg_path);
 		selectedbg.setImage(selectedbgimg);
 		
-		String backhome_path = ClassLoader.getSystemResource("35cc4b0f4226a0f1.png").toString();
+		String backhome_path = ClassLoader.getSystemResource("arrow.png").toString();
 		Image backhomeimg = new Image(backhome_path);
 		BackHomeimg.setImage(backhomeimg);
+		BackHomeimg.setRotate(180);
 		
 		PlayButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
 

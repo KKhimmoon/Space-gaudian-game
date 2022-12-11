@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -24,7 +25,7 @@ public class Timer extends Canvas{
 	
 	
 	public Timer(int s) {
-		super(800,40);
+		super(80,40);
 		this.currentTime = s;
 		this.lastTimeTriggered = -1;
 		GraphicsContext gc = this.getGraphicsContext2D();
@@ -56,10 +57,11 @@ public class Timer extends Canvas{
 		getAnimationTimer().start();
 	}
 	public void drawCurrentTimeString(GraphicsContext gc){
-		gc.setFill(Color.YELLOW);
-		gc.setFont(new Font(14));
+		gc.setFill(Color.WHITE);
+		gc.setFont(new Font(20));
 		gc.clearRect(0, 0, this.getWidth(), this.getHeight());
-		gc.fillText("Count Down Timer : " + this.currentTime, this.getWidth() / 2 +250, this.getHeight() / 2);
+		gc.drawImage(new Image(ClassLoader.getSystemResource("clock.png").toString()), 0, 0, 40, 40);
+		gc.fillText("" + this.currentTime, this.getWidth()/2, this.getHeight() / 2 +12);
 	}
 	public static AnimationTimer getAnimationTimer() {
 		return animationTimer;

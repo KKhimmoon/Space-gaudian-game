@@ -53,6 +53,7 @@ public class Pause extends Pane implements Initializable{
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				logic.GameLogic.pausescene.setVisible(true);
+				Timer.getAnimationTimer().stop();
 			}
 		});
 //		this.resumeBtn.setCursor(Cursor.HAND);
@@ -93,6 +94,7 @@ public class Pause extends Pane implements Initializable{
 		exitIMG.setImage(exit);
 	}
 	public void onClickResume(ActionEvent event) throws IOException {
+		Timer.getAnimationTimer().start();
 		logic.GameLogic.pausescene.setVisible(false);
 	}
 	public void onClickExit(ActionEvent event) throws IOException {
