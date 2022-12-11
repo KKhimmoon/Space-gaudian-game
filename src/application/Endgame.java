@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -64,8 +66,16 @@ public class Endgame implements Initializable{
 		String playagain_path = ClassLoader.getSystemResource("text-1670683737700.png").toString();
 		Image playagain = new Image(playagain_path);
 		playAgainIMG.setImage(playagain);
-		
-		this.yourScoreText.setText("Your Score : "+SpaceInvaders.getScore());
+		AnimationTimer animationTimer = new AnimationTimer() {
+			
+			@Override
+			public void handle(long arg0) {
+				// TODO Auto-generated method stub
+				yourScoreText.setText("Your Score : "+SpaceInvaders.getScore());
+			}
+		};
+		animationTimer.start();
+
 
 	}
 

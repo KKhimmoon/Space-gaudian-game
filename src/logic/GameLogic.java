@@ -38,7 +38,8 @@ public class GameLogic extends Scene {
 	private ArrayList<Enemy> enemys;
 	private ArrayList<BombItem> bombitems;
 	private ArrayList<BulletItem> bulletitems;
-	public int countBomb;
+	public static int countBomb;
+
 	public static int BulletState;
 	private static int score;
 	private static final Random RAND = new Random(); // private
@@ -64,7 +65,14 @@ public class GameLogic extends Scene {
 		setScore(0);
 	}
 	
-	
+	public static int getCountBomb() {
+		return countBomb;
+	}
+
+
+	public static void setCountBomb(int countBomb) {
+		GameLogic.countBomb = countBomb;
+	}
 	public static int getBulletState() {
 		return BulletState;
 	}
@@ -158,7 +166,7 @@ public class GameLogic extends Scene {
 		modal.setVisible(false);
 		bombpane.setTranslateX(700);
 		bombpane.setTranslateY(520);
-		root.getChildren().addAll(canvas,timerAndScorePane,bombpane,modal,pause,pausescene);
+		root.getChildren().addAll(canvas,timerAndScorePane,bombpane,pause,modal,pausescene);
 		this.setRoot(root);
 	}
 	
@@ -169,9 +177,6 @@ public class GameLogic extends Scene {
 		gc.setFont(Font.font(20));
 		gc.setFill(Color.WHITE);
 		gc.fillText("Score" + score,60,20);
-		gc.setFont(Font.font(35));
-		gc.setFill(Color.YELLOW);
-		gc.fillText("Bomb" + countBomb,60,120);
 		
 		if(gameOver) {
 			gc.setFont(Font.font(35));

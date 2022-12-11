@@ -12,10 +12,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class BombPane extends HBox{
-	private int amount = 50;
+	private int amount ;
 	private Canvas canvas;
 	public BombPane(){
 		this.setMinSize(100, 50);
+		this.amount = logic.GameLogic.getCountBomb();
 		String bomb_path = ClassLoader.getSystemResource("bomb.png").toString();
 		Image bombIMG = new Image(bomb_path);
 		ImageView bomb = new ImageView(bombIMG);
