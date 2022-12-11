@@ -3,6 +3,7 @@ package logic;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.IntStream;
 
 import com.sun.media.jfxmediaimpl.platform.Platform;
@@ -10,6 +11,7 @@ import com.sun.media.jfxmediaimpl.platform.Platform;
 import application.BombPane;
 import application.Pause;
 import application.TimeAndScorePane;
+
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -36,13 +38,15 @@ import sharedObject.RenderableHolder;
 public class GameLogic extends Scene {
 
 	private static Rocket player;
-	private static ArrayList<Shot> shots;
-	private static ArrayList<Enemy> enemys;
-	private static ArrayList<BombItem> bombitems;
-	private static ArrayList<BulletItem> bulletitems;
+	private static ConcurrentLinkedQueue<Shot> shots;
+	private static ConcurrentLinkedQueue<Shot> enemysshots;
+	private static ConcurrentLinkedQueue<Enemy> enemys;
+	private static ConcurrentLinkedQueue<BombItem> bombitems;
+	private static ConcurrentLinkedQueue<BulletItem> bulletitems;
 	public static int countBomb;
 
 	public static int BulletState;
+	
 	public static GraphicsContext getGc() {
 		return gc;
 	}
@@ -64,9 +68,10 @@ public class GameLogic extends Scene {
 	private static TimeAndScorePane timerAndScorePane;
 	
 	public void InitializeGame() {
-		shots = new ArrayList<>();
-		enemys = new ArrayList<>();
-		bombitems = new ArrayList<>();
+		shots = new ConcurrentLinkedQueue<>();
+		enemys = new ConcurrentLinkedQueue<>();
+		enemysshots = new ConcurrentLinkedQueue<>();
+		bombitems = new ConcurrentLinkedQueue<>();
 		player = new Rocket(WIDTH/2,HEIGHT-PLAYER_SIZE-30,PLAYER_SIZE);
 		setBulletState(0);
 		setScore(0);
@@ -195,19 +200,37 @@ public class GameLogic extends Scene {
 			enemys.add(newEnemy());
 		}
 		for(Enemy x:enemys) {
+			if(x.isExploding()) {enemys.remove(x); continue;}
 			x.draw(gc);
+			if(RAND.nextInt(500) < 20) {
+				enemysshots.add(x.shoot());
+			}
+//			enemysshots.add(x.shoot());
+		}
+
+		for(Shot shot: enemysshots) {
+//				System.out.println("haha");
+				if(shot.getPosY()< 0 || shot.isRemove) {
+					enemysshots.remove(shot);
+					continue;
+				}
+				shot.update();
+				shot.draw(gc);
+				if(shot.colide(player)) {
+						score--;
+						shot.setRemove(true);
+					}
 		}
 		if(RAND.nextInt(1000) < 10) {
 			bombitems.add(newBomb());
 		}
-		
 		player.update();
 		player.draw(gc);
 		player.setPosX((int) mouseX);
-		for(int i = shots.size()-1;i>= 0;i--) {
-			Shot shot = shots.get(i);
+		for(Shot shot: shots) {
+			
 			if(shot.getPosY()< 0 || shot.isRemove) {
-				shots.remove(i);
+				shots.remove(shot);
 				continue;
 			}
 			shot.update();

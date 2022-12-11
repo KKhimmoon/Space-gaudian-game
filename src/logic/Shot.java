@@ -18,6 +18,13 @@ public class Shot implements Updateable,Collidable {
 		setSpeed(10);
 		// TODO Auto-generated constructor stub
 	}
+	public Shot(int posX,int posY,int speed) {
+		super();
+		setPosX(posX);
+		setPosY(posY);
+		setSpeed(speed);
+		// TODO Auto-generated constructor stub
+	}
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.RED);
 		if (GameLogic.BulletState >= 20) {
