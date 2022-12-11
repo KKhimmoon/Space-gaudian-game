@@ -1,6 +1,7 @@
 package application;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,7 +15,7 @@ public class BombPane extends HBox{
 	private int amount = 50;
 	private Canvas canvas;
 	public BombPane(){
-		this.setMaxSize(800, 600);
+		this.setMinSize(100, 50);
 		String bomb_path = ClassLoader.getSystemResource("bomb.png").toString();
 		Image bombIMG = new Image(bomb_path);
 		ImageView bomb = new ImageView(bombIMG);

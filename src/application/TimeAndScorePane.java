@@ -16,8 +16,7 @@ public class TimeAndScorePane extends VBox{
 		this.prefHeight(200);
 		this.prefWidth(800);
 		this.setPadding(new Insets(15, 0, 0, 0));
-		Text text = new Text("Score : 135");
-		this.getChildren().addAll(text,new Timer(100)); // add score ด้วย
+		this.getChildren().addAll(new Timer(10)); // add score ด้วย
 		
 	}
 	public void setTimer(Timer t) {

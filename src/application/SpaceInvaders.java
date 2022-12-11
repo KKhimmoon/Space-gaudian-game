@@ -1,8 +1,10 @@
 package application;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.IntStream;
 
 import javafx.animation.KeyFrame;
@@ -10,8 +12,10 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -29,7 +33,8 @@ public class SpaceInvaders extends Scene {
 	static final Random RAND = new Random(); // private
 	
 	
-	private StackPane root;
+	public static Pane root;
+	public static Parent modal;
 	
 	
 	static final int WIDTH = 800;
@@ -56,7 +61,7 @@ public class SpaceInvaders extends Scene {
 	Rocket player;
 	ArrayList<Shot> shots;
 	ArrayList<Universe> univ;
-	ArrayList<Enemy> enemys;
+	ConcurrentLinkedQueue<Enemy> enemys;
 	private int score;
 	private double mouseX;
 	
@@ -73,7 +78,7 @@ public class SpaceInvaders extends Scene {
 	public SpaceInvaders() {
 		super(new StackPane(),WIDTH, HEIGHT);
 		// TODO Auto-generated method stub
-		root = new StackPane();
+		root = new Pane();
 		TimeAndScorePane timerAndScorePane = new TimeAndScorePane();
 		timerAndScorePane.setAlignment(Pos.TOP_RIGHT);
 		BombPane bombpane = new BombPane();
@@ -102,14 +107,26 @@ public class SpaceInvaders extends Scene {
 			}
 		});
 		setup();
-		root.getChildren().addAll(canvas,timerAndScorePane,bombpane);
+
+		try {
+			modal = FXMLLoader.load(getClass().getResource("EndgameScene.fxml"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		modal.setVisible(false);
+		bombpane.setTranslateX(700);
+		bombpane.setTranslateY(520);
+		modal.setTranslateX(170);
+		modal.setTranslateY(150);
+		root.getChildren().addAll(canvas,timerAndScorePane,bombpane,modal);
 		this.setRoot(root);
 	}
 	
 	public void setup() {
 		univ = new ArrayList<>();
 		shots = new ArrayList<>();
-		enemys = new ArrayList<>();
+		enemys = new ConcurrentLinkedQueue<>();
 		player = new Rocket(WIDTH/2,HEIGHT -PLAYER_SIZE,PLAYER_SIZE);
 		score = 0;
 		IntStream.range(0, Maxbom).mapToObj(i -> this.newEnemy());
@@ -121,7 +138,7 @@ public class SpaceInvaders extends Scene {
 		gc.setTextAlign(TextAlignment.CENTER);
 		gc.setFont(Font.font(20));
 		gc.setFill(Color.WHITE);
-		gc.fillText("Score" + score,60,20);
+		gc.fillText("Score" + score,750,25);
 		
 		
 		if(gameOver) {
@@ -163,11 +180,16 @@ public class SpaceInvaders extends Scene {
 				}
 			}
 		}
-		for(int i = enemys.size()-1;i>= 0;i--) {
-			if(enemys.get(i).isDestroyed()) {
-				enemys.set(i, newEnemy());
+		for(Enemy x:enemys) {
+			if(x.isDestroyed()) {
+				enemys.remove(x);
 			}
 		}
+//		for(int i = enemys.size()-1;i>= 0;i--) {
+//			if(enemys.get(i).isDestroyed()) {
+//				enemys.set(i, newEnemy());
+//			}
+//		}
 		gameOver = player.isDestroyed();
 		if(RAND.nextInt(10)>2) {
 			univ.add(new Universe());
@@ -179,7 +201,7 @@ public class SpaceInvaders extends Scene {
 		}
 		
 	}
-	
+
 	
 	
 

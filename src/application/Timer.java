@@ -1,10 +1,19 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.animation.AnimationTimer;
+import javafx.event.Event;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class Timer extends Canvas{
 	private int currentTime;
@@ -22,7 +31,10 @@ public class Timer extends Canvas{
 			@Override
 			public void handle(long now) {
 				// TODO Auto-generated method stub
-				if(currentTime <= 0 ) return;
+				if(currentTime <= 0 ) {
+					SpaceInvaders.modal.setVisible(true);
+					return ;
+				}
 				lastTimeTriggered = (lastTimeTriggered < 0 ? now : lastTimeTriggered);
 				
 				if (now - lastTimeTriggered >= 1000000000)
