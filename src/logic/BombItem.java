@@ -10,7 +10,7 @@ public class BombItem extends Item{
 
 	public BombItem(int posX, int posY, int size) {
 		super(posX, posY, size);
-		this.img = "shield.img";
+		this.img = "shield.png";
 		setSpeed(5);
 		// TODO Auto-generated constructor stub
 	}

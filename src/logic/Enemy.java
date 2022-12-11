@@ -9,7 +9,7 @@ public class Enemy extends Rocket {
 		public Enemy(int posX, int posY, int size) {
 			super(posX,posY,size);
 			this.img = "35cc4b0f4226a0f1.png";
-			setSpeed(5);
+			setSpeed(1);
 		
 			// TODO Auto-generated constructor stub
 		}

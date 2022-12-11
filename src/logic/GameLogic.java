@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import com.sun.media.jfxmediaimpl.platform.Platform;
+
 import application.BombPane;
 import application.Pause;
 import application.TimeAndScorePane;
@@ -33,23 +35,27 @@ import sharedObject.RenderableHolder;
 
 public class GameLogic extends Scene {
 
-	private Rocket player;
-	private ArrayList<Shot> shots;
-	private ArrayList<Enemy> enemys;
-	private ArrayList<BombItem> bombitems;
-	private ArrayList<BulletItem> bulletitems;
+	private static Rocket player;
+	private static ArrayList<Shot> shots;
+	private static ArrayList<Enemy> enemys;
+	private static ArrayList<BombItem> bombitems;
+	private static ArrayList<BulletItem> bulletitems;
 	public static int countBomb;
 
 	public static int BulletState;
+	public static GraphicsContext getGc() {
+		return gc;
+	}
+
 	private static int score;
 	private static final Random RAND = new Random(); // private
 	static final int WIDTH = 800;
 	static final int HEIGHT = 600;
 	static final int PLAYER_SIZE = 100;
 	final int MaxShot = 20;
-	boolean gameOver = false;
-	private GraphicsContext gc;
-	private double mouseX;
+	private static boolean gameOver = false;
+	private static GraphicsContext gc;
+	private static double mouseX;
 	
 	public static Pane root;
 	public static Parent modal;
@@ -94,11 +100,11 @@ public class GameLogic extends Scene {
 	public static void InitializeIngredient() {
 
 	}
-	public Enemy newEnemy() {
+	public static Enemy newEnemy() {
 		return new Enemy(50 + RAND.nextInt(WIDTH-100),0,PLAYER_SIZE);
 		
 	}
-	public BombItem newBomb() {
+	public static BombItem newBomb() {
 		return new BombItem(50 + RAND.nextInt(WIDTH-100),0,PLAYER_SIZE);
 		
 	}
@@ -108,9 +114,9 @@ public class GameLogic extends Scene {
 		super(new Pane(),WIDTH,HEIGHT);
 		Canvas canvas = new Canvas(WIDTH,HEIGHT);
 		gc = canvas.getGraphicsContext2D();
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),e-> run(gc)));
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.play();
+//		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),e-> run(gc)));
+//		timeline.setCycleCount(Timeline.INDEFINITE);
+//		timeline.play();
 //		AnimationTimer animationTimer = new AnimationTimer() {
 //			public void handle(long arg0) {
 //				// ===========================================
@@ -170,7 +176,7 @@ public class GameLogic extends Scene {
 		this.setRoot(root);
 	}
 	
-	private void run(GraphicsContext gc) {
+	public static void run(GraphicsContext gc) {
 		gc.setFill(Color.grayRgb(20));
 		gc.fillRect(0, 0, WIDTH, HEIGHT);
 		gc.setTextAlign(TextAlignment.CENTER);
@@ -183,15 +189,16 @@ public class GameLogic extends Scene {
 			gc.setFill(Color.YELLOW);
 			gc.fillText("Game Over" + score,WIDTH/2,HEIGHT/2.5);
 		}
-		if(RAND.nextInt(50) > 20) {
+		if(RAND.nextInt(500) < 10) {
 			enemys.add(newEnemy());
 		}
 		for(Enemy x:enemys) {
 			x.draw(gc);
 		}
-		if(RAND.nextInt(50) > 10) {
+		if(RAND.nextInt(1000) < 10) {
 			bombitems.add(newBomb());
 		}
+		
 		player.update();
 		player.draw(gc);
 		player.setPosX((int) mouseX);

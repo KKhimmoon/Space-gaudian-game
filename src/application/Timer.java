@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -34,12 +35,18 @@ public class Timer extends Canvas{
 				// TODO Auto-generated method stub
 				if(currentTime <= 0 ) {
 					logic.GameLogic.modal.setVisible(true);
-					return ;
+					getAnimationTimer().stop();
+					
 				}
+				logic.GameLogic.run(logic.GameLogic.getGc());
 				lastTimeTriggered = (lastTimeTriggered < 0 ? now : lastTimeTriggered);
 				
 				if (now - lastTimeTriggered >= 1000000000)
 				{
+//					if(currentTime <= 0 ) {
+//						logic.GameLogic.modal.setVisible(true);
+//						return ;
+//					}
 					currentTime--;
 					drawCurrentTimeString(gc);
 					lastTimeTriggered = now;
