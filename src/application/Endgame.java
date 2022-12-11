@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Endgame implements Initializable{
@@ -37,7 +38,10 @@ public class Endgame implements Initializable{
 	private ImageView upIMG;
 	@FXML
 	private ImageView playAgainIMG;
+	@FXML
+	private Text yourScoreText;
 	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -60,8 +64,12 @@ public class Endgame implements Initializable{
 		String playagain_path = ClassLoader.getSystemResource("text-1670683737700.png").toString();
 		Image playagain = new Image(playagain_path);
 		playAgainIMG.setImage(playagain);
+		
+		this.yourScoreText.setText("Your Score : "+SpaceInvaders.getScore());
+
 	}
-	
+
+
 	public void yesButtonHangler(ActionEvent event) throws IOException{
 //		Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 //		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();

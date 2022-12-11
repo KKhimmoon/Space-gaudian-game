@@ -20,7 +20,7 @@ public class BigMeteorite extends Enemy implements Moveable,Destroyable{
 	@Override
 	public void updateBlood() {
 		// TODO Auto-generated method stub
-	
+		if()
 	}
 
 	@Override

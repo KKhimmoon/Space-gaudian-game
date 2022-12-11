@@ -35,6 +35,7 @@ public class SpaceInvaders extends Scene {
 	
 	public static Pane root;
 	public static Parent modal;
+	public static Parent pausescene;
 	
 	
 	static final int WIDTH = 800;
@@ -62,7 +63,11 @@ public class SpaceInvaders extends Scene {
 	ArrayList<Shot> shots;
 	ArrayList<Universe> univ;
 	ConcurrentLinkedQueue<Enemy> enemys;
-	private int score;
+	private static int score;
+	public static int getScore() {
+		return score;
+	}
+
 	private double mouseX;
 	
 	Enemy newEnemy() {
@@ -114,12 +119,20 @@ public class SpaceInvaders extends Scene {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		try {
+			pausescene = FXMLLoader.load(getClass().getResource("PauseScene.fxml"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Pause pause = new Pause();
+		pause.setTranslateX(10);
+		pause.setTranslateY(10);
+		pausescene.setVisible(false);
 		modal.setVisible(false);
 		bombpane.setTranslateX(700);
 		bombpane.setTranslateY(520);
-		modal.setTranslateX(170);
-		modal.setTranslateY(150);
-		root.getChildren().addAll(canvas,timerAndScorePane,bombpane,modal);
+		root.getChildren().addAll(canvas,timerAndScorePane,bombpane,modal,pause,pausescene);
 		this.setRoot(root);
 	}
 	
@@ -147,8 +160,9 @@ public class SpaceInvaders extends Scene {
 			gc.fillText("Game Over" + score,WIDTH/2,HEIGHT/2.5);
 		}
 		
-		if(RAND.nextInt(50) > 5) {
+		if(RAND.nextInt(10) >8) {
 			enemys.add(newEnemy());
+			
 		}
 		for(Enemy x:enemys) {
 			x.draw(gc);
@@ -201,6 +215,7 @@ public class SpaceInvaders extends Scene {
 		}
 		
 	}
+
 
 	
 	
