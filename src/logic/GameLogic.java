@@ -164,15 +164,15 @@ public class GameLogic extends Scene {
 				
 			}
 		});
-		setOnKeyPressed(keyevent -> {
-			if(keyevent.getCode()==KeyCode.SHIFT) {
-				if(shots.size() < MaxShot) {
-					shots.add(player.shoot());
-				}
-			}
-		});
 		InitializeGame();
 		root = new Pane();
+		root.addEventFilter(KeyEvent.KEY_PRESSED, event->{
+            if (event.getCode() == KeyCode.SPACE) {
+            	if(shots.size() < MaxShot) {
+					shots.add(player.shoot());
+				}
+            }
+		});
 		timerAndScorePane = new TimeAndScorePane();
 		timerAndScorePane.setTranslateX(680);
 		bombpane = new BombPane();
