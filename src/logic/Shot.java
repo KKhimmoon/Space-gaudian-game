@@ -29,9 +29,9 @@ public class Shot implements Updateable,Collidable {
 		gc.setFill(Color.RED);
 		if (GameLogic.BulletState >= 20) {
 			gc.setFill(Color.YELLOWGREEN);
-			gc.fillOval(posX, posY, size, size);
+			gc.fillOval(Math.min(745,getPosX()), posY, size, size);
 		} else {
-		gc.fillOval(posX, posY, size, size);
+		gc.fillOval(Math.min(745,getPosX()), posY, size, size);
 		}
 	}
 	

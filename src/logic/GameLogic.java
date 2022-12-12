@@ -107,11 +107,11 @@ public class GameLogic extends Scene {
 		GameLogic.score = score;
 	}
 	public static Enemy newEnemy() {
-		return new Enemy(50 + RAND.nextInt(WIDTH-100),0,PLAYER_SIZE);
+		return new Enemy(10 + RAND.nextInt(WIDTH-120),0,PLAYER_SIZE);
 		
 	}
 	public static BombItem newBomb() {
-		return new BombItem(50 + RAND.nextInt(WIDTH-100),0,PLAYER_SIZE);
+		return new BombItem(10 + RAND.nextInt(WIDTH-120),0,PLAYER_SIZE);
 		
 	}
 

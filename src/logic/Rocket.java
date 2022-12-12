@@ -79,10 +79,10 @@ public class Rocket extends Entity implements Updateable,Collidable{
 //			gc.drawImage(SpaceInvaders.EXPLOSION_IMG, getExplosionStep() % SpaceInvaders.EXPLOSION_COL * SpaceInvaders.EXPLOSION_W,
 //					(getExplosionStep()/SpaceInvaders.EXPLOSION_ROWS)*SpaceInvaders.EXPLOSION_H +1,SpaceInvaders.EXPLOSION_W,
 //					SpaceInvaders.EXPLOSION_H,getPosX(),getPosY(),getSize(),getSize());
-			gc.drawImage(this.img,getPosX(),getPosY(),getSize(),getSize());
+			gc.drawImage(this.img,Math.min(800-this.size,getPosX()),getPosY(),getSize(),getSize());
 //			
 		}else {
-			gc.drawImage(this.img,getPosX(),getPosY(),getSize(),getSize());
+			gc.drawImage(this.img,Math.min(800-this.size,getPosX()),getPosY(),getSize(),getSize());
 		}
 		
 	}
