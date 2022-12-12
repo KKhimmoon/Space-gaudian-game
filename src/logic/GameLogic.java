@@ -133,20 +133,6 @@ public class GameLogic extends Scene {
 		super(new Pane(),WIDTH,HEIGHT);
 		Canvas canvas = new Canvas(WIDTH,HEIGHT);
 		gc = canvas.getGraphicsContext2D();
-//		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),e-> run(gc)));
-//		timeline.setCycleCount(Timeline.INDEFINITE);
-//		timeline.play();
-//		AnimationTimer animationTimer = new AnimationTimer() {
-//			public void handle(long arg0) {
-//				// ===========================================
-//				
-//				// ===========================================
-//		
-//				
-//				}
-//		};
-//
-//		animationTimer.start();
 		canvas.setCursor(Cursor.MOVE);
 		canvas.setOnMouseMoved(e-> mouseX = e.getX());
 		canvas.setOnMouseClicked(new EventHandler<Event>() {
@@ -209,12 +195,6 @@ public class GameLogic extends Scene {
 		gc.fillRect(0, 0, WIDTH, HEIGHT);
 		gc.setTextAlign(TextAlignment.CENTER);
 		
-//		if(gameOver) {
-//			gc.setFont(Font.font(35));
-//			gc.setFill(Color.YELLOW);
-//			gc.fillText("Game Over" + score,WIDTH/2,HEIGHT/2.5);
-//		}
-	//	----------------------------------------------
 		if(enemys.size() < 2) {
 		if(RAND.nextInt(500) < 10) {
 			enemys.add(newEnemy());

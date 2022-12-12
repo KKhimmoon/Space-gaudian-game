@@ -22,7 +22,6 @@ public class TimeAndScorePane extends VBox{
 	}
 	public TimeAndScorePane() {
 		super();
-//		this.setStyle("-fx-background-color: #F13030;");
 		this.setSpacing(0);
 		this.canvas = new Canvas(120,50);
 		gc = this.canvas.getGraphicsContext2D();
@@ -33,7 +32,7 @@ public class TimeAndScorePane extends VBox{
 	
 	public static void updateScore(GraphicsContext gc) {
 		gc.clearRect(0, 0, 120, 50);
-		String path = ClassLoader.getSystemResource("OldSchoolAdventures-42j9.ttf").toString();
+		String path = sharedObject.RenderableHolder.gameFontPath;
 		gc.setFont(Font.loadFont(path,12));
 		gc.setFill(Color.WHITE);
 		gc.fillText("SCORE : " + logic.GameLogic.getScore(),0,25);

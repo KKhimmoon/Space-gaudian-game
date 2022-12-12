@@ -83,29 +83,12 @@ public class SelectedController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		String spaceship1_path = ClassLoader.getSystemResource("295ef468535024b2.png").toString();
-		Image spaceship1img = new Image(spaceship1_path);
-		spaceship1.setImage(spaceship1img);
-		
-		String spaceship2_path = ClassLoader.getSystemResource("4ced2fc5b95a6026.png").toString();
-		Image spaceship2img = new Image(spaceship2_path);
-		spaceship2.setImage(spaceship2img);
-		
-		String spaceship3_path = ClassLoader.getSystemResource("f5a14a449cd65af7.png").toString();
-		Image spaceship3img = new Image(spaceship3_path);
-		spaceship3.setImage(spaceship3img);
-		
-		String playbtn_path = ClassLoader.getSystemResource("text-1668336560572.png").toString();
-		Image playbtn = new Image(playbtn_path);
-		PlayImage.setImage(playbtn);
-		
-		String selectedbg_path = ClassLoader.getSystemResource("space.png").toString();
-		Image selectedbgimg = new Image(selectedbg_path);
-		selectedbg.setImage(selectedbgimg);
-		
-		String backhome_path = ClassLoader.getSystemResource("arrow.png").toString();
-		Image backhomeimg = new Image(backhome_path);
-		BackHomeimg.setImage(backhomeimg);
+		spaceship1.setImage(sharedObject.RenderableHolder.player1);
+		spaceship2.setImage(sharedObject.RenderableHolder.player2);
+		spaceship3.setImage(sharedObject.RenderableHolder.player3);
+		PlayImage.setImage(sharedObject.RenderableHolder.playTxt);
+		selectedbg.setImage(sharedObject.RenderableHolder.selectedBg);
+		BackHomeimg.setImage(sharedObject.RenderableHolder.arrow);
 		BackHomeimg.setRotate(180);
 		
 		PlayButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -155,7 +138,7 @@ public class SelectedController implements Initializable {
 				setSelected1(true);
 				setSelected2(false);
 				setSelected3(false);
-				setSelectedSpaceShip(spaceship1img);
+				setSelectedSpaceShip(sharedObject.RenderableHolder.player1);
 				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
 				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
 				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
@@ -188,7 +171,7 @@ public class SelectedController implements Initializable {
 				setSelected1(false);
 				setSelected2(true);
 				setSelected3(false);
-				setSelectedSpaceShip(spaceship2img);
+				setSelectedSpaceShip(sharedObject.RenderableHolder.player2);
 				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
 				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
 				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
@@ -221,7 +204,7 @@ public class SelectedController implements Initializable {
 				setSelected1(false);
 				setSelected2(false);
 				setSelected3(true);
-				setSelectedSpaceShip(spaceship3img);
+				setSelectedSpaceShip(sharedObject.RenderableHolder.player3);
 				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
 				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
 				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");

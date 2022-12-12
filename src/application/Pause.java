@@ -43,7 +43,7 @@ public class Pause extends Pane implements Initializable{
 	
 	public Pause() {
 		this.pauseBtn = new Button();
-		ImageView pauseBtnIMG = new ImageView(new Image(ClassLoader.getSystemResource("pause.png").toString()));
+		ImageView pauseBtnIMG = new ImageView(sharedObject.RenderableHolder.pausedBtn);
 		pauseBtnIMG.setFitHeight(30);
 		pauseBtnIMG.setFitWidth(30);
 		this.pauseBtn.setGraphic(pauseBtnIMG);
@@ -56,34 +56,6 @@ public class Pause extends Pane implements Initializable{
 				Timer.getAnimationTimer().stop();
 			}
 		});
-//		this.pauseBtn.setOnAction(new EventHandler<ActionEvent>() {
-//			
-//			@Override
-//			public void handle(ActionEvent event) {
-//				// TODO Auto-generated method stub
-//				logic.GameLogic.pausescene.setVisible(true);
-//				Timer.getAnimationTimer().stop();
-//			}
-//		});
-		
-//		this.resumeBtn.setCursor(Cursor.HAND);
-//		this.resumeBtn.setOnAction(new EventHandler<ActionEvent>() {
-//
-//			@Override
-//			public void handle(ActionEvent arg0) {
-//				// TODO Auto-generated method stub
-//				SpaceInvaders.pausescene.setVisible(false);
-//			}
-//		});
-//		this.exitBtn.setCursor(Cursor.HAND);
-//		this.exitBtn.setOnAction(new EventHandler<ActionEvent>() {
-//
-//			@Override
-//			public void handle(ActionEvent arg0) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
 		this.setCursor(Cursor.HAND);
 		this.setStyle("-fx-background-color: #FFFFFF00;");
 		this.getChildren().add(pauseBtn);
@@ -92,17 +64,9 @@ public class Pause extends Pane implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		String paused_path = ClassLoader.getSystemResource("text-1670742224985.png").toString();
-		Image paused = new Image(paused_path);
-		pausedIMG.setImage(paused);
-		
-		String resume_path = ClassLoader.getSystemResource("text-1670742468482.png").toString();
-		Image resume = new Image(resume_path);
-		resumeIMG.setImage(resume);
-
-		String exit_path = ClassLoader.getSystemResource("text-1670742457889.png").toString();
-		Image exit = new Image(exit_path);
-		exitIMG.setImage(exit);
+		pausedIMG.setImage(sharedObject.RenderableHolder.pausedTxt);
+		resumeIMG.setImage(sharedObject.RenderableHolder.resumeTxt);
+		exitIMG.setImage(sharedObject.RenderableHolder.exitTxt);
 		resumeBtn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override

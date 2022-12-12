@@ -18,7 +18,6 @@ public class Shot implements Updateable,Collidable {
 		setPosY(posY);
 		setSpeed(10);
 		setName("Player Shot");
-		// TODO Auto-generated constructor stub
 	}
 	public Shot(int posX,int posY,int speed) {
 		super();
@@ -26,7 +25,6 @@ public class Shot implements Updateable,Collidable {
 		setPosY(posY);
 		setSpeed(speed);
 		setName("Enemy Shot");
-		// TODO Auto-generated constructor stub
 	}
 	
 	public String getName() {

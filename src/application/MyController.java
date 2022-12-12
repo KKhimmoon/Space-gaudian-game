@@ -73,42 +73,11 @@ public class MyController implements Initializable {
 		translate.setByX(520);
 		translate.play();
 		
-		//rotate
-		RotateTransition rotate = new RotateTransition();
-		rotate.setNode(Meteorite);
-		rotate.setDuration(Duration.millis(1200));
-		rotate.setCycleCount(TranslateTransition.INDEFINITE);
-		rotate.setInterpolator(Interpolator.LINEAR);
-		rotate.setByAngle(360);
-		rotate.setAxis(Rotate.Z_AXIS);
-		rotate.play();
-		
-		TranslateTransition translateMeteorite = new TranslateTransition();
-		translateMeteorite.setNode(Meteorite);
-		translateMeteorite.setDuration(Duration.millis(5000));
-		translateMeteorite.setCycleCount(TranslateTransition.INDEFINITE);
-		translateMeteorite.setByY(800);
-		translateMeteorite.play();
-		
-		String bg_path = ClassLoader.getSystemResource("SpaceBg.gif").toString();
-		Image bg = new Image(bg_path);
-		spaceBg.setImage(bg);
-		
-		String startbtn_path = ClassLoader.getSystemResource("text-1668334301790.png").toString();
-		Image startbtn = new Image(startbtn_path);
-		StartImage.setImage(startbtn);
-		
-		String htpbtn_path = ClassLoader.getSystemResource("text-1668334352822.png").toString();
-		Image htpbtn = new Image(htpbtn_path);
-		HowtoplayImage.setImage(htpbtn);
-		
-		String spaceship1_path = ClassLoader.getSystemResource("295ef468535024b2.png").toString();
-		Image spaceship1img = new Image(spaceship1_path);
-		MySpaceShip.setImage(spaceship1img);
-		
-		String title_path = ClassLoader.getSystemResource("text-1668333657199.png").toString();
-		Image titleimg = new Image(title_path);
-		TitleImage.setImage(titleimg);
+		spaceBg.setImage(sharedObject.RenderableHolder.homeBg);
+		StartImage.setImage(sharedObject.RenderableHolder.startTxt);
+		HowtoplayImage.setImage(sharedObject.RenderableHolder.howtoplayTxt);
+		MySpaceShip.setImage(sharedObject.RenderableHolder.player1);
+		TitleImage.setImage(sharedObject.RenderableHolder.titleTxt);
 		
 		StartButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
 

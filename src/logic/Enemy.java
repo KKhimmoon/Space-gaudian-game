@@ -8,13 +8,10 @@ import javafx.scene.image.Image;
 public class Enemy extends Rocket {
 	    private int  blood;
 		private int speed;
-		private final String img;
 		public Enemy(int posX, int posY, int size) {
 			super(posX,posY,size);
-			this.img = "enemy.png";
 			setSpeed(5);
 			setBlood(100);
-			// TODO Auto-generated constructor stub
 		}
 		public int getSpeed() {
 			return speed;
@@ -48,9 +45,7 @@ public class Enemy extends Rocket {
 		}
 		public void draw(GraphicsContext gc) {
 			if(!isExploding()) {
-				String image_path = ClassLoader.getSystemResource(this.img).toString();
-				Image image = new Image(image_path);
-				gc.drawImage(image,getPosX(),getPosY(),getSize(),getSize());
+				gc.drawImage(sharedObject.RenderableHolder.enemy,getPosX(),getPosY(),getSize(),getSize());
 				if(getPosY() != 150) {
 					setPosY(getPosY()+ getSpeed());
 				}

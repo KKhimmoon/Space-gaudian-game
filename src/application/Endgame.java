@@ -52,25 +52,11 @@ public class Endgame implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		String yes_path = ClassLoader.getSystemResource("text-1670682864624.png").toString();
-		Image yes = new Image(yes_path);
-		yesIMG.setImage(yes);
-		
-		String no_path = ClassLoader.getSystemResource("text-1670682874098.png").toString();
-		Image no = new Image(no_path);
-		noIMG.setImage(no);
-		
-		String time_path = ClassLoader.getSystemResource("text-1670683535366.png").toString();
-		Image time = new Image(time_path);
-		timeIMG.setImage(time);
-		
-		String up_path = ClassLoader.getSystemResource("text-1670683506454.png").toString();
-		Image up = new Image(up_path);
-		upIMG.setImage(up);
-		
-		String playagain_path = ClassLoader.getSystemResource("text-1670683737700.png").toString();
-		Image playagain = new Image(playagain_path);
-		playAgainIMG.setImage(playagain);
+		yesIMG.setImage(sharedObject.RenderableHolder.yesTxt);
+		noIMG.setImage(sharedObject.RenderableHolder.noTxt);
+		timeIMG.setImage(sharedObject.RenderableHolder.timeTxt);
+		upIMG.setImage(sharedObject.RenderableHolder.upTxt);
+		playAgainIMG.setImage(sharedObject.RenderableHolder.playagainTxt);
 		
 		canvas = new Canvas(500,100);
 		gc = canvas.getGraphicsContext2D();
@@ -118,8 +104,7 @@ public class Endgame implements Initializable{
 
 
 	public static void updateYourScore(GraphicsContext gc) {
-		String path = ClassLoader.getSystemResource("SpaceRacer-DOPlR.otf").toString();
-		gc.setFont(Font.loadFont(path,20));
+		gc.setFont(sharedObject.RenderableHolder.endgameFont);
 		gc.setFill(Color.WHITE);
 		gc.fillText("Your Score : " + logic.GameLogic.getScore(),0,50);
 	}

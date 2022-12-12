@@ -15,9 +15,7 @@ public class SmallMeteorite extends Enemy{
 	}
 	public void draw(GraphicsContext gc) {
 		if(!isExploding()) {
-			String image_path = ClassLoader.getSystemResource(this.img).toString();
-			Image image = new Image(image_path);
-			gc.drawImage(image,getPosX(),getPosY(),getSize(),getSize());
+			gc.drawImage(sharedObject.RenderableHolder.meteorite,getPosX(),getPosY(),getSize(),getSize());
 			setPosY(getPosY()+ getSpeed());
 		}
 	}
