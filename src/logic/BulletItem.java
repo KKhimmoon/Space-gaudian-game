@@ -9,7 +9,7 @@ public class BulletItem extends Item{
 
 	public BulletItem(int posX, int posY, int size) {
 		super(posX, posY, size);
-		this.img = "shield.png";
+		this.img = "bulletitem.png";
 		setSpeed(3);
 		// TODO Auto-generated constructor stub
 	}

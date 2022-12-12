@@ -40,11 +40,14 @@ public class Shot implements Updateable,Collidable {
 			gc.setFill(Color.BLUE);
 			gc.fillOval(posX, posY, size, size);
 		}else {
-			if (GameLogic.BulletState == 2) {
+			if (GameLogic.BulletState == 1) {
 				gc.setFill(Color.YELLOWGREEN);
 				gc.fillOval(Math.min(745,getPosX()), posY, size, size);
-			} else if  (GameLogic.BulletState == 3) {
+			} else if  (GameLogic.BulletState == 2) {
 				gc.setFill(Color.YELLOW);
+			    gc.fillOval(Math.min(745,getPosX()), posY, size, size);
+			} else if  (GameLogic.BulletState >= 3) {
+				gc.setFill(Color.PINK);
 			    gc.fillOval(Math.min(745,getPosX()), posY, size, size);
 			}else {
 				gc.setFill(Color.RED);

@@ -45,6 +45,7 @@ public class GameLogic extends Scene {
 	private static ConcurrentLinkedQueue<BulletItem> bulletitems;
 	
 	public static int countBomb;
+	public static int countBomb2;
 	public static int countterBomb;
 	public static int countBullet;
 	public static int countterBullet;
@@ -76,14 +77,14 @@ public class GameLogic extends Scene {
 		bulletitems = new ConcurrentLinkedQueue<>();
 		bombitems = new ConcurrentLinkedQueue<>();
 		player = new Rocket(WIDTH/2,HEIGHT-PLAYER_SIZE-30,PLAYER_SIZE);
-		countBomb = 250;
+		countBomb2 = 1000;
 		countterBomb = 0;
-		countBullet = 300;
+		countBullet = 1200;
 		countterBullet = 0;
+		setCountBomb(0);
 		setBulletState(0);
 		setScore(0);
 	}
-	
 	
 	public static int getCountBomb() {
 		return countBomb;
@@ -197,16 +198,16 @@ public class GameLogic extends Scene {
 		gc.setFill(Color.grayRgb(20));
 		gc.fillRect(0, 0, WIDTH, HEIGHT);
 		gc.setTextAlign(TextAlignment.CENTER);
-//		gc.setFont(Font.font(20));
-//    	gc.setFill(Color.WHITE);
-//		gc.fillText("Score" + score,60,20);
+		gc.setFont(Font.font(20));
+    	gc.setFill(Color.WHITE);
+		gc.fillText("Score" + countBomb,60,20);
 		
 //		if(gameOver) {
 //			gc.setFont(Font.font(35));
 //			gc.setFill(Color.YELLOW);
 //			gc.fillText("Game Over" + score,WIDTH/2,HEIGHT/2.5);
 //		}
-		
+	//	----------------------------------------------
 		if(enemys.size() < 2) {
 		if(RAND.nextInt(500) < 10) {
 			enemys.add(newEnemy());
@@ -217,8 +218,20 @@ public class GameLogic extends Scene {
 			if(RAND.nextInt(500) < 20) {
 				enemysshots.add(x.shoot());
 			}
-//			enemysshots.add(x.shoot());
 		}
+		for(Shot shot: enemysshots) {
+			if(shot.getPosY()< 0 || shot.isRemove) {
+				enemysshots.remove(shot);
+				continue;
+			}
+			shot.update();
+			shot.draw(gc);
+			if(shot.colide(player)) {
+					score--;
+					shot.setRemove(true);
+			}
+	}
+	//------------------------------------------------
 		if(bulletitems.size() < 1) {
 			if(RAND.nextInt(500) < 10) {
 				bulletitems.add(newBullet());
@@ -233,61 +246,41 @@ public class GameLogic extends Scene {
 					bulletitems.remove(x);
 				}
 			}
+		}
+		for(BulletItem x:bulletitems) {
 			if(player.colide(x) && !player.isExploding()) {
 				x.explode();
 				BulletState += 1;
+			}
 		}
-	}	
+	//------------------------------------------------	
 		
+	   if(bombitems.size() < 1) {
+			if(RAND.nextInt(500) < 10) {
+				bombitems.add(newBomb());
+	   }}
 		
-//	if(bulletitems.size() < 1) {
-//			if(RAND.nextInt(500) < 10) {
-//				bulletitems.add(newBullet());
-//	}}
-//		
-//	for(BulletItem x:bulletitems) {
-//			countterBullet += 1;
-//			if(countterBullet >= countBullet) {
-//				x.draw(gc);
-//				if(x.isDestroyed() || x.isExploding()) {
-//					countterBullet = 0;
-//					bulletitems.remove(x);
-//				}
-//			}
-//		if(player.colide(x) && !player.isExploding()) {
-//			x.explode();
-//				
-//	}
-//		if(bulletitems.size() < 5) {
-//			bulletitems.add(newBullet());
-//		 }
-//		for(BulletItem x:bulletitems) {
-//			x.draw(gc);
-//			if(player.colide(x) && !player.isExploding()) {
-//				x.explode();
-//				BulletState += 1;
-//			}
-//		}	
-		for(Shot shot: enemysshots) {
-				if(shot.getPosY()< 0 || shot.isRemove) {
-					enemysshots.remove(shot);
-					continue;
-				}
-				shot.update();
-				shot.draw(gc);
-				if(shot.colide(player)) {
-						score--;
-						shot.setRemove(true);
-				}
+	for(BombItem x: bombitems) {
+			countterBomb += 1;
+			if(countterBomb >= countBomb2) {
+				x.draw(gc);
+				if(x.isDestroyed() || x.isExploding()) {
+					countterBomb = 0;
+					bombitems.remove(x);
+			   }
+			}
+	}
+	for(BombItem x: bombitems) {
+		if(player.colide(x) && !player.isExploding()) {
+			x.explode();
+			setCountBomb(getCountBomb()+1);
 		}
-		if(RAND.nextInt(1000) < 10) {
-			bombitems.add(newBomb());
-		}
+	  }
+	//------------------------------------------------
 		player.update();
 		player.draw(gc);
 		player.setPosX((int) mouseX);
 		for(Shot shot: shots) {
-			
 			if(shot.getPosY()< 0 || shot.isRemove) {
 				shots.remove(shot);
 				continue;
@@ -305,19 +298,6 @@ public class GameLogic extends Scene {
 				}
 			}
 		}
-		for(BombItem x:bombitems) {
-			x.draw(gc);
-			if(player.colide(x) && !player.isExploding()) {
-				x.explode();
-//				countBomb +=1;
-//				BulletState += 1;
-			}
-		}	
-//		for(int i = enemys.size()-1;i>= 0;i--) {
-//			if(enemys.get(i).isDestroyed()) {
-//				enemys.set(i, newEnemy());
-//			}
-//		}
 		gameOver = player.isDestroyed();
 	}
 

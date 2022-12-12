@@ -33,10 +33,10 @@ public class Enemy extends Rocket {
 			}
 		}
 		public void attack(Rocket other) {
-			if(getBlood() <= other.getPower()) {
+			if(getBlood() <= super.getPower()) {
 				setBlood(0);
 			}else {
-				setBlood(this.getBlood()- other.getPower());
+				setBlood(this.getBlood()- super.getPower());
 			}
 		}
 		public void update() {
