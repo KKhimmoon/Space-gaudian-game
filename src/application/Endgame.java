@@ -9,6 +9,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -77,6 +78,33 @@ public class Endgame implements Initializable{
 		canvas.setTranslateX(110);
 		canvas.setTranslateY(80);
 		popUp.getChildren().add(canvas);
+		
+		yesBtn.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event e) {
+				// TODO Auto-generated method stub
+				try {
+					yesButtonHandler(e);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		noBtn.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event e) {
+				// TODO Auto-generated method stub
+				try {
+					noButtonHandler(e);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 	
 
@@ -97,14 +125,14 @@ public class Endgame implements Initializable{
 		gc.fillText("Your Score : " + logic.GameLogic.getScore(),0,50);
 	}
 	
-	public void yesButtonHangler(ActionEvent event) throws IOException{
+	public void yesButtonHandler(Event event) throws IOException{
 //		Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 //		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 //		scene = new Scene(root);
 //		stage.setScene(scene);
 //		stage.show();
 	}
-	public void noButtonHangler(ActionEvent event) throws IOException {
+	public void noButtonHandler(Event event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -26,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -34,12 +36,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MyController implements Initializable {
-	
-	@FXML
-	private MediaView BackgroundMedia;
-	
-	private Media media;
-	private MediaPlayer mediaplayer;
 	
 	@FXML
 	private Button StartButton;
@@ -56,6 +52,10 @@ public class MyController implements Initializable {
 	private ImageView HowtoplayImage;
 	@FXML
 	private ImageView TitleImage;
+	@FXML
+	private ImageView spaceBg;
+	@FXML
+	private Pane HomeBg;
 	
 	private Stage stage;
 	private Scene scene;
@@ -90,22 +90,9 @@ public class MyController implements Initializable {
 		translateMeteorite.setByY(800);
 		translateMeteorite.play();
 		
-		//fade
-		//scale
-//		ScaleTransition scale = new ScaleTransition();
-//		scale.setNode(StartImage);
-//		scale.setDuration(Duration.millis(2000));
-//		scale.setInterpolator(Interpolator.LINEAR);
-//		scale.setByX(1);
-//		scale.setByY(1);
-//		scale.play();
-		
-		String media_path = ClassLoader.getSystemResource("spacebg.mp4").toString();
-		media = new Media(media_path);
-		mediaplayer = new MediaPlayer(media);
-		mediaplayer.setCycleCount(mediaplayer.INDEFINITE);
-		mediaplayer.play();
-		BackgroundMedia.setMediaPlayer(mediaplayer);
+		String bg_path = ClassLoader.getSystemResource("SpaceBg.gif").toString();
+		Image bg = new Image(bg_path);
+		spaceBg.setImage(bg);
 		
 		String startbtn_path = ClassLoader.getSystemResource("text-1668334301790.png").toString();
 		Image startbtn = new Image(startbtn_path);

@@ -23,7 +23,7 @@
                   </DropShadow>
                </effect>
             </ImageView>
-            <Button fx:id="resumeBtn" layoutX="97.0" layoutY="191.0" mnemonicParsing="false" onAction="#onClickResume" prefHeight="43.0" prefWidth="117.0" style="-fx-background-color: #FAE82E; -fx-background-radius: 10;">
+            <Button fx:id="resumeBtn" layoutX="97.0" layoutY="191.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="117.0" style="-fx-background-color: #FAE82E; -fx-background-radius: 10;">
                <graphic>
                   <ImageView fx:id="resumeIMG" fitHeight="22.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -38,7 +38,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="exitBtn" layoutX="108.0" layoutY="270.0" mnemonicParsing="false" onAction="#onClickExit" prefHeight="43.0" prefWidth="98.0" style="-fx-background-color: #FAE82E; -fx-background-radius: 10;">
+            <Button fx:id="exitBtn" layoutX="108.0" layoutY="270.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="98.0" style="-fx-background-color: #FAE82E; -fx-background-radius: 10;">
                <graphic>
                   <ImageView fx:id="exitIMG" fitHeight="25.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>

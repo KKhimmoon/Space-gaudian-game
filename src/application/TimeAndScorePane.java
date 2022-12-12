@@ -29,8 +29,8 @@ public class TimeAndScorePane extends VBox{
 		this.setPadding(new Insets(10, 0, 0, 0));
 		this.setAlignment(Pos.BASELINE_RIGHT);
 		this.getChildren().addAll(this.canvas,new Timer(100)); // add score ด้วย
-		
 	}
+	
 	public static void updateScore(GraphicsContext gc) {
 		gc.clearRect(0, 0, 120, 50);
 		String path = ClassLoader.getSystemResource("OldSchoolAdventures-42j9.ttf").toString();

@@ -6,8 +6,6 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.IntStream;
 
-import com.sun.media.jfxmediaimpl.platform.Platform;
-
 import application.BombPane;
 import application.Pause;
 import application.TimeAndScorePane;
@@ -26,6 +24,9 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -69,6 +70,7 @@ public class GameLogic extends Scene {
 	public static Parent pausescene;
 	
 	private static TimeAndScorePane timerAndScorePane;
+	private static BombPane bombpane ;
 	
 	public void InitializeGame() {
 		shots = new ConcurrentLinkedQueue<>();
@@ -150,7 +152,7 @@ public class GameLogic extends Scene {
 		canvas.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
-			public void handle(Event arg0) {
+			public void handle(Event e) {
 				// TODO Auto-generated method stub
 				if(shots.size() < MaxShot) {
 					shots.add(player.shoot());
@@ -162,12 +164,17 @@ public class GameLogic extends Scene {
 				
 			}
 		});
+		this.setOnKeyPressed((KeyEvent keyevent) -> {
+			if(keyevent.getCode().equals(KeyCode.SPACE)) {
+				shots.add(player.shoot());
+				System.out.println("pppppppppppp");
+			}
+		});
 		InitializeGame();
-		
 		root = new Pane();
 		timerAndScorePane = new TimeAndScorePane();
 		timerAndScorePane.setTranslateX(680);
-		BombPane bombpane = new BombPane();
+		bombpane = new BombPane();
 		bombpane.setAlignment(Pos.BOTTOM_RIGHT);
 		
 		try {
@@ -194,13 +201,11 @@ public class GameLogic extends Scene {
 	}
 	
 	public static void run(GraphicsContext gc) {
+		bombpane.drawCurrentAmount(BombPane.getGc());
 		timerAndScorePane.updateScore(timerAndScorePane.getGc());
 		gc.setFill(Color.grayRgb(20));
 		gc.fillRect(0, 0, WIDTH, HEIGHT);
 		gc.setTextAlign(TextAlignment.CENTER);
-		gc.setFont(Font.font(20));
-    	gc.setFill(Color.WHITE);
-		gc.fillText("Score" + countBomb,60,20);
 		
 //		if(gameOver) {
 //			gc.setFont(Font.font(35));

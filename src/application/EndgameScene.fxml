@@ -11,7 +11,7 @@
    <children>
       <Pane fx:id="popUp" layoutX="150.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0" style="-fx-background-radius: 30; -fx-background-color: #EFE241;">
          <children>
-            <Button fx:id="yesBtn" layoutX="96.0" layoutY="192.0" mnemonicParsing="false" onAction="#yesButtonHangler" prefHeight="37.0" prefWidth="93.0" style="-fx-background-color: #163FF9; -fx-background-radius: 30;">
+            <Button fx:id="yesBtn" layoutX="96.0" layoutY="192.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="93.0" style="-fx-background-color: #163FF9; -fx-background-radius: 30;">
                <graphic>
                   <ImageView fx:id="yesIMG" fitHeight="20.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
              </ImageView>
@@ -27,7 +27,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="noBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="192.0" mnemonicParsing="false" onAction="#noButtonHangler" prefHeight="37.0" prefWidth="93.0" style="-fx-background-color: #163FF9; -fx-background-radius: 30;">
+            <Button fx:id="noBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="192.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="93.0" style="-fx-background-color: #163FF9; -fx-background-radius: 30;">
                <graphic>
                   <ImageView fx:id="noIMG" fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
