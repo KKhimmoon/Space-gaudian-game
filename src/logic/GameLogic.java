@@ -164,10 +164,11 @@ public class GameLogic extends Scene {
 				
 			}
 		});
-		this.setOnKeyPressed((KeyEvent keyevent) -> {
-			if(keyevent.getCode().equals(KeyCode.SPACE)) {
-				shots.add(player.shoot());
-				System.out.println("pppppppppppp");
+		setOnKeyPressed(keyevent -> {
+			if(keyevent.getCode()==KeyCode.SHIFT) {
+				if(shots.size() < MaxShot) {
+					shots.add(player.shoot());
+				}
 			}
 		});
 		InitializeGame();
@@ -201,6 +202,7 @@ public class GameLogic extends Scene {
 	}
 	
 	public static void run(GraphicsContext gc) {
+		
 		bombpane.drawCurrentAmount(BombPane.getGc());
 		timerAndScorePane.updateScore(timerAndScorePane.getGc());
 		gc.setFill(Color.grayRgb(20));

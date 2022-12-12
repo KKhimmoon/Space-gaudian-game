@@ -19,7 +19,7 @@
       </ImageView>
       <VBox alignment="CENTER" layoutX="250.0" layoutY="300.0" prefHeight="200.0" prefWidth="300.0" spacing="10.0">
          <children>
-            <Button fx:id="StartButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToSelectedScene" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: none;" textFill="WHITE">
+            <Button fx:id="StartButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: none;" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="StartImage" fitHeight="50.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>

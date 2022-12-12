@@ -148,10 +148,10 @@ public class SelectedController implements Initializable {
 				else{Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
 			}
 		});
-		Space1Btn.setOnAction(new EventHandler<ActionEvent>() {
+		Space1Btn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
 				setSelected1(true);
 				setSelected2(false);
@@ -161,7 +161,7 @@ public class SelectedController implements Initializable {
 				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
 				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
 			}
-		}); 
+		});
 		Space2Btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -181,10 +181,10 @@ public class SelectedController implements Initializable {
 				else{Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
 			}
 		});
-		Space2Btn.setOnAction(new EventHandler<ActionEvent>() {
+		Space2Btn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
 				setSelected1(false);
 				setSelected2(true);
@@ -214,10 +214,10 @@ public class SelectedController implements Initializable {
 				else {Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
 			}
 		});
-		Space3Btn.setOnAction(new EventHandler<ActionEvent>() {
+		Space3Btn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
 				setSelected1(false);
 				setSelected2(false);
@@ -228,13 +228,26 @@ public class SelectedController implements Initializable {
 				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
 			}
 		}); 
-		PlayButton.setOnAction(new EventHandler<ActionEvent>() {
+		PlayButton.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
 				try {
 					switchToGame(arg0);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		BackHomeBtn.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				try {
+					switchToHome(arg0);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -273,21 +286,21 @@ public class SelectedController implements Initializable {
 		this.selectedSpaceShip = selectedSpaceShip;
 	}
 
-	public void switchToHome(ActionEvent event) throws IOException {
+	public void switchToHome(Event event) throws IOException {
 		 Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);
 		 stage.show();
 	}
-	public void switchToSelectedScene(ActionEvent event) throws IOException {
+	public void switchToSelectedScene(Event event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("SelectedScene.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);
 		 stage.show();
 	}
-	public void switchToGame(ActionEvent event) throws IOException {
+	public void switchToGame(Event event) throws IOException {
 		if(getSelectedSpaceShip()==null) {
 			String dialogueString = "You have to choose a Spaceship before PLAY";
 			Alert alert = new Alert(AlertType.CONFIRMATION, dialogueString, ButtonType.OK);
