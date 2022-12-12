@@ -33,7 +33,8 @@ public class TimeAndScorePane extends VBox{
 	}
 	public static void updateScore(GraphicsContext gc) {
 		gc.clearRect(0, 0, 120, 50);
-		gc.setFont(Font.font(20));
+		String path = ClassLoader.getSystemResource("OldSchoolAdventures-42j9.ttf").toString();
+		gc.setFont(Font.loadFont(path,12));
 		gc.setFill(Color.WHITE);
 		gc.fillText("SCORE : " + logic.GameLogic.getScore(),0,25);
 	}

@@ -35,7 +35,22 @@ public class Timer extends Canvas{
 			public void handle(long now) {
 				// TODO Auto-generated method stub
 				if(currentTime <= 0 ) {
-					logic.GameLogic.modal.setVisible(true);
+//					Platform.runLater(new Runnable() {
+//						
+//						@Override
+//						public void run() {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//					});
+//					try {
+//						logic.GameLogic.endgame = FXMLLoader.load(getClass().getResource("EndgameScene.fxml"));
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+					Endgame.updateYourScore(Endgame.getGc());
+					logic.GameLogic.endgame.setVisible(true);
 					getAnimationTimer().stop();
 					
 				}
@@ -58,7 +73,8 @@ public class Timer extends Canvas{
 	}
 	public void drawCurrentTimeString(GraphicsContext gc){
 		gc.setFill(Color.WHITE);
-		gc.setFont(new Font(20));
+		String path = ClassLoader.getSystemResource("OldSchoolAdventures-42j9.ttf").toString();
+		gc.setFont(Font.loadFont(path,15));
 		gc.clearRect(0, 0, this.getWidth(), this.getHeight());
 		gc.drawImage(new Image(ClassLoader.getSystemResource("clock.png").toString()), 0, 0, 40, 40);
 		gc.fillText("" + this.currentTime, this.getWidth()/2, this.getHeight() / 2 +12);

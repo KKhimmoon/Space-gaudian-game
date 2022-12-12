@@ -33,7 +33,8 @@ public class BombPane extends HBox{
 	
 	public void drawCurrentAmount(GraphicsContext gc) {
 		gc.setFill(Color.WHITE);
-		gc.setFont(new Font(20));
+		String path = ClassLoader.getSystemResource("OldSchoolAdventures-42j9.ttf").toString();
+		gc.setFont(Font.loadFont(path,15));
 		gc.clearRect(0, 0,this.canvas.getWidth(), this.canvas.getHeight());
 		gc.fillText( ""+ this.amount , this.canvas.getWidth() / 2-10 , this.canvas.getHeight() / 2+5);
 	}

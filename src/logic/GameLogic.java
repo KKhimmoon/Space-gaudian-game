@@ -62,7 +62,7 @@ public class GameLogic extends Scene {
 	private static double mouseX;
 	
 	public static Pane root;
-	public static Parent modal;
+	public static Parent endgame;
 	public static Parent pausescene;
 	
 	private static TimeAndScorePane timerAndScorePane;
@@ -160,7 +160,7 @@ public class GameLogic extends Scene {
 		bombpane.setAlignment(Pos.BOTTOM_RIGHT);
 		
 		try {
-			modal = FXMLLoader.load(getClass().getClassLoader().getResource("application/EndgameScene.fxml"));
+			endgame = FXMLLoader.load(getClass().getClassLoader().getResource("application/EndgameScene.fxml"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -175,10 +175,10 @@ public class GameLogic extends Scene {
 		pause.setTranslateX(10);
 		pause.setTranslateY(10);
 		pausescene.setVisible(false);
-		modal.setVisible(false);
+		endgame.setVisible(false);
 		bombpane.setTranslateX(700);
 		bombpane.setTranslateY(520);
-		root.getChildren().addAll(canvas,timerAndScorePane,bombpane,pause,modal,pausescene);
+		root.getChildren().addAll(canvas,timerAndScorePane,bombpane,pause,endgame,pausescene);
 		this.setRoot(root);
 	}
 	

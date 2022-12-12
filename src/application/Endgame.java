@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -14,10 +15,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -25,7 +30,7 @@ public class Endgame implements Initializable{
 	private Stage stage;
 	private Scene scene;
 	@FXML 
-	private static Pane popUp;
+	private Pane popUp;
 	@FXML 
 	private Button yesBtn;
 	@FXML
@@ -40,9 +45,9 @@ public class Endgame implements Initializable{
 	private ImageView upIMG;
 	@FXML
 	private ImageView playAgainIMG;
-	@FXML
-	private Text yourScoreText;
 	
+	private Canvas canvas;
+	private static GraphicsContext gc;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -66,21 +71,32 @@ public class Endgame implements Initializable{
 		String playagain_path = ClassLoader.getSystemResource("text-1670683737700.png").toString();
 		Image playagain = new Image(playagain_path);
 		playAgainIMG.setImage(playagain);
-		AnimationTimer animationTimer = new AnimationTimer() {
-			
-			@Override
-			public void handle(long arg0) {
-				// TODO Auto-generated method stub
-				
-				yourScoreText.setText("Your Score : "+SpaceInvaders.getScore());
-			}
-		};
-		animationTimer.start();
+		
+		canvas = new Canvas(500,100);
+		gc = canvas.getGraphicsContext2D();
+		canvas.setTranslateX(110);
+		canvas.setTranslateY(80);
+		popUp.getChildren().add(canvas);
+	}
+	
 
-
+	public static GraphicsContext getGc() {
+		return gc;
 	}
 
 
+	public static void setGc(GraphicsContext gc) {
+		Endgame.gc = gc;
+	}
+
+
+	public static void updateYourScore(GraphicsContext gc) {
+		String path = ClassLoader.getSystemResource("SpaceRacer-DOPlR.otf").toString();
+		gc.setFont(Font.loadFont(path,20));
+		gc.setFill(Color.WHITE);
+		gc.fillText("Your Score : " + logic.GameLogic.getScore(),0,50);
+	}
+	
 	public void yesButtonHangler(ActionEvent event) throws IOException{
 //		Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 //		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
