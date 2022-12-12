@@ -5,13 +5,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class BombItem extends Item{
-	public int speed;
 	private final String img;
 
 	public BombItem(int posX, int posY, int size) {
 		super(posX, posY, size);
-		this.img = "shield.png";
-		setSpeed(1);
+		this.img = "bomb2.png";
+		setSpeed(3);
 		// TODO Auto-generated constructor stub
 	}
 	@Override

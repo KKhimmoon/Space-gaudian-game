@@ -6,17 +6,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Enemy extends Rocket {
-	    private ArrayList<Shot> allShots;
+	    private int  blood;
 		private int speed;
 		private final String img;
 		public Enemy(int posX, int posY, int size) {
 			super(posX,posY,size);
-			this.img = "4ced2fc5b95a6026.png";
-			allShots = new ArrayList<Shot>();
-			setSpeed(2);
+			this.img = "enemy.png";
+			setSpeed(5);
+			setBlood(100);
 			// TODO Auto-generated constructor stub
 		}
-
 		public int getSpeed() {
 			return speed;
 		}
@@ -25,6 +24,21 @@ public class Enemy extends Rocket {
 			this.speed = speed;
 		}
 		
+		public int getBlood() {
+			return blood;
+		}
+		public void setBlood(int blood) {
+			if(blood <=  0) {
+				this.blood = 0;
+			}
+		}
+		public void attack(Rocket other) {
+			if(getBlood() <= other.getPower()) {
+				setBlood(0);
+			}else {
+				setBlood(this.getBlood()- other.getPower());
+			}
+		}
 		public void update() {
 			super.update();
 			if(!isExploding() && !isDestroyed()) {
@@ -43,11 +57,7 @@ public class Enemy extends Rocket {
 		   }
 		}
 		public Shot shoot() {
-			return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY()+getSize() ,-10);
-		}
-
-		public ArrayList<Shot> getAllShots() {
-			return allShots;
+			return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY() +getSize()/2 ,-10);
 		}
 		
 }

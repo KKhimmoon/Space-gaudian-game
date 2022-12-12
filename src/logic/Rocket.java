@@ -8,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Rocket extends Entity implements Updateable,Collidable{
+	private int power;
 	private int size;
 	private boolean exploding;
 	private int explosionStep;
@@ -20,7 +21,7 @@ public class Rocket extends Entity implements Updateable,Collidable{
 		setExplosionStep(0);
 		setDestroyed(false);
 		setExploding(false);
-		
+		setPower(5);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -33,8 +34,15 @@ public class Rocket extends Entity implements Updateable,Collidable{
 	public void update() {
 		// TODO Auto-generated method stub
 		if(isExploding()) setExplosionStep(getExplosionStep()+1);
-		setDestroyed(getExplosionStep() > 600); // fix it
+		setDestroyed(getExplosionStep() > GameLogic.HEIGHT); // fix it
 	}	
+	public int getPower() {
+		return power;
+	}
+
+	public void setPower(int power) {
+		this.power = power;
+	}
 
 	public int getSize() {
 		return size;
@@ -75,13 +83,7 @@ public class Rocket extends Entity implements Updateable,Collidable{
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		if(isExploding()) {
-//			gc.drawImage(SpaceInvaders.EXPLOSION_IMG, getExplosionStep() % SpaceInvaders.EXPLOSION_COL * SpaceInvaders.EXPLOSION_W,
-//					(getExplosionStep()/SpaceInvaders.EXPLOSION_ROWS)*SpaceInvaders.EXPLOSION_H +1,SpaceInvaders.EXPLOSION_W,
-//					SpaceInvaders.EXPLOSION_H,getPosX(),getPosY(),getSize(),getSize());
-			gc.drawImage(this.img,Math.min(800-this.size,getPosX()),getPosY(),getSize(),getSize());
-//			
-		}else {
+		if(!isExploding()) {
 			gc.drawImage(this.img,Math.min(800-this.size,getPosX()),getPosY(),getSize(),getSize());
 		}
 		

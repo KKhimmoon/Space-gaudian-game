@@ -43,14 +43,16 @@ public class GameLogic extends Scene {
 	private static ConcurrentLinkedQueue<Enemy> enemys;
 	private static ConcurrentLinkedQueue<BombItem> bombitems;
 	private static ConcurrentLinkedQueue<BulletItem> bulletitems;
+	
 	public static int countBomb;
-
+	public static int countterBomb;
+	public static int countBullet;
+	public static int countterBullet;
 	public static int BulletState;
 	
 	public static GraphicsContext getGc() {
 		return gc;
 	}
-
 	private static int score;
 	private static final Random RAND = new Random(); // private
 	static final int WIDTH = 800;
@@ -71,11 +73,17 @@ public class GameLogic extends Scene {
 		shots = new ConcurrentLinkedQueue<>();
 		enemys = new ConcurrentLinkedQueue<>();
 		enemysshots = new ConcurrentLinkedQueue<>();
+		bulletitems = new ConcurrentLinkedQueue<>();
 		bombitems = new ConcurrentLinkedQueue<>();
 		player = new Rocket(WIDTH/2,HEIGHT-PLAYER_SIZE-30,PLAYER_SIZE);
+		countBomb = 250;
+		countterBomb = 0;
+		countBullet = 300;
+		countterBullet = 0;
 		setBulletState(0);
 		setScore(0);
 	}
+	
 	
 	public static int getCountBomb() {
 		return countBomb;
@@ -112,7 +120,9 @@ public class GameLogic extends Scene {
 	}
 	public static BombItem newBomb() {
 		return new BombItem(10 + RAND.nextInt(WIDTH-120),0,PLAYER_SIZE);
-		
+	}
+	public static BulletItem newBullet() {
+		return new BulletItem(10 + RAND.nextInt(WIDTH-120),0,PLAYER_SIZE);
 	}
 
 	public GameLogic() {
@@ -188,17 +198,19 @@ public class GameLogic extends Scene {
 		gc.fillRect(0, 0, WIDTH, HEIGHT);
 		gc.setTextAlign(TextAlignment.CENTER);
 //		gc.setFont(Font.font(20));
-//		gc.setFill(Color.WHITE);
+//    	gc.setFill(Color.WHITE);
 //		gc.fillText("Score" + score,60,20);
 		
-		if(gameOver) {
-			gc.setFont(Font.font(35));
-			gc.setFill(Color.YELLOW);
-			gc.fillText("Game Over" + score,WIDTH/2,HEIGHT/2.5);
-		}
+//		if(gameOver) {
+//			gc.setFont(Font.font(35));
+//			gc.setFill(Color.YELLOW);
+//			gc.fillText("Game Over" + score,WIDTH/2,HEIGHT/2.5);
+//		}
+		
+		if(enemys.size() < 2) {
 		if(RAND.nextInt(500) < 10) {
 			enemys.add(newEnemy());
-		}
+		}}
 		for(Enemy x:enemys) {
 			if(x.isExploding()) {enemys.remove(x); continue;}
 			x.draw(gc);
@@ -207,9 +219,56 @@ public class GameLogic extends Scene {
 			}
 //			enemysshots.add(x.shoot());
 		}
-
+		if(bulletitems.size() < 1) {
+			if(RAND.nextInt(500) < 10) {
+				bulletitems.add(newBullet());
+		}}
+		
+		for(BulletItem x:bulletitems) {
+			countterBullet += 1;
+			if(countterBullet >= countBullet) {
+				x.draw(gc);
+				if(x.isDestroyed() || x.isExploding()) {
+					countterBullet = 0;
+					bulletitems.remove(x);
+				}
+			}
+			if(player.colide(x) && !player.isExploding()) {
+				x.explode();
+				BulletState += 1;
+		}
+	}	
+		
+		
+//	if(bulletitems.size() < 1) {
+//			if(RAND.nextInt(500) < 10) {
+//				bulletitems.add(newBullet());
+//	}}
+//		
+//	for(BulletItem x:bulletitems) {
+//			countterBullet += 1;
+//			if(countterBullet >= countBullet) {
+//				x.draw(gc);
+//				if(x.isDestroyed() || x.isExploding()) {
+//					countterBullet = 0;
+//					bulletitems.remove(x);
+//				}
+//			}
+//		if(player.colide(x) && !player.isExploding()) {
+//			x.explode();
+//				
+//	}
+//		if(bulletitems.size() < 5) {
+//			bulletitems.add(newBullet());
+//		 }
+//		for(BulletItem x:bulletitems) {
+//			x.draw(gc);
+//			if(player.colide(x) && !player.isExploding()) {
+//				x.explode();
+//				BulletState += 1;
+//			}
+//		}	
 		for(Shot shot: enemysshots) {
-//				System.out.println("haha");
 				if(shot.getPosY()< 0 || shot.isRemove) {
 					enemysshots.remove(shot);
 					continue;
@@ -219,7 +278,7 @@ public class GameLogic extends Scene {
 				if(shot.colide(player)) {
 						score--;
 						shot.setRemove(true);
-					}
+				}
 		}
 		if(RAND.nextInt(1000) < 10) {
 			bombitems.add(newBomb());
@@ -237,9 +296,12 @@ public class GameLogic extends Scene {
 			shot.draw(gc);
 			for(Enemy x:enemys) {
 				if(shot.colide(x) && !x.isExploding()) {
-					score++;
-					x.explode();
 					shot.setRemove(true);
+					x.attack(player);
+					if(x.getBlood() == 0) {
+						x.explode();
+						score += 10;
+					}
 				}
 			}
 		}
@@ -247,8 +309,8 @@ public class GameLogic extends Scene {
 			x.draw(gc);
 			if(player.colide(x) && !player.isExploding()) {
 				x.explode();
-				countBomb +=1;
-				BulletState += 1;
+//				countBomb +=1;
+//				BulletState += 1;
 			}
 		}	
 //		for(int i = enemys.size()-1;i>= 0;i--) {

@@ -4,11 +4,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class BigMeteorite extends Enemy {
-	private int speed;
 	private final String img;
 	public BigMeteorite(int posX, int posY, int size) {
-		super(posX, posY, size);
+		super(posX, posY, 8);
 		setSpeed(2);
+		setBlood(15);
 		this.img = "35cc4b0f4226a0f1.png";
 		
 		// TODO Auto-generated constructor stub
@@ -20,12 +20,6 @@ public class BigMeteorite extends Enemy {
 			gc.drawImage(image,getPosX(),getPosY(),getSize(),getSize());
 			setPosY(getPosY()+ getSpeed());
 		}
-	}
-	public int getSpeed() {
-			return speed;
-	}
-	public void setSpeed(int speed) {
-			this.speed = speed;
 	}
 
 		

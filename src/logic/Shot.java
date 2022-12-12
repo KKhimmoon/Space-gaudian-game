@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 
 public class Shot implements Updateable,Collidable {
 	public boolean isRemove;
+	private String name;
 	private int posX;
 	private int posY;
 	private int speed;
@@ -16,6 +17,7 @@ public class Shot implements Updateable,Collidable {
 		setPosX(posX);
 		setPosY(posY);
 		setSpeed(10);
+		setName("Player Shot");
 		// TODO Auto-generated constructor stub
 	}
 	public Shot(int posX,int posY,int speed) {
@@ -23,15 +25,31 @@ public class Shot implements Updateable,Collidable {
 		setPosX(posX);
 		setPosY(posY);
 		setSpeed(speed);
+		setName("Enemy Shot");
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public void draw(GraphicsContext gc) {
-		gc.setFill(Color.RED);
-		if (GameLogic.BulletState >= 20) {
-			gc.setFill(Color.YELLOWGREEN);
-			gc.fillOval(Math.min(745,getPosX()), posY, size, size);
-		} else {
-		gc.fillOval(Math.min(745,getPosX()), posY, size, size);
+		if(getName() == "Enemy Shot") {
+			gc.setFill(Color.BLUE);
+			gc.fillOval(posX, posY, size, size);
+		}else {
+			if (GameLogic.BulletState == 2) {
+				gc.setFill(Color.YELLOWGREEN);
+				gc.fillOval(Math.min(745,getPosX()), posY, size, size);
+			} else if  (GameLogic.BulletState == 3) {
+				gc.setFill(Color.YELLOW);
+			    gc.fillOval(Math.min(745,getPosX()), posY, size, size);
+			}else {
+				gc.setFill(Color.RED);
+			    gc.fillOval(Math.min(745,getPosX()), posY, size, size);
+			}
 		}
 	}
 	
