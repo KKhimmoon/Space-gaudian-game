@@ -8,11 +8,25 @@ import javafx.scene.image.Image;
 public class Enemy extends Rocket {
 	    private int  blood;
 		private int speed;
+		private int ownscore;
+		private final String img;
 		public Enemy(int posX, int posY, int size) {
 			super(posX,posY,size);
+			this.img = "enemy.png";
 			setSpeed(5);
-			setBlood(100);
+			setBlood(30);
+			setOwnscore(15);
+			// TODO Auto-generated constructor stub
 		}
+		
+		public int getOwnscore() {
+			return ownscore;
+		}
+
+		public void setOwnscore(int ownscore) {
+			this.ownscore = ownscore;
+		}
+
 		public int getSpeed() {
 			return speed;
 		}
@@ -27,13 +41,15 @@ public class Enemy extends Rocket {
 		public void setBlood(int blood) {
 			if(blood <=  0) {
 				this.blood = 0;
+			}else {
+				this.blood = blood;
 			}
 		}
 		public void attack(Rocket other) {
-			if(getBlood() <= super.getPower()) {
+			if(getBlood() <= other.getPower()) {
 				setBlood(0);
 			}else {
-				setBlood(this.getBlood()- super.getPower());
+				setBlood(this.getBlood()- other.getPower());
 			}
 		}
 		public void update() {

@@ -12,7 +12,9 @@ public class Rocket extends Entity implements Updateable,Collidable{
 	private int size;
 	private boolean exploding;
 	private int explosionStep;
+	private final Image img;
 	public Rocket(int posX,int posY,int size) {
+		this.img = SelectedController.getSelectedSpaceShip();
 		setPosX(posX);
 		setPosY(posY);
 		setSize(size);
@@ -39,7 +41,12 @@ public class Rocket extends Entity implements Updateable,Collidable{
 	}
 
 	public void setPower(int power) {
-		this.power = power;
+		if(power > 14) {
+			this.power = 14;
+		}
+		else{
+			this.power = power;
+	    }
 	}
 
 	public int getSize() {
@@ -75,14 +82,14 @@ public class Rocket extends Entity implements Updateable,Collidable{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	public Shot shoot() {
-		return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY() - Shot.size);
+	public Shot shoot(String name) {
+		return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY() - Shot.size,name);
 	}
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		if(!isExploding()) {
-			gc.drawImage(SelectedController.getSelectedSpaceShip(),Math.min(800-this.size,getPosX()),getPosY(),getSize(),getSize());
+			gc.drawImage(this.img,Math.min(800-this.size,getPosX()),getPosY(),getSize(),getSize());
 		}
 		
 	}

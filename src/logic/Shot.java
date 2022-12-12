@@ -12,12 +12,13 @@ public class Shot implements Updateable,Collidable {
 	private int posY;
 	private int speed;
 	static final int size = 6;
-	public Shot(int posX,int posY) {
+	public Shot(int posX,int posY,String name) {
 		super();
 		setPosX(posX);
 		setPosY(posY);
 		setSpeed(10);
-		setName("Player Shot");
+		setName(name);
+		// TODO Auto-generated constructor stub
 	}
 	public Shot(int posX,int posY,int speed) {
 		super();
@@ -25,6 +26,7 @@ public class Shot implements Updateable,Collidable {
 		setPosY(posY);
 		setSpeed(speed);
 		setName("Enemy Shot");
+		// TODO Auto-generated constructor stub
 	}
 	
 	public String getName() {
@@ -37,6 +39,9 @@ public class Shot implements Updateable,Collidable {
 		if(getName() == "Enemy Shot") {
 			gc.setFill(Color.BLUE);
 			gc.fillOval(posX, posY, size, size);
+		}else if(getName() == "Bomb Shot") {
+			gc.setFill(Color.ORANGE);
+		    gc.fillOval(Math.min(745,getPosX()), posY, size, size);
 		}else {
 			if (GameLogic.BulletState == 1) {
 				gc.setFill(Color.YELLOWGREEN);
