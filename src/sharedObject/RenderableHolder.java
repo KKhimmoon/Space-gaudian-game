@@ -48,6 +48,7 @@ public class RenderableHolder {
 	
 	//gif
 	public static Image homeBg;
+	public static Image destroyGif;
 	
 	//sound
 	public static AudioClip homeSound;
@@ -104,10 +105,12 @@ public class RenderableHolder {
 		explodeShot = new Image(ClassLoader.getSystemResource(image+"explodeshot.png").toString());
 		shot1 = new Image(ClassLoader.getSystemResource(image+"shot1.png").toString());
 		shot2 = new Image(ClassLoader.getSystemResource(image+"shot2.png").toString());
-		shot3 = new Image(ClassLoader.getSystemResource(image+"shot3.png").toString());
+		shot3 = new Image(ClassLoader.getSystemResource(image+"destroy.gif").toString());
+		
 		
 		//gif
 		homeBg = new Image(ClassLoader.getSystemResource(image+"spaceBg.gif").toString());
+		destroyGif = new Image(ClassLoader.getSystemResource(image+"spaceBg.gif").toString());
 		
 		//sound
 		homeSound = new AudioClip(ClassLoader.getSystemResource(sound+"homesound.mp3").toString());

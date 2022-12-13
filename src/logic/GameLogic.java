@@ -50,13 +50,10 @@ public class GameLogic extends Scene {
 	private static ConcurrentLinkedQueue<BigMeteorite> bigMetroItems;
 	public static int countBomb;
 	public static int countBomb2;
-	public static int countBomb3;
 	public static int countterBomb;
-	public static int countterBomb2;
 	public static int countBullet;
 	public static int countterBullet;
 	public static int BulletState;
-	private static boolean isBombed;
 	
 	public static GraphicsContext getGc() {
 		return gc;
@@ -91,7 +88,6 @@ public class GameLogic extends Scene {
 		countterBomb = 0;
 		countBullet = 1200;
 		countterBullet = 0;
-		isBombed = false;
 		setCountBomb(0);
 		setBulletState(0);
 		setScore(0);
@@ -162,17 +158,20 @@ public class GameLogic extends Scene {
 //		};
 //
 //		animationTimer.start();
-		canvas.setCursor(Cursor.MOVE);
+//		canvas.setCursor(Cursor.MOVE);
 		canvas.setOnMouseMoved(e-> mouseX = e.getX());
 		canvas.setOnMouseClicked(new EventHandler<Event>() {
 //arg0
 			@Override
 			public void handle(Event e) {
 				// TODO Auto-generated method stub
-				
+				sharedObject.RenderableHolder.laserGunSound.play();
 				if(shots.size() < MaxShot) {
 					shots.add(player.shoot("Player Shot"));
-					sharedObject.RenderableHolder.laserGunSound.play();
+				}
+				if(gameOver) {
+					gameOver = false;
+					InitializeGame();
 				}
 				
 			}
@@ -184,7 +183,6 @@ public class GameLogic extends Scene {
             	if(getCountBomb()> 0) {
             		setCountBomb(getCountBomb()-1);
             		shots.add(player.shoot("Bomb Shot"));
-            		isBombed = true;
             	}
 			}
 		});
@@ -354,20 +352,7 @@ public class GameLogic extends Scene {
 					//System.out.println(x.getBlood());
 					if(shot.getName() == "Bomb Shot") {
 						sharedObject.RenderableHolder.destroySound.play();
-						Thread thread = new Thread(() -> {
-							try {
-								x.explode();
-								x.draw(gc,isBombed);
-								Thread.sleep(1000);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						});
-						thread.start();
-//						x.draw(gc,isBombed);
-//						x.explode();
-//						isBombed = false;
+						x.explode();
 					}
 					if(x.getBlood() == 0) {
 						x.explode();
@@ -381,9 +366,8 @@ public class GameLogic extends Scene {
 					x.attack(player);
 					if(shot.getName() == "Bomb Shot") {
 						sharedObject.RenderableHolder.destroySound.play();
-						x.draw(gc,isBombed);
+						x.draw(gc);
 						x.explode();
-						isBombed = false;
 					}
 					if(x.getBlood() == 0) {
 						x.explode();
@@ -397,16 +381,14 @@ public class GameLogic extends Scene {
 					x.attack(player);
 					if(shot.getName() == "Bomb Shot") {
 						sharedObject.RenderableHolder.destroySound.play();
-						x.draw(gc,isBombed);
 						x.explode();
-						isBombed = false;
-						}
 					}
 					if(x.getBlood() == 0) {
 						x.explode();
 						score += x.getOwnscore();
 					}
 				}
+			}
 		}
 		gameOver = player.isDestroyed();
 	}
