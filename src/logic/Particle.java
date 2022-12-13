@@ -54,7 +54,7 @@ public class Particle extends Entity {
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.drawImage(sharedObject.RenderableHolder.destroyGif,getPosX(),getPosY(),100,100);
+		gc.drawImage(sharedObject.RenderableHolder.destroyGif,getPosX()-50,getPosY()-20,100,100);
 	}
 	
 	

@@ -10,25 +10,27 @@ public class Enemy extends Rocket {
 	    private int  blood;
 		private int speed;
 		private int ownscore;
+		private boolean moveleft;
 	
 //		private boolean isBombed;
 		public Enemy(int posX, int posY, int size) {
 			super(posX,posY,size);
-			setSpeed(5);
+			setSpeed(3);
 			setBlood(30);
 			setOwnscore(15);
 			setExplosionStep(0);
+			setMoveleft(false);
 //			setBombed(false);
 			// TODO Auto-generated constructor stub
 		}
 		
-//		public boolean isBombed() {
-//			return isBombed;
-//		}
-//
-//		public void setBombed(boolean isBombed) {
-//			this.isBombed = isBombed;
-//		}
+		public boolean isMoveleft() {
+			return moveleft;
+		}
+
+		public void setMoveleft(boolean moveleft) {
+			this.moveleft = moveleft;
+		}
 
 		public int getOwnscore() {
 			return ownscore;
@@ -76,14 +78,23 @@ public class Enemy extends Rocket {
 				if(getPosY() != 150) {
 					setPosY(getPosY()+ getSpeed());
 				}
+				else {
+					if(isMoveleft()) {
+						setPosX(getPosX()-getSpeed());
+						if(getPosX() <= 0) {
+							setPosX(0);
+							setMoveleft(false);
+						}
+					}else {
+						setPosX(getPosX() + getSpeed());
+						if(getPosX() >= GameLogic.WIDTH-this.getSize()) {
+							setPosX(GameLogic.WIDTH-this.getSize());
+							setMoveleft(true);
+						}
+					}
+				}
 		   }
 		}
-//		public void draw(GraphicsContext gc,boolean x) {
-//			if(x) {
-//				super.update();
-//				gc.drawImage(sharedObject.RenderableHolder.destroy,getPosX(),getPosY(),100,100);
-//			}
-//		}
 		public Shot shoot() {
 			return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY() +getSize()/2 ,-10);
 		}

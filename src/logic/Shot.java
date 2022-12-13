@@ -44,8 +44,7 @@ public class Shot implements Updateable,Collidable {
 			gc.setFill(Color.BLUE);
 			gc.fillOval(posX, posY, size, size+15);
 		}else if(getName() == "Bomb Shot") {
-			gc.setFill(Color.ORANGE);
-		    gc.fillOval(Math.min(745,getPosX()), posY, size+25,size+25);
+			gc.drawImage(sharedObject.RenderableHolder.bombshot,Math.min(745,getPosX()), posY, size+50, size+50);
 		}else {
 			if (GameLogic.BulletState == 1) {
 				gc.drawImage(sharedObject.RenderableHolder.shot2,Math.min(745,getPosX()), posY, size, size+25);

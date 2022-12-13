@@ -9,7 +9,7 @@ public class BigMeteorite extends Enemy {
 		super(posX, posY, 120);
 		setSpeed(2);
 		setBlood(15);
-		setOwnscore(5);
+		setOwnscore(6);
 		
 		// TODO Auto-generated constructor stub
 	}
