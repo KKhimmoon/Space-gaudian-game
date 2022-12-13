@@ -41,6 +41,7 @@ public class RenderableHolder {
 	public static Image playagainTxt;
 	public static Image pausedBtn;
 	public static Image destroy;
+	public static Image explodeShot;
 	
 	//gif
 	public static Image homeBg;
@@ -96,6 +97,7 @@ public class RenderableHolder {
 		pausedTxt = new Image(ClassLoader.getSystemResource(image+"text-paused.png").toString());
 		pausedBtn = new Image(ClassLoader.getSystemResource(image+"pause.png").toString());
 		destroy = new Image(ClassLoader.getSystemResource(image+"destroy.png").toString());
+		explodeShot = new Image(ClassLoader.getSystemResource(image+"explodeshot.png").toString());
 		
 		//gif
 		homeBg = new Image(ClassLoader.getSystemResource(image+"spaceBg.gif").toString());
