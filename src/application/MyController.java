@@ -61,6 +61,7 @@ public class MyController implements Initializable {
 	public static AnimationTimer homeSound;
 	private Stage stage;
 	private Scene scene;
+	public static Parent howToPlay;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -77,7 +78,9 @@ public class MyController implements Initializable {
 		spaceBg.setImage(sharedObject.RenderableHolder.homeBg);
 		StartImage.setImage(sharedObject.RenderableHolder.startTxt);
 		HowtoplayImage.setImage(sharedObject.RenderableHolder.howtoplayTxt);
-		MySpaceShip.setImage(sharedObject.RenderableHolder.player1);
+		MySpaceShip.setImage(sharedObject.RenderableHolder.player2);
+		MySpaceShip.setScaleX(1.5);
+		MySpaceShip.setScaleY(1.5);
 		TitleImage.setImage(sharedObject.RenderableHolder.titleTxt);
 		
 		StartButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -136,7 +139,7 @@ public class MyController implements Initializable {
 			public void handle(Event e) {
 				// TODO Auto-generated method stub
 				try {
-					switchToHome(e); ///editttttttttttt
+					switchToHowToPlayScene(e);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -144,6 +147,15 @@ public class MyController implements Initializable {
 			}
 		});
 		playHomeSound();
+//		HowToPlayController howToPlayScene = new HowToPlayController();
+		try {
+			howToPlay = FXMLLoader.load(getClass().getResource("HowToPlay.fxml"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		howToPlay.setVisible(false);
+		HomeBg.getChildren().add(howToPlay);
 	}
 	public void playHomeSound() {
 		homeSound = new AnimationTimer() {
@@ -158,14 +170,8 @@ public class MyController implements Initializable {
 		};
 		homeSound.start();
 	}
-	public void switchToHome(Event event) throws IOException {
-		sharedObject.RenderableHolder.homeSound.stop();
-		homeSound.stop();
-		 Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		 scene = new Scene(root);
-		 stage.setScene(scene);
-		 stage.show();
+	public void switchToHowToPlayScene(Event event) throws IOException {
+		howToPlay.setVisible(true);
 	}
 	public void switchToSelectedScene(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();

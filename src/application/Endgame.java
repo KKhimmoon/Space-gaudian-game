@@ -109,14 +109,13 @@ public class Endgame implements Initializable{
 	}
 	
 	public void yesButtonHandler(Event event) throws IOException{
-//		Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-//		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-//		scene = new Scene(root);
-//		stage.setScene(scene);
-//		stage.show();
 		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.mainGameSound.stop();
 		Timer.getMainGameSound().stop();
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new logic.GameLogic();
+		stage.setScene(scene);
+		stage.show();
 		
 	}
 	public void noButtonHandler(Event event) throws IOException {

@@ -40,8 +40,6 @@ public class RenderableHolder {
 	public static Image upTxt;
 	public static Image playagainTxt;
 	public static Image pausedBtn;
-	public static Image destroy;
-	public static Image explodeShot;
 	public static Image shot1;
 	public static Image shot2;
 	public static Image shot3;
@@ -77,7 +75,7 @@ public class RenderableHolder {
 		String font = "font/";
 		
 		//image
-		selectedBg = new Image(ClassLoader.getSystemResource(image+"spaceBg2.png").toString());
+		selectedBg = new Image(ClassLoader.getSystemResource(image+"selectedBg.jpg").toString());
 		titleTxt = new Image(ClassLoader.getSystemResource(image+"text-space_guardian.png").toString());
 		startTxt = new Image(ClassLoader.getSystemResource(image+"text-start.png").toString());
 		howtoplayTxt = new Image(ClassLoader.getSystemResource(image+"text-how_to_play.png").toString());
@@ -101,16 +99,15 @@ public class RenderableHolder {
 		playagainTxt = new Image(ClassLoader.getSystemResource(image+"text-play_again.png").toString());
 		pausedTxt = new Image(ClassLoader.getSystemResource(image+"text-paused.png").toString());
 		pausedBtn = new Image(ClassLoader.getSystemResource(image+"pause.png").toString());
-		destroy = new Image(ClassLoader.getSystemResource(image+"destroy.png").toString());
-		explodeShot = new Image(ClassLoader.getSystemResource(image+"explodeshot.png").toString());
 		shot1 = new Image(ClassLoader.getSystemResource(image+"shot1.png").toString());
 		shot2 = new Image(ClassLoader.getSystemResource(image+"shot2.png").toString());
-		shot3 = new Image(ClassLoader.getSystemResource(image+"destroy.gif").toString());
+		shot3 = new Image(ClassLoader.getSystemResource(image+"shot3.png").toString());
+		
 		
 		
 		//gif
 		homeBg = new Image(ClassLoader.getSystemResource(image+"spaceBg.gif").toString());
-		destroyGif = new Image(ClassLoader.getSystemResource(image+"spaceBg.gif").toString());
+		destroyGif = new Image(ClassLoader.getSystemResource(image+"destroy.gif").toString());
 		
 		//sound
 		homeSound = new AudioClip(ClassLoader.getSystemResource(sound+"homesound.mp3").toString());

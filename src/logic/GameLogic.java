@@ -252,31 +252,30 @@ public class GameLogic extends Scene {
 //		}
 		
 	//	----------------------------------------------
-//		if(enemys.size() < 2) {
-//		if(RAND.nextInt(500) < 10) {
-//			AllEnemy.add(newEnemy());
-//     		enemys.add(newEnemy());
-//		}
-//		}
-//		for(Enemy x:enemys) {
-//			if(x.isExploding()) {enemys.remove(x); continue;}
-//			x.draw(gc);
-//			if(RAND.nextInt(500) < 20) {
-//				enemysshots.add(x.shoot());
-//			}
-//		}
-//		for(Shot shot: enemysshots) {
-//			if(shot.getPosY()< 0 || shot.isRemove) {
-//				enemysshots.remove(shot);
-//				continue;
-//			}
-//			shot.update();
-//			shot.draw(gc);
-//			if(shot.colide(player)) {
-//					score--;
-//					shot.setRemove(true);
-//			}
-//	}
+		if(enemys.size() < 2) {
+		if(RAND.nextInt(500) < 10) {
+			AllEnemy.add(newEnemy());
+		}
+		}
+		for(Enemy x:enemys) {
+			if(x.isExploding()) {enemys.remove(x); continue;}
+			x.draw(gc);
+			if(RAND.nextInt(500) < 20) {
+				enemysshots.add(x.shoot());
+			}
+		}
+		for(Shot shot: enemysshots) {
+			if(shot.getPosY()< 0 || shot.isRemove) {
+				enemysshots.remove(shot);
+				continue;
+			}
+			shot.update();
+			shot.draw(gc);
+			if(shot.colide(player)) {
+					score--;
+					shot.setRemove(true);
+			}
+	}
 	//------------------------------------------------
 		if(bulletitems.size() < 1) {
 			if(RAND.nextInt(500) < 10) {

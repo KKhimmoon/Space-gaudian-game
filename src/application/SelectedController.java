@@ -91,25 +91,6 @@ public class SelectedController implements Initializable {
 		BackHomeimg.setImage(sharedObject.RenderableHolder.arrow);
 		BackHomeimg.setRotate(180);
 		
-		PlayButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				PlayImage.setScaleX(1.1);
-				PlayImage.setScaleY(1.1);
-			}
-		});
-		
-		PlayButton.setOnMouseExited(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				PlayImage.setScaleX(1);
-				PlayImage.setScaleY(1);
-			}
-		});
 		
 		Space1Btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
@@ -219,6 +200,27 @@ public class SelectedController implements Initializable {
 				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
 			}
 		}); 
+		
+		PlayButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				PlayImage.setScaleX(1.1);
+				PlayImage.setScaleY(1.1);
+			}
+		});
+		
+		PlayButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				PlayImage.setScaleX(1);
+				PlayImage.setScaleY(1);
+			}
+		});
+		
 		PlayButton.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -232,6 +234,7 @@ public class SelectedController implements Initializable {
 				}
 			}
 		});
+		
 		BackHomeBtn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -243,6 +246,26 @@ public class SelectedController implements Initializable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}
+		});
+		
+		BackHomeBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				BackHomeimg.setScaleX(1.1);
+				BackHomeimg.setScaleY(1.1);
+			}
+		});
+		
+		BackHomeBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				BackHomeimg.setScaleX(1);
+				BackHomeimg.setScaleY(1);
 			}
 		});
 	}
@@ -278,6 +301,7 @@ public class SelectedController implements Initializable {
 	}
 
 	public void switchToHome(Event event) throws IOException {
+		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.homeSound.stop();
 		MyController.homeSound.stop();
 		 Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
