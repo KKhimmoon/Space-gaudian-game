@@ -61,7 +61,8 @@ public class MyController implements Initializable {
 	public static AnimationTimer homeSound;
 	private Stage stage;
 	private Scene scene;
-	public static Parent howToPlay;
+	public static Pane howToPlay;
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -147,14 +148,18 @@ public class MyController implements Initializable {
 			}
 		});
 		playHomeSound();
-//		HowToPlayController howToPlayScene = new HowToPlayController();
-		try {
-			howToPlay = FXMLLoader.load(getClass().getResource("HowToPlay.fxml"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		howToPlay = new Pane();
+		howToPlay.setPrefSize(800, 600);
+		howToPlay.setStyle("-fx-background-color: #00000055;");
 		howToPlay.setVisible(false);
+		howToPlay.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				howToPlay.setVisible(false);
+			}
+		});
 		HomeBg.getChildren().add(howToPlay);
 	}
 	public void playHomeSound() {
