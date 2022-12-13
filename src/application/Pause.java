@@ -52,6 +52,7 @@ public class Pause extends Pane implements Initializable{
 			@Override
             public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				sharedObject.RenderableHolder.stopSound.play();
 				logic.GameLogic.pausescene.setVisible(true);
 				Timer.getAnimationTimer().stop();
 			}
@@ -95,10 +96,14 @@ public class Pause extends Pane implements Initializable{
 		});
 	}
 	public void onClickResume(Event event) throws IOException {
+		sharedObject.RenderableHolder.onClickSound.play();
 		Timer.getAnimationTimer().start();
 		logic.GameLogic.pausescene.setVisible(false);
 	}
 	public void onClickExit(Event event) throws IOException {
+		sharedObject.RenderableHolder.onClickSound.play();
+		sharedObject.RenderableHolder.mainGameSound.stop();
+		Timer.getMainGameSound().stop();
 		Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);

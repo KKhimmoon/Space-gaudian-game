@@ -3,9 +3,11 @@ package sharedObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
 import entity.base.Updateable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 
 public class RenderableHolder {
@@ -44,7 +46,15 @@ public class RenderableHolder {
 	public static Image homeBg;
 	
 	//sound
-	
+	public static AudioClip homeSound;
+	public static AudioClip onPressedSound;
+	public static AudioClip onClickSound;
+	public static AudioClip stopSound;
+	public static AudioClip mainGameSound;
+	public static AudioClip destroySound;
+	public static AudioClip collectedSound;
+	public static AudioClip errorSound;
+	public static AudioClip mouseEnteredSound;
 	
 	//font
 	public static Font endgameFont;
@@ -60,6 +70,7 @@ public class RenderableHolder {
 		String sound = "sound/";
 		String font = "font/";
 		
+		//image
 		selectedBg = new Image(ClassLoader.getSystemResource(image+"spaceBg2.png").toString());
 		titleTxt = new Image(ClassLoader.getSystemResource(image+"text-space_guardian.png").toString());
 		startTxt = new Image(ClassLoader.getSystemResource(image+"text-start.png").toString());
@@ -86,10 +97,24 @@ public class RenderableHolder {
 		pausedBtn = new Image(ClassLoader.getSystemResource(image+"pause.png").toString());
 		destroy = new Image(ClassLoader.getSystemResource(image+"destroy.png").toString());
 		
+		//gif
 		homeBg = new Image(ClassLoader.getSystemResource(image+"spaceBg.gif").toString());
 		
+		//sound
+		homeSound = new AudioClip(ClassLoader.getSystemResource(sound+"homesound.mp3").toString());
+//		homeSound.setVolume(0.05);
+		mainGameSound = new AudioClip(ClassLoader.getSystemResource(sound+"maingamesound.mp3").toString());
+		onClickSound = new AudioClip(ClassLoader.getSystemResource(sound+"buttonsound.mp3").toString());
+		stopSound = new AudioClip(ClassLoader.getSystemResource(sound+"stopsound.mp3").toString());
+		collectedSound = new AudioClip(ClassLoader.getSystemResource(sound+"collectedsound.mp3").toString());
+		mouseEnteredSound = new AudioClip(ClassLoader.getSystemResource(sound+"mouseenteredsound.mp3").toString());
+		errorSound = new AudioClip(ClassLoader.getSystemResource(sound+"errorsound.mp3").toString());
+		destroySound = new AudioClip(ClassLoader.getSystemResource(sound+"destroysound.mp3").toString());
+		
+		//fontpath
 		gameFontPath = ClassLoader.getSystemResource(font + "OldSchoolAdventures-42j9.ttf").toString();
 		
+		//font
 		endgameFont = Font.loadFont(ClassLoader.getSystemResource(font + "SpaceRacer-DOPlR.otf").toString(), 20);
 	}
 	public void update() {

@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -57,9 +58,9 @@ public class MyController implements Initializable {
 	@FXML
 	private Pane HomeBg;
 	
+	public static AnimationTimer homeSound;
 	private Stage stage;
 	private Scene scene;
-	private Parent root;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -142,9 +143,24 @@ public class MyController implements Initializable {
 				}
 			}
 		});
+		playHomeSound();
 	}
-
+	public void playHomeSound() {
+		homeSound = new AnimationTimer() {
+			
+			@Override
+			public void handle(long arg0) {
+				// TODO Auto-generated method stub
+				if (!sharedObject.RenderableHolder.homeSound.isPlaying()) {
+					sharedObject.RenderableHolder.homeSound.play();
+				}
+			}
+		};
+		homeSound.start();
+	}
 	public void switchToHome(Event event) throws IOException {
+		sharedObject.RenderableHolder.homeSound.stop();
+		homeSound.stop();
 		 Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
@@ -152,6 +168,7 @@ public class MyController implements Initializable {
 		 stage.show();
 	}
 	public void switchToSelectedScene(Event event) throws IOException {
+		sharedObject.RenderableHolder.onClickSound.play();
 		Parent root = FXMLLoader.load(getClass().getResource("SelectedScene.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);

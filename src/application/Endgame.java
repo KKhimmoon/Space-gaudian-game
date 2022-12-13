@@ -102,7 +102,6 @@ public class Endgame implements Initializable{
 		Endgame.gc = gc;
 	}
 
-
 	public static void updateYourScore(GraphicsContext gc) {
 		gc.setFont(sharedObject.RenderableHolder.endgameFont);
 		gc.setFill(Color.WHITE);
@@ -115,8 +114,15 @@ public class Endgame implements Initializable{
 //		scene = new Scene(root);
 //		stage.setScene(scene);
 //		stage.show();
+		sharedObject.RenderableHolder.onClickSound.play();
+		sharedObject.RenderableHolder.mainGameSound.stop();
+		Timer.getMainGameSound().stop();
+		
 	}
 	public void noButtonHandler(Event event) throws IOException {
+		sharedObject.RenderableHolder.onClickSound.play();
+		sharedObject.RenderableHolder.mainGameSound.stop();
+		Timer.getMainGameSound().stop();
 		Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

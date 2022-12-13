@@ -301,6 +301,7 @@ public class GameLogic extends Scene {
 		}
 		for(BulletItem x:bulletitems) {
 			if(player.colide(x) && !player.isExploding()) {
+				sharedObject.RenderableHolder.collectedSound.play();
 				x.explode();
 				BulletState += 1;
 				player.setPower(player.getPower() + 3);
@@ -326,6 +327,7 @@ public class GameLogic extends Scene {
 	}
 	for(BombItem x: bombitems) {
 		if(player.colide(x) && !player.isExploding()) {
+			sharedObject.RenderableHolder.collectedSound.play();
 			x.explode();
 			setCountBomb(getCountBomb()+1);
 		}
@@ -348,6 +350,7 @@ public class GameLogic extends Scene {
 					x.attack(player);
 					//System.out.println(x.getBlood());
 					if(shot.getName() == "Bomb Shot") {
+						sharedObject.RenderableHolder.destroySound.play();
 						x.explode();
 					}
 					if(x.getBlood() == 0) {
@@ -361,6 +364,7 @@ public class GameLogic extends Scene {
 					shot.setRemove(true);
 					x.attack(player);
 					if(shot.getName() == "Bomb Shot") {
+						sharedObject.RenderableHolder.destroySound.play();
 						x.draw(gc);
 						x.explode();
 					}
@@ -375,6 +379,7 @@ public class GameLogic extends Scene {
 					shot.setRemove(true);
 					x.attack(player);
 					if(shot.getName() == "Bomb Shot") {
+						sharedObject.RenderableHolder.destroySound.play();
 						x.explode();
 					}
 					if(x.getBlood() == 0) {

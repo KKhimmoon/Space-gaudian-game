@@ -20,7 +20,8 @@ import javafx.stage.Window;
 
 public class Timer extends Canvas{
 	private int currentTime;
-	private static AnimationTimer animationTimer;
+	public static AnimationTimer animationTimer;
+	public static AnimationTimer mainGameSound;
 	private long lastTimeTriggered;
 	
 	
@@ -41,6 +42,7 @@ public class Timer extends Canvas{
 					
 				}
 				logic.GameLogic.run(logic.GameLogic.getGc());
+				
 				lastTimeTriggered = (lastTimeTriggered < 0 ? now : lastTimeTriggered);
 				
 				if (now - lastTimeTriggered >= 1000000000)
@@ -52,7 +54,31 @@ public class Timer extends Canvas{
 			}
 		});
 		getAnimationTimer().start();
+		playMainGameSound();
 	}
+	
+	public static AnimationTimer getMainGameSound() {
+		return mainGameSound;
+	}
+
+	public static void setMainGameSound(AnimationTimer mainGameSound) {
+		Timer.mainGameSound = mainGameSound;
+	}
+
+	public void playMainGameSound() {
+		mainGameSound = new AnimationTimer() {
+			
+			@Override
+			public void handle(long arg0) {
+				// TODO Auto-generated method stub
+				if(!sharedObject.RenderableHolder.mainGameSound.isPlaying()) {
+					sharedObject.RenderableHolder.mainGameSound.play();
+				}
+			}
+		};
+		mainGameSound.start();
+	}
+	
 	public void drawCurrentTimeString(GraphicsContext gc){
 		gc.setFill(Color.WHITE);
 		String path = sharedObject.RenderableHolder.gameFontPath;

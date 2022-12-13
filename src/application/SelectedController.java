@@ -117,7 +117,9 @@ public class SelectedController implements Initializable {
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				if(isSelected1()) Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
-				else{Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
+				else{
+					sharedObject.RenderableHolder.mouseEnteredSound.play();
+					Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
 			}
 		});
 		
@@ -135,6 +137,7 @@ public class SelectedController implements Initializable {
 			@Override
 			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
+				sharedObject.RenderableHolder.onClickSound.play();
 				setSelected1(true);
 				setSelected2(false);
 				setSelected3(false);
@@ -150,7 +153,9 @@ public class SelectedController implements Initializable {
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				if(isSelected2()) Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
-				else{Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
+				else{
+					sharedObject.RenderableHolder.mouseEnteredSound.play();
+					Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
 			}
 		});
 		
@@ -168,6 +173,7 @@ public class SelectedController implements Initializable {
 			@Override
 			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
+				sharedObject.RenderableHolder.onClickSound.play();
 				setSelected1(false);
 				setSelected2(true);
 				setSelected3(false);
@@ -183,7 +189,9 @@ public class SelectedController implements Initializable {
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				if(isSelected3()) Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
-				else {Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
+				else {
+					sharedObject.RenderableHolder.mouseEnteredSound.play();
+					Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
 			}
 		});
 		
@@ -201,6 +209,7 @@ public class SelectedController implements Initializable {
 			@Override
 			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
+				sharedObject.RenderableHolder.onClickSound.play();
 				setSelected1(false);
 				setSelected2(false);
 				setSelected3(true);
@@ -269,14 +278,9 @@ public class SelectedController implements Initializable {
 	}
 
 	public void switchToHome(Event event) throws IOException {
+		sharedObject.RenderableHolder.homeSound.stop();
+		MyController.homeSound.stop();
 		 Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		 scene = new Scene(root);
-		 stage.setScene(scene);
-		 stage.show();
-	}
-	public void switchToSelectedScene(Event event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("SelectedScene.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);
@@ -284,6 +288,7 @@ public class SelectedController implements Initializable {
 	}
 	public void switchToGame(Event event) throws IOException {
 		if(getSelectedSpaceShip()==null) {
+			sharedObject.RenderableHolder.errorSound.play();
 			String dialogueString = "You have to choose a Spaceship before PLAY";
 			Alert alert = new Alert(AlertType.CONFIRMATION, dialogueString, ButtonType.OK);
 	        alert.setHeaderText("Warning");
@@ -294,6 +299,11 @@ public class SelectedController implements Initializable {
 	            return ;
 	        }
 		}
+		sharedObject.RenderableHolder.onClickSound.play();
+		if(sharedObject.RenderableHolder.homeSound.isPlaying()||sharedObject.RenderableHolder.mainGameSound.isPlaying()) {
+			sharedObject.RenderableHolder.homeSound.stop();
+		}
+		MyController.homeSound.stop();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new logic.GameLogic();
 		stage.setScene(scene);
