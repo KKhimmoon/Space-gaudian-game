@@ -68,6 +68,25 @@ public class Pause extends Pane implements Initializable{
 		pausedIMG.setImage(sharedObject.RenderableHolder.pausedTxt);
 		resumeIMG.setImage(sharedObject.RenderableHolder.resumeTxt);
 		exitIMG.setImage(sharedObject.RenderableHolder.exitTxt);
+		
+		resumeBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				resumeBtn.setStyle("-fx-background-color: #F12808; -fx-background-radius: 10;");
+			}
+		});
+		
+		resumeBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				resumeBtn.setStyle("-fx-background-color: #FAE82E; -fx-background-radius: 10;");
+			}
+		});
+		
 		resumeBtn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -81,6 +100,25 @@ public class Pause extends Pane implements Initializable{
 				}
 			}
 		});
+		
+		exitBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				exitBtn.setStyle("-fx-background-color: #F12808; -fx-background-radius: 10;");
+			}
+		});
+		
+		exitBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				exitBtn.setStyle("-fx-background-color: #FAE82E; -fx-background-radius: 10;");
+			}
+		});
+		
 		exitBtn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
