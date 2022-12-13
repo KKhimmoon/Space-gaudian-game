@@ -56,6 +56,7 @@ public class RenderableHolder {
 	public static AudioClip collectedSound;
 	public static AudioClip errorSound;
 	public static AudioClip mouseEnteredSound;
+	public static AudioClip laserGunSound;
 	
 	//font
 	public static Font endgameFont;
@@ -110,8 +111,13 @@ public class RenderableHolder {
 		stopSound = new AudioClip(ClassLoader.getSystemResource(sound+"stopsound.mp3").toString());
 		collectedSound = new AudioClip(ClassLoader.getSystemResource(sound+"collectedsound.mp3").toString());
 		mouseEnteredSound = new AudioClip(ClassLoader.getSystemResource(sound+"mouseenteredsound.mp3").toString());
+		mouseEnteredSound.setVolume(0.3);
 		errorSound = new AudioClip(ClassLoader.getSystemResource(sound+"errorsound.mp3").toString());
+		errorSound.setVolume(0.3);
 		destroySound = new AudioClip(ClassLoader.getSystemResource(sound+"destroysound.mp3").toString());
+		destroySound.setVolume(0.5);
+		laserGunSound = new AudioClip(ClassLoader.getSystemResource(sound+"lasergunsound.mp3").toString());
+		laserGunSound.setVolume(0.5);
 		
 		//fontpath
 		gameFontPath = ClassLoader.getSystemResource(font + "OldSchoolAdventures-42j9.ttf").toString();

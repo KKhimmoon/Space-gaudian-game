@@ -165,6 +165,7 @@ public class GameLogic extends Scene {
 			@Override
 			public void handle(Event e) {
 				// TODO Auto-generated method stub
+				sharedObject.RenderableHolder.laserGunSound.play();
 				if(shots.size() < MaxShot) {
 					shots.add(player.shoot("Player Shot"));
 				}
