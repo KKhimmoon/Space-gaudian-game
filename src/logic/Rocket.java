@@ -91,7 +91,6 @@ public class Rocket extends Entity implements Updateable,Collidable{
 		if(!isExploding()) {
 			gc.drawImage(this.img,Math.min(800-this.size,getPosX()),getPosY(),getSize(),getSize());
 		}
-		
 	}
 
 

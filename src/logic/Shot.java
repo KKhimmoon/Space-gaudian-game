@@ -4,6 +4,7 @@ import entity.base.Collidable;
 import entity.base.Updateable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sharedObject.RenderableHolder;
 
 public class Shot implements Updateable,Collidable {
 	public boolean isRemove;
@@ -11,6 +12,9 @@ public class Shot implements Updateable,Collidable {
 	private int posX;
 	private int posY;
 	private int speed;
+	private boolean flashing = false;
+	private int flashCounter = 0;
+	private int flashDurationCounter = 0;
 	static final int size = 6;
 	public Shot(int posX,int posY,String name) {
 		super();
@@ -28,7 +32,7 @@ public class Shot implements Updateable,Collidable {
 		setName("Enemy Shot");
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -38,23 +42,20 @@ public class Shot implements Updateable,Collidable {
 	public void draw(GraphicsContext gc) {
 		if(getName() == "Enemy Shot") {
 			gc.setFill(Color.BLUE);
-			gc.fillOval(posX, posY, size, size);
+			gc.fillOval(posX, posY, size, size+15);
 		}else if(getName() == "Bomb Shot") {
 			gc.setFill(Color.ORANGE);
 		    gc.fillOval(Math.min(745,getPosX()), posY, size, size);
 		}else {
 			if (GameLogic.BulletState == 1) {
-				gc.setFill(Color.YELLOWGREEN);
-				gc.fillOval(Math.min(745,getPosX()), posY, size, size);
+				gc.drawImage(sharedObject.RenderableHolder.shot2,Math.min(745,getPosX()), posY, size, size+25);
 			} else if  (GameLogic.BulletState == 2) {
-				gc.setFill(Color.YELLOW);
-			    gc.fillOval(Math.min(745,getPosX()), posY, size, size);
+				gc.drawImage(sharedObject.RenderableHolder.shot3,Math.min(745,getPosX()), posY, size, size+25);
 			} else if  (GameLogic.BulletState >= 3) {
-				gc.setFill(Color.PINK);
-			    gc.fillOval(Math.min(745,getPosX()), posY, size, size);
+				gc.drawImage(sharedObject.RenderableHolder.shot3,Math.min(745,getPosX()+ size/2 + 1), posY, size, size+25);
+				gc.drawImage(sharedObject.RenderableHolder.shot3,Math.min(745,getPosX()- size/2 - 1), posY, size, size+25);
 			}else {
-				gc.setFill(Color.RED);
-			    gc.fillOval(Math.min(745,getPosX()), posY, size, size);
+				gc.drawImage(sharedObject.RenderableHolder.shot1,Math.min(745,getPosX()), posY, size, size+25);
 			}
 		}
 	}
@@ -83,8 +84,15 @@ public class Shot implements Updateable,Collidable {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-	
-
+//	public boolean hitbyBomb(){
+//		if(this.getName() == "Enemy Shot") {
+//			return true;
+//		}return false;
+//	}
+//	public void hitEnemy() {
+//		flashCounter = 10;
+//		flashDurationCounter = 0;
+//	}
 	@Override
 	public boolean colide(Rocket other) {
 		// TODO Auto-generated method stub

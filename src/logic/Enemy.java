@@ -4,21 +4,32 @@ import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import sharedObject.RenderableHolder;
 
 public class Enemy extends Rocket {
 	    private int  blood;
 		private int speed;
 		private int ownscore;
-		private final String img;
+	
+//		private boolean isBombed;
 		public Enemy(int posX, int posY, int size) {
 			super(posX,posY,size);
-			this.img = "enemy.png";
 			setSpeed(5);
 			setBlood(30);
 			setOwnscore(15);
+			setExplosionStep(0);
+//			setBombed(false);
 			// TODO Auto-generated constructor stub
 		}
 		
+//		public boolean isBombed() {
+//			return isBombed;
+//		}
+//
+//		public void setBombed(boolean isBombed) {
+//			this.isBombed = isBombed;
+//		}
+
 		public int getOwnscore() {
 			return ownscore;
 		}
@@ -57,7 +68,7 @@ public class Enemy extends Rocket {
 			if(!isExploding() && !isDestroyed()) {
 				setPosY(getPosY()+ getSpeed());
 			}
-			if(getPosY() > 600) setDestroyed(true); 
+			if(getPosY() > GameLogic.HEIGHT) setDestroyed(true); 
 		}
 		public void draw(GraphicsContext gc) {
 			if(!isExploding()) {
@@ -66,6 +77,12 @@ public class Enemy extends Rocket {
 					setPosY(getPosY()+ getSpeed());
 				}
 		   }
+		}
+		public void draw(GraphicsContext gc,boolean x) {
+			if(x) {
+				super.update();
+				gc.drawImage(sharedObject.RenderableHolder.destroy,getPosX(),getPosY(),100,100);
+			}
 		}
 		public Shot shoot() {
 			return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY() +getSize()/2 ,-10);
