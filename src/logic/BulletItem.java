@@ -5,9 +5,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class BulletItem extends Item{
+	
+
 	public BulletItem(int posX, int posY, int size) {
 		super(posX, posY, size);
-		setSpeed(3);
+		setSpeed(1);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -45,7 +45,7 @@ public class Shot implements Updateable,Collidable {
 			gc.fillOval(posX, posY, size, size+15);
 		}else if(getName() == "Bomb Shot") {
 			gc.setFill(Color.ORANGE);
-		    gc.fillOval(Math.min(745,getPosX()), posY, size, size);
+		    gc.fillOval(Math.min(745,getPosX()), posY, size+25,size+25);
 		}else {
 			if (GameLogic.BulletState == 1) {
 				gc.drawImage(sharedObject.RenderableHolder.shot2,Math.min(745,getPosX()), posY, size, size+25);
@@ -84,22 +84,12 @@ public class Shot implements Updateable,Collidable {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-//	public boolean hitbyBomb(){
-//		if(this.getName() == "Enemy Shot") {
-//			return true;
-//		}return false;
-//	}
-//	public void hitEnemy() {
-//		flashCounter = 10;
-//		flashDurationCounter = 0;
-//	}
 	@Override
 	public boolean colide(Rocket other) {
 		// TODO Auto-generated method stub
 		int d = GameLogic.distance(this.getPosX() + size/5,this.posY + size/5, other.getPosX() + other.getSize()/5,other.getPosY() + other.getSize()/5);
 		return d < other.getSize()/3 + other.getSize()/3;
 	}
-
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub

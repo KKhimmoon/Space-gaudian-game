@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import sharedObject.RenderableHolder;
 
 public class Enemy extends Rocket {
@@ -79,12 +78,12 @@ public class Enemy extends Rocket {
 				}
 		   }
 		}
-		public void draw(GraphicsContext gc,boolean x) {
-			if(x) {
-				super.update();
-				gc.drawImage(sharedObject.RenderableHolder.destroyGif,getPosX(),getPosY(),100,100);
-			}
-		}
+//		public void draw(GraphicsContext gc,boolean x) {
+//			if(x) {
+//				super.update();
+//				gc.drawImage(sharedObject.RenderableHolder.destroy,getPosX(),getPosY(),100,100);
+//			}
+//		}
 		public Shot shoot() {
 			return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY() +getSize()/2 ,-10);
 		}

@@ -23,5 +23,4 @@ public class Item extends Rocket{
 		}
 		if(getPosY() > 600) setDestroyed(true); 
 	}
-	
 }
