@@ -1,4 +1,4 @@
-package gui;
+package application;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,9 +25,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import screendrawing.MainGameScreen;
 
-public class EndGameController implements Initializable{
+public class Endgame implements Initializable{
 	private Stage stage;
 	private Scene scene;
 	@FXML 
@@ -37,15 +36,15 @@ public class EndGameController implements Initializable{
 	@FXML
 	private Button noBtn;
 	@FXML
-	private ImageView yesImg;//editt
+	private ImageView yesIMG;
 	@FXML
-	private ImageView noImg;
+	private ImageView noIMG;
 	@FXML
-	private ImageView timeImg;
+	private ImageView timeIMG;
 	@FXML
-	private ImageView upImg;
+	private ImageView upIMG;
 	@FXML
-	private ImageView playAgainImg;
+	private ImageView playAgainIMG;
 	
 	private Canvas canvas;
 	private static GraphicsContext gc;
@@ -53,11 +52,11 @@ public class EndGameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		yesImg.setImage(sharedObject.RenderableHolder.yesTxt);
-		noImg.setImage(sharedObject.RenderableHolder.noTxt);
-		timeImg.setImage(sharedObject.RenderableHolder.timeTxt);
-		upImg.setImage(sharedObject.RenderableHolder.upTxt);
-		playAgainImg.setImage(sharedObject.RenderableHolder.playagainTxt);
+		yesIMG.setImage(sharedObject.RenderableHolder.yesTxt);
+		noIMG.setImage(sharedObject.RenderableHolder.noTxt);
+		timeIMG.setImage(sharedObject.RenderableHolder.timeTxt);
+		upIMG.setImage(sharedObject.RenderableHolder.upTxt);
+		playAgainIMG.setImage(sharedObject.RenderableHolder.playagainTxt);
 		
 		canvas = new Canvas(500,100);
 		gc = canvas.getGraphicsContext2D();
@@ -100,7 +99,7 @@ public class EndGameController implements Initializable{
 
 
 	public static void setGc(GraphicsContext gc) {
-		EndGameController.gc = gc;
+		Endgame.gc = gc;
 	}
 
 	public static void updateYourScore(GraphicsContext gc) {
@@ -114,8 +113,7 @@ public class EndGameController implements Initializable{
 		sharedObject.RenderableHolder.mainGameSound.stop();
 		Timer.getMainGameSound().stop();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		screendrawing.MainGameScreen.setInstance(null);
-		scene = MainGameScreen.getInstance();
+		scene = new logic.GameLogic();
 		stage.setScene(scene);
 		stage.show();
 		
@@ -124,7 +122,7 @@ public class EndGameController implements Initializable{
 		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.mainGameSound.stop();
 		Timer.getMainGameSound().stop();
-		Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

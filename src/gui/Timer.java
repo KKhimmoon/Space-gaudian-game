@@ -17,13 +17,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import screendrawing.MainGameScreen;
 
 public class Timer extends Canvas{
 	private int currentTime;
 	public static AnimationTimer animationTimer;
 	public static AnimationTimer mainGameSound;
 	private long lastTimeTriggered;
-	
 	
 	public Timer(int s) {
 		super(80,40);
@@ -37,11 +37,12 @@ public class Timer extends Canvas{
 				// TODO Auto-generated method stub
 				if(currentTime <= 0 ) {
 					EndGameController.updateYourScore(EndGameController.getGc());
-					logic.GameLogic.endgame.setVisible(true);
+					screendrawing.MainGameScreen.getInstance().endGame.setVisible(true);
 					getAnimationTimer().stop();
 					
 				}
-				logic.GameLogic.run(logic.GameLogic.getGc());
+				
+				MainGameScreen.getInstance().run();
 				
 				lastTimeTriggered = (lastTimeTriggered < 0 ? now : lastTimeTriggered);
 				

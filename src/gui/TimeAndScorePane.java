@@ -27,7 +27,7 @@ public class TimeAndScorePane extends VBox{
 		gc = this.canvas.getGraphicsContext2D();
 		this.setPadding(new Insets(10, 0, 0, 0));
 		this.setAlignment(Pos.BASELINE_RIGHT);
-		this.getChildren().addAll(this.canvas,new Timer(100)); // add score ด้วย
+		this.getChildren().addAll(this.canvas,new Timer(101)); // add score ด้วย
 	}
 	
 	public static void updateScore(GraphicsContext gc) {

@@ -1,4 +1,4 @@
-package gui;
+package application;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,8 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import logic.GameLogic;
-import screendrawing.MainGameScreen;
-public class PauseController extends Pane implements Initializable{
+public class Pause extends Pane implements Initializable{
 	
 	@FXML
 	private ImageView pausedIMG;
@@ -42,7 +41,7 @@ public class PauseController extends Pane implements Initializable{
 	private Stage stage;
 	private Scene scene;
 	
-	public PauseController() {
+	public Pause() {
 		this.pauseBtn = new Button();
 		ImageView pauseBtnIMG = new ImageView(sharedObject.RenderableHolder.pausedBtn);
 		pauseBtnIMG.setFitHeight(30);
@@ -54,7 +53,7 @@ public class PauseController extends Pane implements Initializable{
             public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				sharedObject.RenderableHolder.stopSound.play();
-				MainGameScreen.getInstance().pauseScene.setVisible(true);
+				logic.GameLogic.pausescene.setVisible(true);
 				Timer.getAnimationTimer().stop();
 			}
 		});
@@ -137,14 +136,13 @@ public class PauseController extends Pane implements Initializable{
 	public void onClickResume(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
 		Timer.getAnimationTimer().start();
-		screendrawing.MainGameScreen.getInstance().pauseScene.setVisible(false);
+		logic.GameLogic.pausescene.setVisible(false);
 	}
 	public void onClickExit(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.mainGameSound.stop();
-		screendrawing.MainGameScreen.setInstance(null);
 		Timer.getMainGameSound().stop();
-		Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
 		 stage.setScene(scene);

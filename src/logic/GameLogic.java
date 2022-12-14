@@ -36,12 +36,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import screendrawing.MainGameScreen;
 import sharedObject.RenderableHolder;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 
-public class GameLogic extends Scene {
+public class GameLogic {
 
 	private static Rocket player;
 	private static ConcurrentLinkedQueue<Shot> allShots;
@@ -54,27 +55,22 @@ public class GameLogic extends Scene {
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
 	private static final int PLAYER_SIZE = 100;
-	private static final int MaxShot = 20;
+	private static final int MAXSHOT = 20;
 	private static int score;
-	private static double mouseX;
 	private static boolean hasAlien;
 	public static int amountBomb;
 	public static int countBomb;
 	public static int countterBomb;
 	public static int countBullet;
 	public static int countterBullet;
-	public static int BulletState;
+	public static int bulletState;
 
 	
 	public static GraphicsContext getGc() {
 		return gc;
 	}
-	private static GraphicsContext gc;
-	public static Pane root;
-	public static Parent endgame;
-	public static Parent pausescene;
-	private static TimeAndScorePane timerAndScorePane;
-	private static BombPane bombpane ;
+	private static GraphicsContext gc ;
+
 	
 	public static void InitializeGame() {
 		allShots = new ConcurrentLinkedQueue<>();
@@ -93,23 +89,7 @@ public class GameLogic extends Scene {
 		setScore(0);
 		setHasAlien(false);
 	}
-	public static Rocket getPlayer() {
-		return player;
-	}
-	public static void setPlayer(Rocket player) {
-		GameLogic.player = player;
-	}
-	public static ConcurrentLinkedQueue<Shot> getAllShots() {
-		return allShots;
-	}
-	public static void setAllShots(ConcurrentLinkedQueue<Shot> allShots) {
-		GameLogic.allShots = allShots;
-	}
-
-	public static int getMaxshot() {
-		return MaxShot;
-	}
-
+	
 	public static int getAmountBomb() {
 		return amountBomb;
 	}
@@ -163,15 +143,15 @@ public class GameLogic extends Scene {
 	}
 
 	public static int getBulletState() {
-		return BulletState;
+		return bulletState;
 	}
 	public static void setBulletState(int bulletState) {
-		BulletState = bulletState;
+		bulletState = bulletState;
 	}
 	public static int getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+	public static void setScore(int score) {
 		GameLogic.score = score;
 	}
 	public static Alien newAlien() {
@@ -189,76 +169,25 @@ public class GameLogic extends Scene {
 	public static BigMeteorite newBigMeteo() {
 		return new BigMeteorite(10 + RAND.nextInt(WIDTH-120),0,PLAYER_SIZE);
 	}
-	
-	public GameLogic() {
-		// TODO Auto-generated method stub
-		super(new Pane(),WIDTH,HEIGHT);
-		Canvas canvas = new Canvas(WIDTH,HEIGHT);
-		gc = canvas.getGraphicsContext2D();
-		canvas.setCursor(Cursor.MOVE);
-		canvas.setOnMouseMoved(e-> mouseX = e.getX());
-		canvas.setOnMouseClicked(new EventHandler<Event>() {
+	public static Rocket getPlayer() {
+		return player;
+	}
+	public static void setPlayer(Rocket player) {
+		GameLogic.player = player;
+	}
+	public static ConcurrentLinkedQueue<Shot> getAllShots() {
+		return allShots;
+	}
+	public static void setAllShots(ConcurrentLinkedQueue<Shot> allShots) {
+		GameLogic.allShots = allShots;
+	}
+	public static int getMaxshot() {
+		return MAXSHOT;
+	}
 
-			@Override
-			public void handle(Event e) {
-				// TODO Auto-generated method stub
-				
-				if(allShots.size() < MaxShot) {
-					allShots.add(player.shoot("Player Shot"));
-					sharedObject.RenderableHolder.laserGunSound.play();
-				}
-				
-			}
-		});
-		InitializeGame();
-		root = new Pane(); 
-		root.addEventFilter(KeyEvent.KEY_PRESSED, event->{
-            if (event.getCode() == KeyCode.SPACE) {
-            	if(getAmountBomb()> 0) {
-            		setAmountBomb(getAmountBomb()-1);
-            		allShots.add(player.shoot("Bomb Shot"));
-            	}
-			}
-		});
-		timerAndScorePane = new TimeAndScorePane();
-		timerAndScorePane.setTranslateX(680);
-		bombpane = new BombPane();
-		//BombPane bombpane = new BombPane();
-		bombpane.setAlignment(Pos.BOTTOM_RIGHT);
-		
-		try {
-			endgame = FXMLLoader.load(getClass().getClassLoader().getResource("gui/EndGameScene.fxml"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			pausescene = FXMLLoader.load(getClass().getClassLoader().getResource("gui/PauseScene.fxml"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		PauseController pause = new PauseController();
-		pause.setTranslateX(10);
-		pause.setTranslateY(10);
-		pausescene.setVisible(false);
-		endgame.setVisible(false);
-		bombpane.setTranslateX(700);
-		bombpane.setTranslateY(520);
-		root.getChildren().addAll(canvas,timerAndScorePane,bombpane,pause,endgame,pausescene);
-		this.setRoot(root);
-	}
-	
-	public static void run(GraphicsContext gc) {
-		bombpane.drawCurrentAmount(BombPane.getGc());
-		timerAndScorePane.updateScore(timerAndScorePane.getGc());
-		gc.drawImage(sharedObject.RenderableHolder.mainGameBg,0,0, WIDTH,HEIGHT);
-		runGameScence(gc);
-	}
+
 	public static void runGameScence(GraphicsContext gc) {
-//		bombpane.drawCurrentAmount(BombPane.getGc());
-//		timerAndScorePane.updateScore(timerAndScorePane.getGc());
-//		gc.drawImage(sharedObject.RenderableHolder.mainGameBg,0,0, WIDTH,HEIGHT);
+		GameLogic.gc =gc;
 		addEnemy(allEnemys,hasAlien);
 		addShotsEnemy(allEnemys,allEnemysShots);
 		collideEnemyShot(allEnemysShots,player);
@@ -273,7 +202,7 @@ public class GameLogic extends Scene {
 		checkAllParticles(allParticles);
 		player.update();
 		player.draw(gc);
-		player.setPosX((int) mouseX);
+		player.setPosX((int) screendrawing.MainGameScreen.getInstance().getMouseX());
 	}
 
 	public static void collideEnemyShot(ConcurrentLinkedQueue<Shot> allEnemysShots,Rocket player) {
@@ -330,7 +259,7 @@ public class GameLogic extends Scene {
 			if(player.colide(x) && !player.isExploding()) {
 				sharedObject.RenderableHolder.collectedSound.play();
 				x.explode();
-				BulletState += 1;
+				bulletState += 1;
 				player.setPower(player.getPower() + 3);
 			}
 		}
@@ -420,12 +349,6 @@ public class GameLogic extends Scene {
 		}
 	}
 	
-	public static TimeAndScorePane getTimerAndScorePane() {
-		return timerAndScorePane;
-	}
-	public static void setTimerAndScorePane(TimeAndScorePane timerAndScorePane) {
-		GameLogic.timerAndScorePane = timerAndScorePane;
-	}
 
 
 }
