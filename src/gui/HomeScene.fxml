@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<Pane fx:id="HomeBg" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
+<Pane fx:id="HomeBg" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HomeController">
    <children>
       <ImageView fx:id="spaceBg" fitHeight="809.0" fitWidth="892.0" layoutX="-1.0" layoutY="-94.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
