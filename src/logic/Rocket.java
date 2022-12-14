@@ -1,9 +1,9 @@
 package logic;
 
-import application.SelectedController;
 import entity.base.Collidable;
 import entity.base.Entity;
 import entity.base.Updateable;
+import gui.SelectedController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -16,28 +16,15 @@ public class Rocket extends Entity implements Updateable,Collidable{
 		setPosX(posX);
 		setPosY(posY);
 		setSize(size);
-		setExplosionStep(0);
+//		setExplosionStep(0);
 		setDestroyed(false);
 		setExploding(false);
 		setPower(5);
 		// TODO Auto-generated constructor stub
 	}
-
-	public boolean colide(Rocket other) {
-		int d = GameLogic.distance(this.getPosX() + size/2,this.posY + size/2, other.getPosX() + other.getSize()/2,other.getPosY() + other.getSize()/2);
-		return d < other.getSize()/2 + other.getSize()/2;
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		if(isExploding()) setExplosionStep(getExplosionStep()+1);
-		setDestroyed(getExplosionStep() > GameLogic.HEIGHT); // fix it
-	}	
 	public int getPower() {
 		return power;
 	}
-
 	public void setPower(int power) {
 		if(power > 14) {
 			this.power = 14;
@@ -46,40 +33,45 @@ public class Rocket extends Entity implements Updateable,Collidable{
 			this.power = power;
 	    }
 	}
-
 	public int getSize() {
 		return size;
 	}
-
 	public void setSize(int size) {
 		this.size = size;
-	}
-	public void explode() {
-		setExploding(true);
-		setExplosionStep(-1);
 	}
 
 	public boolean isExploding() {
 		return exploding;
 	}
-
 	public void setExploding(boolean exploding) {
 		this.exploding = exploding;
 	}
-
+	public void explode() {
+		setExploding(true);
+//		setExplosionStep(-1);
+	}
 	public int getExplosionStep() {
 		return explosionStep;
 	}
-
 	public void setExplosionStep(int explosionStep) {
 		this.explosionStep = explosionStep;
 	}
-
 	@Override
 	public int getZ() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public boolean colide(Rocket other) {
+		int d = GameLogic.distance(this.getPosX() + size/2,this.posY + size/2, other.getPosX() + other.getSize()/2,other.getPosY() + other.getSize()/2);
+		return d < other.getSize()/2 + other.getSize()/2;
+	}
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		if(isExploding() || getPosY() > GameLogic.HEIGHT) {
+			setDestroyed(true);
+		}
+	}	
 	public Shot shoot(String name) {
 		return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY() - Shot.size,name);
 	}
@@ -90,9 +82,4 @@ public class Rocket extends Entity implements Updateable,Collidable{
 			gc.drawImage(SelectedController.getSelectedSpaceShip(),Math.min(800-this.size,getPosX()),getPosY(),getSize(),getSize());
 		}
 	}
-
-
-	
-	
-
 }

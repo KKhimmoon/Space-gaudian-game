@@ -1,20 +1,15 @@
 package logic;
-
 import entity.base.Collidable;
+import entity.base.Entity;
 import entity.base.Updateable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
 
-public class Shot implements Updateable,Collidable {
+public class Shot extends Entity implements Updateable,Collidable {
 	public boolean isRemove;
 	private String name;
-	private int posX;
-	private int posY;
 	private int speed;
-	private boolean flashing = false;
-	private int flashCounter = 0;
-	private int flashDurationCounter = 0;
 	static final int size = 6;
 	public Shot(int posX,int posY,String name) {
 		super();
@@ -58,7 +53,6 @@ public class Shot implements Updateable,Collidable {
 			}
 		}
 	}
-	
 	public boolean isRemove() {
 		return isRemove;
 	}
@@ -94,6 +88,9 @@ public class Shot implements Updateable,Collidable {
 		// TODO Auto-generated method stub
 		setPosY(getPosY()-getSpeed());
 	}
-
-
+	@Override
+	public int getZ() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

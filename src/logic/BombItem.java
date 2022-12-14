@@ -6,11 +6,9 @@ import javafx.scene.image.Image;
 
 public class BombItem extends Item{
 
-
 	public BombItem(int posX, int posY, int size) {
 		super(posX, posY, size);
-		
-		setSpeed(1);
+		setSpeed(2);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -18,7 +16,6 @@ public class BombItem extends Item{
 		// TODO Auto-generated method stub
 		if(!isExploding()) {
 			gc.drawImage(sharedObject.RenderableHolder.bombItem,getPosX(),getPosY(),getSize(),getSize());
-			setPosY(getPosY()+getSpeed());
 		}
 	}
 }

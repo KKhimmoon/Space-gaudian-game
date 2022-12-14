@@ -6,13 +6,11 @@ public class Item extends Rocket{
 	public Item(int posX, int posY, int size) {
 		super(posX, posY, size);
 		// TODO Auto-generated constructor stub
-		setSpeed(2);
+		setSpeed(speed);
 	}
-
 	public int getSpeed() {
 		return speed;
 	}
-
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
@@ -21,6 +19,6 @@ public class Item extends Rocket{
 		if(!isDestroyed()) {
 			setPosY(getPosY()+ getSpeed());
 		}
-		if(getPosY() > 600) setDestroyed(true); 
+		if(getPosY() > GameLogic.HEIGHT) setDestroyed(true); 
 	}
 }

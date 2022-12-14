@@ -4,59 +4,45 @@ import entity.base.Entity;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Particle extends Entity {
-	private int counttime;
-	private int countertime;
-	
+	private int countTime;
+	private int countTerTime;
+
 	public Particle(int posX,int posY) {
 		super();
 		setPosX(posX);
 		setPosY(posY);
-		setCountertime(0);
-		setCounttime(20);
+		setCountTerTime(0);
+		setCountTime(20);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	public int getCounttime() {
-		return counttime;
+	public int getCountTime() {
+		return countTime;
 	}
-
-
-	public void setCounttime(int counttime) {
-		this.counttime = counttime;
+	public void setCountTime(int countTime) {
+		this.countTime = countTime;
 	}
-
-
-	public int getCountertime() {
-		return countertime;
+	public int getCountTerTime() {
+		return countTerTime;
 	}
-
-
-	public void setCountertime(int countertime) {
-		this.countertime = countertime;
+	public void setCountTerTime(int countTerTime) {
+		this.countTerTime = countTerTime;
 	}
-
-
 	public void countDelay() {
-		if(getCountertime() >= getCounttime()) {
-		}else {
-			setCountertime(getCountertime()+1);
+		if(!(getCountTerTime() >= getCountTime())) {
+			setCountTerTime(getCountTerTime()+1);
 		}
 	}
-	public boolean isDone() {
-		return getCountertime() >= getCounttime();
+	public boolean isBombDone() {
+		return getCountTerTime() >= getCountTime();
 	}
 	@Override
 	public int getZ() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 99;
 	}
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		gc.drawImage(sharedObject.RenderableHolder.destroyGif,getPosX()-50,getPosY()-20,100,100);
 	}
-	
-	
-
 }
