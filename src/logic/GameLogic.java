@@ -420,7 +420,7 @@ public class GameLogic extends Scene {
 	}
 	public static void releaseBombItem(ConcurrentLinkedQueue<BombItem> allBombitems,int countterBomb,int countBomb) {
 		for(BombItem x: allBombitems) {
-			setCountterBomb(getCountBomb()+1);
+			setCountterBomb(getCountterBomb()+1);
 			if(getCountterBomb() >= getCountBomb()) {
 				x.draw(gc);
 				x.update();

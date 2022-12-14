@@ -28,10 +28,10 @@ public class MainGameScreen  extends Scene{
 	public MainGameScreen() {
 		// TODO Auto-generated method stub
 		super(new Pane(),GameLogic.WIDTH,GameLogic.HEIGHT);
-		Canvas canvas = new Canvas(WIDTH,HEIGHT);
+		Canvas canvas = new Canvas(GameLogic.WIDTH,GameLogic.HEIGHT);
 		gc = canvas.getGraphicsContext2D();
 		canvas.setCursor(Cursor.MOVE);
-		canvas.setOnMouseMoved(e-> mouseX = e.getX());
+		canvas.setOnMouseMoved(e-> GameLogic.mouseX = e.getX());
 		canvas.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -51,7 +51,7 @@ public class MainGameScreen  extends Scene{
             if (event.getCode() == KeyCode.SPACE) {
             	if(getAmountBomb()> 0) {
             		setAmountBomb(getAmountBomb()-1);
-            		allShots.add(player.shoot("Bomb Shot"));
+            		allShots.add(GameLplayer.shoot("Bomb Shot"));
             	}
 			}
 		});
