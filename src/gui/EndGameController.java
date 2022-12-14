@@ -25,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import screendrawing.GameScreen;
 import screendrawing.MainGameScreen;
 
 public class EndGameController implements Initializable{
@@ -114,7 +115,8 @@ public class EndGameController implements Initializable{
 		sharedObject.RenderableHolder.mainGameSound.stop();
 		Timer.getMainGameSound().stop();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		screendrawing.MainGameScreen.setInstance(null);
+		MainGameScreen.restart();
+//		screendrawing.MainGameScreen.setInstance(null);
 		scene = MainGameScreen.getInstance();
 		stage.setScene(scene);
 		stage.show();
@@ -124,6 +126,7 @@ public class EndGameController implements Initializable{
 		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.mainGameSound.stop();
 		Timer.getMainGameSound().stop();
+		MainGameScreen.restart();
 		Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

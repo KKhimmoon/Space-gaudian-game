@@ -41,7 +41,6 @@ public class Timer extends Canvas{
 					getAnimationTimer().stop();
 					
 				}
-				
 				MainGameScreen.getInstance().run();
 				
 				lastTimeTriggered = (lastTimeTriggered < 0 ? now : lastTimeTriggered);

@@ -39,7 +39,7 @@ public class BombPane extends HBox{
 		gc.setFill(Color.WHITE);
 		gc.setFont(Font.loadFont(sharedObject.RenderableHolder.gameFontPath,15));
 		gc.clearRect(0, 0,canvas.getWidth(), canvas.getHeight());
-		gc.fillText( ""+ logic.GameLogic.getCountBomb() , canvas.getWidth() / 2-10 , canvas.getHeight() / 2+5);
+		gc.fillText( ""+ logic.GameLogic.getAmountBomb() , canvas.getWidth() / 2-10 , canvas.getHeight() / 2+5);
 	}
 
 

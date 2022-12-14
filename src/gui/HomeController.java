@@ -42,11 +42,8 @@ public class HomeController implements Initializable {
 	private Button startButton;
 	@FXML
 	private Button howToPlayButton;
-	
 	@FXML
 	private ImageView mySpaceShip;
-	@FXML
-	private ImageView meteorite;
 	@FXML
 	private ImageView startImage;
 	@FXML

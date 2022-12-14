@@ -2,9 +2,11 @@ package screendrawing;
 
 import java.io.IOException;
 
+
 import gui.BombPane;
 import gui.PauseController;
 import gui.TimeAndScorePane;
+import gui.Timer;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -27,18 +29,16 @@ public class MainGameScreen extends Scene{
 	public  Pane root;
 	public  Parent endGame;
 	public	Parent pauseScene;
-	private TimeAndScorePane timerAndScorePane;
+	private static TimeAndScorePane timerAndScorePane;
 	private double mouseX;
 	private BombPane bombPane ;
-	public static MainGameScreen instance;
+	private static MainGameScreen instance;
 	
 	public static MainGameScreen getInstance() {
 		if (instance == null) instance = new MainGameScreen();
 		return instance;
 	}
-	public static void setInstance(MainGameScreen instance) {
-		 instance = instance;
-	}
+
 	private MainGameScreen() {
 		// TODO Auto-generated method stub
 		super(new Pane(),GameLogic.WIDTH,GameLogic.HEIGHT);
@@ -121,6 +121,10 @@ public class MainGameScreen extends Scene{
 	}
 	public void setMouseX(double mouseX) {
 		this.mouseX = mouseX;
+	}
+	public static void restart(){
+		GameLogic.InitializeGame();
+		MainGameScreen.instance = null;
 	}
 	
 }

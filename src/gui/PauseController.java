@@ -142,7 +142,7 @@ public class PauseController extends Pane implements Initializable{
 	public void onClickExit(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.mainGameSound.stop();
-		screendrawing.MainGameScreen.setInstance(null);
+		screendrawing.MainGameScreen.restart();
 		Timer.getMainGameSound().stop();
 		Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
