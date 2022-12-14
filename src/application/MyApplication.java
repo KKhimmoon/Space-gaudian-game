@@ -13,7 +13,7 @@ public class MyApplication extends Application {
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-            primaryStage.setTitle("Space Gurdian");
+            primaryStage.setTitle("Space Guardian");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
          

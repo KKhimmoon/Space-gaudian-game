@@ -30,6 +30,9 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -170,7 +173,8 @@ public class GameLogic extends Scene {
 			}
 		});
 		InitializeGame();
-		root = new Pane();
+		root = new Pane(); 
+//		root.setBackground(new Background(new BackgroundImage(sharedObject.RenderableHolder.mainGameBg, null, null, null, null)));
 		root.addEventFilter(KeyEvent.KEY_PRESSED, event->{
             if (event.getCode() == KeyCode.SPACE) {
             	if(getCountBomb()> 0) {
@@ -217,9 +221,10 @@ public class GameLogic extends Scene {
 	public static void run(GraphicsContext gc) {
 		bombpane.drawCurrentAmount(BombPane.getGc());
 		timerAndScorePane.updateScore(timerAndScorePane.getGc());
-		gc.setFill(Color.grayRgb(20));
-		gc.fillRect(0, 0, WIDTH, HEIGHT);
-		gc.setTextAlign(TextAlignment.CENTER);
+		gc.drawImage(sharedObject.RenderableHolder.mainGameBg,0,0, WIDTH,HEIGHT);
+//		gc.setFill(Color.grayRgb(20));
+//		gc.fillRect(0, 0, WIDTH, HEIGHT);
+//		gc.setTextAlign(TextAlignment.CENTER);
 		
 	     //  ----------------------------------------------	
 			if(RAND.nextInt(500) < 10) {
