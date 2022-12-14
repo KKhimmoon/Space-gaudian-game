@@ -1,4 +1,4 @@
-package application;
+package gui;
 
 import java.io.File;
 import java.io.IOException;
@@ -303,7 +303,7 @@ public class SelectedController implements Initializable {
 	public void switchToHome(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.homeSound.stop();
-		MyController.homeSound.stop();
+		HomeController.homeSound.stop();
 		 Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
@@ -327,7 +327,7 @@ public class SelectedController implements Initializable {
 		if(sharedObject.RenderableHolder.homeSound.isPlaying()||sharedObject.RenderableHolder.mainGameSound.isPlaying()) {
 			sharedObject.RenderableHolder.homeSound.stop();
 		}
-		MyController.homeSound.stop();
+		HomeController.homeSound.stop();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new logic.GameLogic();
 		stage.setScene(scene);

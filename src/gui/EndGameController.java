@@ -1,4 +1,4 @@
-package application;
+package gui;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +26,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Endgame implements Initializable{
+public class EndGameController implements Initializable{
 	private Stage stage;
 	private Scene scene;
 	@FXML 
@@ -99,7 +99,7 @@ public class Endgame implements Initializable{
 
 
 	public static void setGc(GraphicsContext gc) {
-		Endgame.gc = gc;
+		EndGameController.gc = gc;
 	}
 
 	public static void updateYourScore(GraphicsContext gc) {

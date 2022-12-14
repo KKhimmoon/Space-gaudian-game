@@ -1,4 +1,4 @@
-package application;
+package gui;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import logic.GameLogic;
-public class Pause extends Pane implements Initializable{
+public class PauseController extends Pane implements Initializable{
 	
 	@FXML
 	private ImageView pausedIMG;
@@ -41,7 +41,7 @@ public class Pause extends Pane implements Initializable{
 	private Stage stage;
 	private Scene scene;
 	
-	public Pause() {
+	public PauseController() {
 		this.pauseBtn = new Button();
 		ImageView pauseBtnIMG = new ImageView(sharedObject.RenderableHolder.pausedBtn);
 		pauseBtnIMG.setFitHeight(30);

@@ -1,4 +1,4 @@
-package application;
+package gui;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ public class Timer extends Canvas{
 			public void handle(long now) {
 				// TODO Auto-generated method stub
 				if(currentTime <= 0 ) {
-					Endgame.updateYourScore(Endgame.getGc());
+					EndGameController.updateYourScore(EndGameController.getGc());
 					logic.GameLogic.endgame.setVisible(true);
 					getAnimationTimer().stop();
 					
