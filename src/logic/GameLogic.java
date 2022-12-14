@@ -76,7 +76,7 @@ public class GameLogic extends Scene {
 	private static TimeAndScorePane timerAndScorePane;
 	private static BombPane bombpane ;
 	
-	public void InitializeGame() {
+	public static void InitializeGame() {
 		allShots = new ConcurrentLinkedQueue<>();
 		allEnemysShots = new ConcurrentLinkedQueue<>();
 		allBulletitems = new ConcurrentLinkedQueue<>();
@@ -93,7 +93,23 @@ public class GameLogic extends Scene {
 		setScore(0);
 		setHasAlien(false);
 	}
-	
+	public static Rocket getPlayer() {
+		return player;
+	}
+	public static void setPlayer(Rocket player) {
+		GameLogic.player = player;
+	}
+	public static ConcurrentLinkedQueue<Shot> getAllShots() {
+		return allShots;
+	}
+	public static void setAllShots(ConcurrentLinkedQueue<Shot> allShots) {
+		GameLogic.allShots = allShots;
+	}
+
+	public static int getMaxshot() {
+		return MaxShot;
+	}
+
 	public static int getAmountBomb() {
 		return amountBomb;
 	}
@@ -239,137 +255,6 @@ public class GameLogic extends Scene {
 		gc.drawImage(sharedObject.RenderableHolder.mainGameBg,0,0, WIDTH,HEIGHT);
 		runGameScence(gc);
 	}
-//		player.update();
-//		player.draw(gc);
-//		player.setPosX((int) mouseX);
-//	
-//	     //  ----------------------------------------------	
-//			if(RAND.nextInt(500) < 10) {
-//					allEnemys.add(newBigMeteo());
-//			 }
-//     //  ----------------------------------------------	
-//			if(RAND.nextInt(400) < 10) {
-//				allEnemys.add(newSmallMeteo());
-//		      }
-//	//	----------------------------------------------
-//			if(!isHasAlien()) {
-//				allEnemys.add(newAlien());
-//				setHasAlien(true);
-//			}
-//
-//		for(Enemy x: allEnemys) {
-//			if(x instanceof Alien) {
-////				x.update();
-//				if(x.isExploding()|| x.isDestroyed()) {allEnemys.remove(x); continue;}
-//				x.draw(gc);
-//				if(RAND.nextInt(500) < 20) {
-//					allEnemysShots.add(((Alien) x).shoot());
-//				}
-//			}
-//		}
-//		for(Shot shot: allEnemysShots) {
-//			if(shot.getPosY()< 0 || shot.isRemove) {
-//				allEnemysShots.remove(shot);
-//				continue;
-//			}
-//			shot.update();
-//			shot.draw(gc);
-//			if(shot.colide(player)) {
-//					score--;
-//					shot.setRemove(true);
-//			}
-//	}
-//	//------------------------------------------------
-//		if(allBulletitems.size() < 1) {
-//			if(RAND.nextInt(500) < 10) {
-//				allBulletitems.add(newBullet());
-//		}}
-//		
-//		for(BulletItem x: allBulletitems) {
-//			countterBullet += 1;
-//			if(countterBullet >= countBullet) {
-//				x.draw(gc);
-//				x.update();
-//				if(x.isDestroyed() || x.isExploding()) {
-//					countterBullet = 0;
-//					allBulletitems.remove(x);
-//				}
-//			}
-//		}
-//		for(BulletItem x: allBulletitems) {
-//			if(player.colide(x) && !player.isExploding()) {
-//				sharedObject.RenderableHolder.collectedSound.play();
-//				x.explode();
-//				BulletState += 1;
-//				player.setPower(player.getPower() + 3);
-//			}
-//		}
-//	//------------------------------------------------	
-//		
-//	   if(allBombitems.size() < 1) {
-//			if(RAND.nextInt(500) < 10) {
-//				allBombitems.add(newBomb());
-//	   }}
-//		
-//	for(BombItem x: allBombitems) {
-//			countterBomb += 1;
-//			if(countterBomb >= countBomb2) {
-//				x.draw(gc);
-//				x.update();
-//				if(x.isDestroyed() || x.isExploding()) {
-//					countterBomb = 0;
-//					allBombitems.remove(x);
-//			   }
-//		}
-//	}
-//	for(BombItem x: allBombitems) {
-//		if(player.colide(x) && !player.isExploding()) {
-//			sharedObject.RenderableHolder.collectedSound.play();
-//			x.explode();
-//			setCountBomb(getCountBomb()+1);
-//		}
-//	  }
-//	//------------------------------------------------
-//		player.update();
-//		player.draw(gc);
-//		player.setPosX((int) mouseX);
-//	for(Enemy x: allEnemys) {
-//		if(x.isExploding()) {allEnemys.remove(x); continue;}
-//		x.draw(gc);
-//		x.update();
-//	}
-//	for(Shot shot: allShots) {
-//		if(shot.getPosY()< 0 || shot.isRemove) {
-//				allShots.remove(shot);
-//				continue;
-//		}
-//		shot.update();
-//		shot.draw(gc);
-//		for(Enemy x: allEnemys) {
-//			if(shot.colide(x) && !x.isExploding()) {
-//				shot.setRemove(true);
-//				x.attack(player);
-//				if(shot.getName() == "Bomb Shot") {
-//						sharedObject.RenderableHolder.destroySound.play();
-//						allParticles.add(new Particle(shot.getPosX(),shot.getPosY()));
-//						x.explode();
-//				}
-//				if(x.getBlood() == 0) {
-//						x.explode();
-//						score += x.getOwnscore();
-//					}
-//				}
-//			if(!(x instanceof BigMeteorite ||x instanceof SmallMeteorite) && x.isExploding()) {
-//					setHasAlien(false);
-//			    }
-//			}
-//		}
-//		for(Particle x : allParticles) {
-//			x.countDelay();
-//			if(x.isBombDone()) {allParticles.remove(x); continue;}
-//			x.draw(gc);
-//		}
-//	}
 	public static void runGameScence(GraphicsContext gc) {
 //		bombpane.drawCurrentAmount(BombPane.getGc());
 //		timerAndScorePane.updateScore(timerAndScorePane.getGc());
