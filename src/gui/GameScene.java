@@ -20,9 +20,9 @@ public class GameScene extends Scene{
 		root = new StackPane();
 		TimeAndScorePane timerAndScorePane = new TimeAndScorePane();
 		timerAndScorePane.setAlignment(Pos.TOP_RIGHT);
-		BombPane bombpane = new BombPane();
-		bombpane.setAlignment(Pos.BOTTOM_RIGHT);
-		root.getChildren().addAll(timerAndScorePane,bombpane);
+		BombPane bombPane = new BombPane();
+		bombPane.setAlignment(Pos.BOTTOM_RIGHT);
+		root.getChildren().addAll(timerAndScorePane,bombPane);
 		this.setRoot(root);
 		
 		

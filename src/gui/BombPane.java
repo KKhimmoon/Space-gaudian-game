@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 public class BombPane extends HBox{
 	private static Canvas canvas;
 	private static GraphicsContext gc;
+	private ImageView bombImg;
 	public static GraphicsContext getGc() {
 		return gc;
 	}
@@ -24,14 +25,14 @@ public class BombPane extends HBox{
 
 	public BombPane(){
 		this.setMinSize(100, 50);
-		ImageView bomb = new ImageView(sharedObject.RenderableHolder.bombItem);
-		bomb.setFitHeight(40);
-		bomb.setFitWidth(40);
+		bombImg = new ImageView(sharedObject.RenderableHolder.bombItem);
+		bombImg.setFitHeight(40);
+		bombImg.setFitWidth(40);
 		this.setPadding(new Insets(0, 0, 20, 0));
 		canvas = new Canvas(40,30);
 		gc = canvas.getGraphicsContext2D();
 		drawCurrentAmount(gc);
-		this.getChildren().addAll(bomb,canvas);
+		this.getChildren().addAll(bombImg,canvas);
 	}
 	
 	public static void drawCurrentAmount(GraphicsContext gc) {

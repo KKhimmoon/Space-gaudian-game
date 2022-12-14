@@ -36,15 +36,15 @@ public class EndGameController implements Initializable{
 	@FXML
 	private Button noBtn;
 	@FXML
-	private ImageView yesIMG;
+	private ImageView yesImg;//editt
 	@FXML
-	private ImageView noIMG;
+	private ImageView noImg;
 	@FXML
-	private ImageView timeIMG;
+	private ImageView timeImg;
 	@FXML
-	private ImageView upIMG;
+	private ImageView upImg;
 	@FXML
-	private ImageView playAgainIMG;
+	private ImageView playAgainImg;
 	
 	private Canvas canvas;
 	private static GraphicsContext gc;
@@ -52,11 +52,11 @@ public class EndGameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		yesIMG.setImage(sharedObject.RenderableHolder.yesTxt);
-		noIMG.setImage(sharedObject.RenderableHolder.noTxt);
-		timeIMG.setImage(sharedObject.RenderableHolder.timeTxt);
-		upIMG.setImage(sharedObject.RenderableHolder.upTxt);
-		playAgainIMG.setImage(sharedObject.RenderableHolder.playagainTxt);
+		yesImg.setImage(sharedObject.RenderableHolder.yesTxt);
+		noImg.setImage(sharedObject.RenderableHolder.noTxt);
+		timeImg.setImage(sharedObject.RenderableHolder.timeTxt);
+		upImg.setImage(sharedObject.RenderableHolder.upTxt);
+		playAgainImg.setImage(sharedObject.RenderableHolder.playagainTxt);
 		
 		canvas = new Canvas(500,100);
 		gc = canvas.getGraphicsContext2D();

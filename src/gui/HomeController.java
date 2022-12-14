@@ -39,29 +39,29 @@ import javafx.util.Duration;
 public class HomeController implements Initializable {
 	
 	@FXML
-	private Button StartButton;
+	private Button startButton;
 	@FXML
-	private Button HowtoplayButton;
+	private Button howToPlayButton;
 	
 	@FXML
-	private ImageView MySpaceShip;
+	private ImageView mySpaceShip;
 	@FXML
-	private ImageView Meteorite;
+	private ImageView meteorite;
 	@FXML
-	private ImageView StartImage;
+	private ImageView startImage;
 	@FXML
-	private ImageView HowtoplayImage;
+	private ImageView howToPlayImage;
 	@FXML
-	private ImageView TitleImage;
+	private ImageView titleImage;
 	@FXML
 	private ImageView spaceBg;
 	@FXML
-	private Pane HomeBg;
+	private Pane homeBg;
 	
 	public static AnimationTimer homeSound;
 	private Stage stage;
 	private Scene scene;
-	public static Pane howToPlay;
+	private Pane howToPlay;
 	
 	
 	@Override
@@ -69,7 +69,7 @@ public class HomeController implements Initializable {
 		
 		//translate
 		TranslateTransition translate = new TranslateTransition();
-		translate.setNode(MySpaceShip);
+		translate.setNode(mySpaceShip);
 		translate.setDuration(Duration.millis(1500));
 		translate.setCycleCount(TranslateTransition.INDEFINITE);
 		translate.setAutoReverse(true);
@@ -77,51 +77,51 @@ public class HomeController implements Initializable {
 		translate.play();
 		
 		spaceBg.setImage(sharedObject.RenderableHolder.homeBg);
-		StartImage.setImage(sharedObject.RenderableHolder.startTxt);
-		HowtoplayImage.setImage(sharedObject.RenderableHolder.howtoplayTxt);
-		MySpaceShip.setImage(sharedObject.RenderableHolder.player2);
-		MySpaceShip.setScaleX(1.5);
-		MySpaceShip.setScaleY(1.5);
-		TitleImage.setImage(sharedObject.RenderableHolder.titleTxt);
+		startImage.setImage(sharedObject.RenderableHolder.startTxt);
+		howToPlayImage.setImage(sharedObject.RenderableHolder.howtoplayTxt);
+		mySpaceShip.setImage(sharedObject.RenderableHolder.player2);
+		mySpaceShip.setScaleX(1.5);
+		mySpaceShip.setScaleY(1.5);
+		titleImage.setImage(sharedObject.RenderableHolder.titleTxt);
 		
-		StartButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		startButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				StartImage.setScaleX(1.2);
-				StartImage.setScaleY(1.2);
+				startImage.setScaleX(1.2);
+				startImage.setScaleY(1.2);
 			}
 		});
 
-		StartButton.setOnMouseExited(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				StartImage.setScaleX(1);
-				StartImage.setScaleY(1);
-			}
-		});
-		HowtoplayButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		startButton.setOnMouseExited(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				HowtoplayImage.setScaleX(1.2);
-				HowtoplayImage.setScaleY(1.2);
+				startImage.setScaleX(1);
+				startImage.setScaleY(1);
 			}
 		});
-		HowtoplayButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+		howToPlayButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				HowtoplayImage.setScaleX(1);
-				HowtoplayImage.setScaleY(1);
+				howToPlayImage.setScaleX(1.2);
+				howToPlayImage.setScaleY(1.2);
 			}
 		});
-		StartButton.setOnMouseClicked(new EventHandler<Event>() {
+		howToPlayButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				howToPlayImage.setScaleX(1);
+				howToPlayImage.setScaleY(1);
+			}
+		});
+		startButton.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event e) {
@@ -134,7 +134,7 @@ public class HomeController implements Initializable {
 				}
 			}
 		});
-		HowtoplayButton.setOnMouseClicked(new EventHandler<Event>() {
+		howToPlayButton.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event e) {
@@ -164,7 +164,7 @@ public class HomeController implements Initializable {
 				howToPlay.setVisible(false);
 			}
 		});
-		HomeBg.getChildren().add(howToPlay);
+		homeBg.getChildren().add(howToPlay);
 	}
 	public void playHomeSound() {
 		homeSound = new AnimationTimer() {
