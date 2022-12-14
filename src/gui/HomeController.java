@@ -60,7 +60,10 @@ public class HomeController implements Initializable {
 	private Scene scene;
 	private Pane howToPlay;
 	
-	
+	public HomeController() {
+		playHomeSound();
+		initializeHowToPlay();
+	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -144,23 +147,7 @@ public class HomeController implements Initializable {
 				}
 			}
 		});
-		playHomeSound();
-		howToPlay = new Pane();
-		howToPlay.setPrefSize(800, 600);
-		howToPlay.setStyle("-fx-background-color: #00000055;");
-		ImageView howToPlayImg = new ImageView(sharedObject.RenderableHolder.howToPlay);
-		howToPlayImg.setTranslateX(65);
-		howToPlayImg.setTranslateY(100);
-		howToPlay.getChildren().addAll(howToPlayImg);
-		howToPlay.setVisible(false);
-		howToPlay.setOnMouseClicked(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				howToPlay.setVisible(false);
-			}
-		});
+		
 		homeBg.getChildren().add(howToPlay);
 	}
 	public void playHomeSound() {
@@ -177,6 +164,7 @@ public class HomeController implements Initializable {
 		homeSound.start();
 	}
 	public void switchToHowToPlayScene(Event event) throws IOException {
+		sharedObject.RenderableHolder.onClickSound.play();
 		howToPlay.setVisible(true);
 	}
 	public void switchToSelectedScene(Event event) throws IOException {
@@ -186,6 +174,24 @@ public class HomeController implements Initializable {
 		 scene = new Scene(root);
 		 stage.setScene(scene);
 		 stage.show();
+	}
+	public void initializeHowToPlay() {
+		howToPlay = new Pane();
+		howToPlay.setPrefSize(800, 600);
+		howToPlay.setStyle("-fx-background-color: #00000055;");
+		ImageView howToPlayImg = new ImageView(sharedObject.RenderableHolder.howToPlay);
+		howToPlayImg.setTranslateX(65);
+		howToPlayImg.setTranslateY(100);
+		howToPlay.getChildren().addAll(howToPlayImg);
+		howToPlay.setVisible(false);
+		howToPlay.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				howToPlay.setVisible(false);
+			}
+		});
 	}
 	
 

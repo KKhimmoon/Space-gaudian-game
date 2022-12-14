@@ -27,12 +27,11 @@ import screendrawing.MainGameScreen;
 public class PauseController extends Pane implements Initializable{
 	
 	@FXML
-	private ImageView pausedIMG;
+	private ImageView pausedImg;
 	@FXML
-	private ImageView resumeIMG;
+	private ImageView resumeImg;
 	@FXML
-	private ImageView exitIMG;
-	
+	private ImageView exitImg;
 	@FXML
 	private Button resumeBtn;
 	@FXML
@@ -44,10 +43,10 @@ public class PauseController extends Pane implements Initializable{
 	
 	public PauseController() {
 		this.pauseBtn = new Button();
-		ImageView pauseBtnIMG = new ImageView(sharedObject.RenderableHolder.pausedBtn);
-		pauseBtnIMG.setFitHeight(30);
-		pauseBtnIMG.setFitWidth(30);
-		this.pauseBtn.setGraphic(pauseBtnIMG);
+		ImageView pauseBtnImg = new ImageView(sharedObject.RenderableHolder.pausedBtn);
+		pauseBtnImg.setFitHeight(30);
+		pauseBtnImg.setFitWidth(30);
+		this.pauseBtn.setGraphic(pauseBtnImg);
 		this.pauseBtn.setStyle("-fx-background-color: #FFFFFF00;");
 		this.pauseBtn.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
 			@Override
@@ -66,9 +65,9 @@ public class PauseController extends Pane implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		pausedIMG.setImage(sharedObject.RenderableHolder.pausedTxt);
-		resumeIMG.setImage(sharedObject.RenderableHolder.resumeTxt);
-		exitIMG.setImage(sharedObject.RenderableHolder.exitTxt);
+		pausedImg.setImage(sharedObject.RenderableHolder.pausedTxt);
+		resumeImg.setImage(sharedObject.RenderableHolder.resumeTxt);
+		exitImg.setImage(sharedObject.RenderableHolder.exitTxt);
 		
 		resumeBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
 

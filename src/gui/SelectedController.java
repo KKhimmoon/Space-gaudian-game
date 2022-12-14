@@ -41,28 +41,28 @@ import logic.GameLogic;
 public class SelectedController implements Initializable {
 	
 	@FXML
-	private Button PlayButton;
+	private Button playButton;
 	@FXML
-	private Button Space1Btn;
+	private Button player1Btn;
 	@FXML
-	private Button Space2Btn;
+	private Button player2Btn;
 	@FXML
-	private Button Space3Btn;
+	private Button player3Btn;
 	@FXML
-	private Button BackHomeBtn;
+	private Button backHomeBtn;
 	
 	@FXML
-	private ImageView PlayImage;
+	private ImageView playImage;
 	@FXML
-	private ImageView selectedbg;
+	private ImageView selectedBg;
 	@FXML
-	private ImageView spaceship1;
+	private ImageView spaceShip1;
 	@FXML
-	private ImageView spaceship2;
+	private ImageView spaceShip2;
 	@FXML
-	private ImageView spaceship3;
+	private ImageView spaceShip3;
 	@FXML
-	private ImageView BackHomeimg;
+	private ImageView backHomeImg;
 	
 	private static Image selectedSpaceShip;
 	private Stage stage;
@@ -83,37 +83,37 @@ public class SelectedController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		spaceship1.setImage(sharedObject.RenderableHolder.player1);
-		spaceship2.setImage(sharedObject.RenderableHolder.player2);
-		spaceship3.setImage(sharedObject.RenderableHolder.player3);
-		PlayImage.setImage(sharedObject.RenderableHolder.playTxt);
-		selectedbg.setImage(sharedObject.RenderableHolder.selectedBg);
-		BackHomeimg.setImage(sharedObject.RenderableHolder.arrow);
-		BackHomeimg.setRotate(180);
+		spaceShip1.setImage(sharedObject.RenderableHolder.player1);
+		spaceShip2.setImage(sharedObject.RenderableHolder.player2);
+		spaceShip3.setImage(sharedObject.RenderableHolder.player3);
+		playImage.setImage(sharedObject.RenderableHolder.playTxt);
+		selectedBg.setImage(sharedObject.RenderableHolder.selectedBg);
+		backHomeImg.setImage(sharedObject.RenderableHolder.arrow);
+		backHomeImg.setRotate(180);
 		
 		
-		Space1Btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		player1Btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				if(isSelected1()) Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				if(isSelected1()) player1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
 				else{
 					sharedObject.RenderableHolder.mouseEnteredSound.play();
-					Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
+					player1Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
 			}
 		});
 		
-		Space1Btn.setOnMouseExited(new EventHandler<MouseEvent>() {
+		player1Btn.setOnMouseExited(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				if(isSelected1()) Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
-				else{Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
+				if(isSelected1()) player1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				else{player1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
 			}
 		});
-		Space1Btn.setOnMouseClicked(new EventHandler<Event>() {
+		player1Btn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
@@ -123,33 +123,33 @@ public class SelectedController implements Initializable {
 				setSelected2(false);
 				setSelected3(false);
 				setSelectedSpaceShip(sharedObject.RenderableHolder.player1);
-				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
-				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
-				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				player1Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				player2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				player3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
 			}
 		});
-		Space2Btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		player2Btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				if(isSelected2()) Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				if(isSelected2()) player2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
 				else{
 					sharedObject.RenderableHolder.mouseEnteredSound.play();
-					Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
+					player2Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
 			}
 		});
 		
-		Space2Btn.setOnMouseExited(new EventHandler<MouseEvent>() {
+		player2Btn.setOnMouseExited(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				if(isSelected2()) Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
-				else{Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
+				if(isSelected2()) player2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				else{player2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
 			}
 		});
-		Space2Btn.setOnMouseClicked(new EventHandler<Event>() {
+		player2Btn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
@@ -159,33 +159,33 @@ public class SelectedController implements Initializable {
 				setSelected2(true);
 				setSelected3(false);
 				setSelectedSpaceShip(sharedObject.RenderableHolder.player2);
-				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
-				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
-				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				player1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				player2Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				player3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
 			}
 		}); 
-		Space3Btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		player3Btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				if(isSelected3()) Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				if(isSelected3()) player3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
 				else {
 					sharedObject.RenderableHolder.mouseEnteredSound.play();
-					Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
+					player3Btn.setStyle("-fx-background-color: none; -fx-border-color: #FC441F; -fx-border-width: 5;");}
 			}
 		});
 		
-		Space3Btn.setOnMouseExited(new EventHandler<MouseEvent>() {
+		player3Btn.setOnMouseExited(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				if(isSelected3()) Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
-				else {Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
+				if(isSelected3()) player3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				else {player3Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");}
 			}
 		});
-		Space3Btn.setOnMouseClicked(new EventHandler<Event>() {
+		player3Btn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
@@ -195,33 +195,33 @@ public class SelectedController implements Initializable {
 				setSelected2(false);
 				setSelected3(true);
 				setSelectedSpaceShip(sharedObject.RenderableHolder.player3);
-				Space1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
-				Space2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
-				Space3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
+				player1Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				player2Btn.setStyle("-fx-background-color: none; -fx-border-color: #F1C40F; -fx-border-width: 5;");
+				player3Btn.setStyle("-fx-background-color: none; -fx-border-color: #7FFF00; -fx-border-width: 5;");
 			}
 		}); 
 		
-		PlayButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		playButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				PlayImage.setScaleX(1.1);
-				PlayImage.setScaleY(1.1);
+				playImage.setScaleX(1.1);
+				playImage.setScaleY(1.1);
 			}
 		});
 		
-		PlayButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+		playButton.setOnMouseExited(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				PlayImage.setScaleX(1);
-				PlayImage.setScaleY(1);
+				playImage.setScaleX(1);
+				playImage.setScaleY(1);
 			}
 		});
 		
-		PlayButton.setOnMouseClicked(new EventHandler<Event>() {
+		playButton.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
@@ -235,7 +235,7 @@ public class SelectedController implements Initializable {
 			}
 		});
 		
-		BackHomeBtn.setOnMouseClicked(new EventHandler<Event>() {
+		backHomeBtn.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
@@ -249,23 +249,23 @@ public class SelectedController implements Initializable {
 			}
 		});
 		
-		BackHomeBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		backHomeBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				BackHomeimg.setScaleX(1.1);
-				BackHomeimg.setScaleY(1.1);
+				backHomeImg.setScaleX(1.1);
+				backHomeImg.setScaleY(1.1);
 			}
 		});
 		
-		BackHomeBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+		backHomeBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				BackHomeimg.setScaleX(1);
-				BackHomeimg.setScaleY(1);
+				backHomeImg.setScaleX(1);
+				backHomeImg.setScaleY(1);
 			}
 		});
 	}

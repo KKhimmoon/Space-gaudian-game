@@ -11,7 +11,7 @@
    <children>
       <Pane layoutX="245.0" layoutY="88.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #893FFA #893FFA; -fx-background-radius: 30;">
          <children>
-            <ImageView fx:id="pausedIMG" fitHeight="47.0" fitWidth="256.0" layoutX="27.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">    
+            <ImageView fx:id="pausedImg" fitHeight="47.0" fitWidth="256.0" layoutX="27.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">    
                <effect>
                   <DropShadow>
                      <color>
@@ -22,7 +22,7 @@
             </ImageView>
             <Button fx:id="resumeBtn" layoutX="97.0" layoutY="191.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="117.0" style="-fx-background-color: #FAE82E; -fx-background-radius: 10;">
                <graphic>
-                  <ImageView fx:id="resumeIMG" fitHeight="22.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="resumeImg" fitHeight="22.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
                      <effect>
                         <DropShadow>
                            <color>
@@ -44,7 +44,7 @@
             </Button>
             <Button fx:id="exitBtn" layoutX="108.0" layoutY="270.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="98.0" style="-fx-background-color: #FAE82E; -fx-background-radius: 10;">
                <graphic>
-                  <ImageView fx:id="exitIMG" fitHeight="25.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="exitImg" fitHeight="25.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
                      <effect>
                         <DropShadow>
                            <color>
