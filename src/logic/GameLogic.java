@@ -8,7 +8,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.stream.IntStream;
 
 import com.sun.media.jfxmediaimpl.platform.Platform;
-import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
 
 import gui.BombPane;
 import gui.PauseController;
@@ -213,6 +212,10 @@ public class GameLogic extends Scene {
 		timerAndScorePane.updateScore(timerAndScorePane.getGc());
 		gc.drawImage(sharedObject.RenderableHolder.mainGameBg,0,0, WIDTH,HEIGHT);
 		
+		player.update();
+		player.draw(gc);
+		player.setPosX((int) mouseX);
+	}
 	     //  ----------------------------------------------	
 //			if(RAND.nextInt(500) < 10) {
 //					allEnemys.add(newBigMeteo());
@@ -238,18 +241,18 @@ public class GameLogic extends Scene {
 //			}
 //	
 //		}
-		for(Shot shot: allEnemysShots) {
-			if(shot.getPosY()< 0 || shot.isRemove) {
-				allEnemysShots.remove(shot);
-				continue;
-			}
-			shot.update();
-			shot.draw(gc);
-			if(shot.colide(player)) {
-					score--;
-					shot.setRemove(true);
-			}
-	}
+//		for(Shot shot: allEnemysShots) {
+//			if(shot.getPosY()< 0 || shot.isRemove) {
+//				allEnemysShots.remove(shot);
+//				continue;
+//			}
+//			shot.update();
+//			shot.draw(gc);
+//			if(shot.colide(player)) {
+//					score--;
+//					shot.setRemove(true);
+//			}
+//	}
 	//------------------------------------------------
 //		if(allBulletitems.size() < 1) {
 //			if(RAND.nextInt(500) < 10) {
@@ -301,9 +304,9 @@ public class GameLogic extends Scene {
 //		}
 //	  }
 	//------------------------------------------------
-		player.update();
-		player.draw(gc);
-		player.setPosX((int) mouseX);
+//		player.update();
+//		player.draw(gc);
+//		player.setPosX((int) mouseX);
 //	for(Enemy x: allEnemys) {
 //		if(x.isExploding()) {allEnemys.remove(x); continue;}
 //		x.draw(gc);
@@ -340,7 +343,7 @@ public class GameLogic extends Scene {
 //			x.draw(gc);
 //		}
 //	}
-	public static void collideEnemyShot() {
+	public static void collideEnemyShot(ConcurrentLinkedQueue<Enemy> allEnemys) {
 		for(Shot shot: allEnemysShots) {
 			if(shot.getPosY()< 0 || shot.isRemove) {
 				allEnemysShots.remove(shot);
