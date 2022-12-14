@@ -44,6 +44,7 @@ public class RenderableHolder {
 	public static Image shot2;
 	public static Image shot3;
 	public static Image bombshot;
+	public static Image howToPlay;
 	
 	//gif
 	public static Image homeBg;
@@ -104,6 +105,7 @@ public class RenderableHolder {
 		shot2 = new Image(ClassLoader.getSystemResource(image+"shot2.png").toString());
 		shot3 = new Image(ClassLoader.getSystemResource(image+"shot3.png").toString());
 		bombshot = new Image(ClassLoader.getSystemResource(image+"bombshot.png").toString());
+		howToPlay = new Image(ClassLoader.getSystemResource(image+"howtoplay.png").toString());
 		
 		//gif
 		homeBg = new Image(ClassLoader.getSystemResource(image+"spaceBg.gif").toString());

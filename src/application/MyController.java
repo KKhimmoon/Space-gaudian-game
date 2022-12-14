@@ -151,6 +151,10 @@ public class MyController implements Initializable {
 		howToPlay = new Pane();
 		howToPlay.setPrefSize(800, 600);
 		howToPlay.setStyle("-fx-background-color: #00000055;");
+		ImageView howToPlayImg = new ImageView(sharedObject.RenderableHolder.howToPlay);
+		howToPlayImg.setTranslateX(65);
+		howToPlayImg.setTranslateY(100);
+		howToPlay.getChildren().addAll(howToPlayImg);
 		howToPlay.setVisible(false);
 		howToPlay.setOnMouseClicked(new EventHandler<Event>() {
 
@@ -158,6 +162,7 @@ public class MyController implements Initializable {
 			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
 				howToPlay.setVisible(false);
+				sharedObject.RenderableHolder.onClickSound.play();
 			}
 		});
 		HomeBg.getChildren().add(howToPlay);
@@ -177,6 +182,7 @@ public class MyController implements Initializable {
 	}
 	public void switchToHowToPlayScene(Event event) throws IOException {
 		howToPlay.setVisible(true);
+		sharedObject.RenderableHolder.onClickSound.play();
 	}
 	public void switchToSelectedScene(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();

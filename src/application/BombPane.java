@@ -24,12 +24,11 @@ public class BombPane extends HBox{
 
 	public BombPane(){
 		this.setMinSize(100, 50);
-		ImageView bomb = new ImageView(sharedObject.RenderableHolder.bomb);
-		this.setSpacing(10);
+		ImageView bomb = new ImageView(sharedObject.RenderableHolder.bombItem);
 		bomb.setFitHeight(40);
 		bomb.setFitWidth(40);
-		this.setPadding(new Insets(0, 20, 20, 0));
-		canvas = new Canvas(40,20);
+		this.setPadding(new Insets(0, 0, 20, 0));
+		canvas = new Canvas(40,30);
 		gc = canvas.getGraphicsContext2D();
 		drawCurrentAmount(gc);
 		this.getChildren().addAll(bomb,canvas);
