@@ -5,13 +5,13 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class Particle extends Entity {
 	private int countTime;
-	private int countTerTime;
+	private int countterTime;
 
 	public Particle(int posX,int posY) {
 		super();
 		setPosX(posX);
 		setPosY(posY);
-		setCountTerTime(0);
+		setCountterTime(0);
 		setCountTime(20);
 		// TODO Auto-generated constructor stub
 	}
@@ -21,19 +21,19 @@ public class Particle extends Entity {
 	public void setCountTime(int countTime) {
 		this.countTime = countTime;
 	}
-	public int getCountTerTime() {
-		return countTerTime;
+	public int getCountterTime() {
+		return countterTime;
 	}
-	public void setCountTerTime(int countTerTime) {
-		this.countTerTime = countTerTime;
+	public void setCountterTime(int countterTime) {
+		this.countterTime = countterTime;
 	}
 	public void countDelay() {
-		if(!(getCountTerTime() >= getCountTime())) {
-			setCountTerTime(getCountTerTime()+1);
+		if(!(getCountterTime() >= getCountTime())) {
+			setCountterTime(getCountterTime()+1);
 		}
 	}
 	public boolean isBombDone() {
-		return getCountTerTime() >= getCountTime();
+		return getCountterTime() >= getCountTime();
 	}
 	@Override
 	public int getZ() {

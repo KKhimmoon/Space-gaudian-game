@@ -58,13 +58,9 @@ public class GameLogic extends Scene {
 	private static int score;
 	private static double mouseX;
 	private static boolean hasAlien;
-
-
-
+	public static int amountBomb;
 	public static int countBomb;
-	public static int countBomb2;
 	public static int countterBomb;
-	public static boolean isEnemy;
 	public static int countBullet;
 	public static int countterBullet;
 	public static int BulletState;
@@ -88,32 +84,68 @@ public class GameLogic extends Scene {
 		allEnemys = new ConcurrentLinkedQueue<>();
 		allParticles = new ConcurrentLinkedQueue<>();
 		player = new Rocket(WIDTH/2,HEIGHT-PLAYER_SIZE-30,PLAYER_SIZE);
-		countBomb2 = 1000;
-		countterBomb = 0;
-		countBullet = 1200;
-		countterBullet = 0;
-		setCountBomb(0);
+		setAmountBomb(0);
+		setCountterBomb(0);
+		setCountBullet(1200);
+		setCountterBullet(0);
+		setCountBomb(1000);
 		setBulletState(0);
 		setScore(0);
 		setHasAlien(false);
 	}
 	
-	
-	public static boolean isHasAlien() {
-		return hasAlien;
+	public static int getAmountBomb() {
+		return amountBomb;
 	}
-	public static void setHasAlien(boolean hasAlein) {
-		GameLogic.hasAlien = hasAlien;
+
+	public static void setAmountBomb(int amountBomb) {
+		GameLogic.amountBomb = amountBomb;
 	}
+
+	public static int getCountterBomb() {
+		return countterBomb;
+	}
+
+	public static void setCountterBomb(int countterBomb) {
+		GameLogic.countterBomb = countterBomb;
+	}
+
+	public static int getCountBullet() {
+		return countBullet;
+	}
+
+	public static void setCountBullet(int countBullet) {
+		GameLogic.countBullet = countBullet;
+	}
+
+	public static int getCountterBullet() {
+		return countterBullet;
+	}
+
+	public static void setCountterBullet(int countterBullet) {
+		GameLogic.countterBullet = countterBullet;
+	}
+
 	public static int distance(int x1,int y1,int x2,int y2) {
 		return (int)Math.sqrt(Math.pow(x1-x2,2) + Math.pow((y1-y2), 2));
 	}
+	public static boolean isHasAlien() {
+		return hasAlien;
+	}
+
+	public static void setHasAlien(boolean hasAlien) {
+		GameLogic.hasAlien = hasAlien;
+	}
+
+
 	public static int getCountBomb() {
 		return countBomb;
 	}
+
 	public static void setCountBomb(int countBomb) {
 		GameLogic.countBomb = countBomb;
 	}
+
 	public static int getBulletState() {
 		return BulletState;
 	}
@@ -166,18 +198,12 @@ public class GameLogic extends Scene {
 		root = new Pane(); 
 		root.addEventFilter(KeyEvent.KEY_PRESSED, event->{
             if (event.getCode() == KeyCode.SPACE) {
-            	if(getCountBomb()> 0) {
-            		setCountBomb(getCountBomb()-1);
+            	if(getAmountBomb()> 0) {
+            		setAmountBomb(getAmountBomb()-1);
             		allShots.add(player.shoot("Bomb Shot"));
-
             	}
 			}
 		});
-		
-		
-//		InitializeGame();
-//		
-//		root = new Pane();
 		timerAndScorePane = new TimeAndScorePane();
 		timerAndScorePane.setTranslateX(680);
 		bombpane = new BombPane();
@@ -211,12 +237,13 @@ public class GameLogic extends Scene {
 		bombpane.drawCurrentAmount(BombPane.getGc());
 		timerAndScorePane.updateScore(timerAndScorePane.getGc());
 		gc.drawImage(sharedObject.RenderableHolder.mainGameBg,0,0, WIDTH,HEIGHT);
-		
-		player.update();
-		player.draw(gc);
-		player.setPosX((int) mouseX);
+		runGameScence(gc);
 	}
-	     //  ----------------------------------------------	
+//		player.update();
+//		player.draw(gc);
+//		player.setPosX((int) mouseX);
+//	
+//	     //  ----------------------------------------------	
 //			if(RAND.nextInt(500) < 10) {
 //					allEnemys.add(newBigMeteo());
 //			 }
@@ -225,21 +252,20 @@ public class GameLogic extends Scene {
 //				allEnemys.add(newSmallMeteo());
 //		      }
 //	//	----------------------------------------------
-//			if(!hasAlien) {
+//			if(!isHasAlien()) {
 //				allEnemys.add(newAlien());
 //				setHasAlien(true);
 //			}
-
+//
 //		for(Enemy x: allEnemys) {
 //			if(x instanceof Alien) {
 ////				x.update();
-//				if(x.isExploding()|| x.isDestroyed()) {allEnemys.remove(x); setHasEnemy(false);continue;}
+//				if(x.isExploding()|| x.isDestroyed()) {allEnemys.remove(x); continue;}
 //				x.draw(gc);
 //				if(RAND.nextInt(500) < 20) {
-//					alleEnemysShots.add(((Alien) x).shoot());
+//					allEnemysShots.add(((Alien) x).shoot());
 //				}
 //			}
-//	
 //		}
 //		for(Shot shot: allEnemysShots) {
 //			if(shot.getPosY()< 0 || shot.isRemove) {
@@ -253,12 +279,12 @@ public class GameLogic extends Scene {
 //					shot.setRemove(true);
 //			}
 //	}
-	//------------------------------------------------
+//	//------------------------------------------------
 //		if(allBulletitems.size() < 1) {
 //			if(RAND.nextInt(500) < 10) {
 //				allBulletitems.add(newBullet());
 //		}}
-		
+//		
 //		for(BulletItem x: allBulletitems) {
 //			countterBullet += 1;
 //			if(countterBullet >= countBullet) {
@@ -278,8 +304,8 @@ public class GameLogic extends Scene {
 //				player.setPower(player.getPower() + 3);
 //			}
 //		}
-	//------------------------------------------------	
-		
+//	//------------------------------------------------	
+//		
 //	   if(allBombitems.size() < 1) {
 //			if(RAND.nextInt(500) < 10) {
 //				allBombitems.add(newBomb());
@@ -303,7 +329,7 @@ public class GameLogic extends Scene {
 //			setCountBomb(getCountBomb()+1);
 //		}
 //	  }
-	//------------------------------------------------
+//	//------------------------------------------------
 //		player.update();
 //		player.draw(gc);
 //		player.setPosX((int) mouseX);
@@ -332,8 +358,9 @@ public class GameLogic extends Scene {
 //						x.explode();
 //						score += x.getOwnscore();
 //					}
-//				}if(!(x instanceof BigMeteorite ||x instanceof SmallMeteorite) && x.isExploding()) {
-//					isEnemy = true;
+//				}
+//			if(!(x instanceof BigMeteorite ||x instanceof SmallMeteorite) && x.isExploding()) {
+//					setHasAlien(false);
 //			    }
 //			}
 //		}
@@ -343,7 +370,28 @@ public class GameLogic extends Scene {
 //			x.draw(gc);
 //		}
 //	}
-	public static void collideEnemyShot(ConcurrentLinkedQueue<Enemy> allEnemys) {
+	public static void runGameScence(GraphicsContext gc) {
+//		bombpane.drawCurrentAmount(BombPane.getGc());
+//		timerAndScorePane.updateScore(timerAndScorePane.getGc());
+//		gc.drawImage(sharedObject.RenderableHolder.mainGameBg,0,0, WIDTH,HEIGHT);
+		addEnemy(allEnemys,hasAlien);
+		addShotsEnemy(allEnemys,allEnemysShots);
+		collideEnemyShot(allEnemysShots,player);
+		addBulletItems(allBulletitems);
+		addBombItems(allBombitems);
+		releaseBulletItem(allBulletitems,getCountterBullet(),getCountBullet());
+		releaseBombItem(allBombitems,getCountterBomb(),getCountBomb());
+		collideBombItem(allBombitems,player);
+		collideBulletItem(allBulletitems,player);
+		removeDeadEnemy(allEnemys);
+		attackAllEnemys(allShots,allEnemys);
+		checkAllParticles(allParticles);
+		player.update();
+		player.draw(gc);
+		player.setPosX((int) mouseX);
+	}
+
+	public static void collideEnemyShot(ConcurrentLinkedQueue<Shot> allEnemysShots,Rocket player) {
 		for(Shot shot: allEnemysShots) {
 			if(shot.getPosY()< 0 || shot.isRemove) {
 				allEnemysShots.remove(shot);
@@ -359,39 +407,38 @@ public class GameLogic extends Scene {
 	}
 	public static void releaseBulletItem(ConcurrentLinkedQueue<BulletItem> allBulletitems,int countterBullet,int countBullet){
 		for(BulletItem x: allBulletitems) {
-			countterBullet += 1;
-			if(countterBullet >= countBullet) {
+			setCountterBullet(getCountterBullet()+1);
+			if(getCountterBullet() >=  getCountBullet()) {
 				x.draw(gc);
 				x.update();
 				if(x.isDestroyed() || x.isExploding()) {
-					countterBullet = 0;
+					setCountterBullet(0);
 					allBulletitems.remove(x);
 				}
 			}
 		}	
 	}
-	public static void releaseBombItem(ConcurrentLinkedQueue<BombItem> allBombitems,int countterBomb,int countBomb2) {
+	public static void releaseBombItem(ConcurrentLinkedQueue<BombItem> allBombitems,int countterBomb,int countBomb) {
 		for(BombItem x: allBombitems) {
-			countterBomb += 1;
-			if(countterBomb >= countBomb2) {
+			setCountterBomb(getCountBomb()+1);
+			if(getCountterBomb() >= getCountBomb()) {
 				x.draw(gc);
 				x.update();
 				if(x.isDestroyed() || x.isExploding()) {
-					countterBomb = 0;
+					setCountterBomb(0);
 					allBombitems.remove(x);
 			}
 		 }
 	  }
 	}
 	public static void collideBombItem(ConcurrentLinkedQueue<BombItem> allBombitems,Rocket player) {
-			for(BulletItem x: allBulletitems) {
-				if(player.colide(x) && !player.isExploding()) {
-					sharedObject.RenderableHolder.collectedSound.play();
-					x.explode();
-					BulletState += 1;
-					player.setPower(player.getPower() + 3);
-				}
+		 for(BombItem x: allBombitems) {
+			if(player.colide(x) && !player.isExploding()) {
+				sharedObject.RenderableHolder.collectedSound.play();
+				x.explode();
+				setAmountBomb(getAmountBomb()+1);
 			}
+		  }
 	}	
 	public static void collideBulletItem(ConcurrentLinkedQueue<BulletItem> allBulletitems,Rocket player) {
 		for(BulletItem x: allBulletitems) {
@@ -429,7 +476,6 @@ public class GameLogic extends Scene {
 //				x.update();
 				if(x.isExploding()|| x.isDestroyed()) {
 					allEnemys.remove(x); 
-					setHasAlien(false);
 					continue;
 				}
 				x.draw(gc);
@@ -475,9 +521,9 @@ public class GameLogic extends Scene {
 							score += x.getOwnscore();
 						}
 					}
-//				if(!(x instanceof BigMeteorite ||x instanceof SmallMeteorite) && x.isExploding()) {
-//						isEnemy = true;
-//				    }
+				if(!(x instanceof BigMeteorite ||x instanceof SmallMeteorite) && x.isExploding()) {
+					setHasAlien(false);
+				    }
 				}
 			}
 	}
