@@ -1,22 +1,10 @@
 package gui;
 
-import java.io.IOException;
-
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
-import javafx.event.Event;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import screendrawing.MainGameScreen;
 
 public class Timer extends Canvas{
@@ -28,41 +16,33 @@ public class Timer extends Canvas{
 	public Timer(int s) {
 		super(80,40);
 		this.currentTime = s;
-		this.lastTimeTriggered = -1;
+		this.lastTimeTriggered = 0;
 		GraphicsContext gc = this.getGraphicsContext2D();
 		setAnimationTimer(new AnimationTimer() {
 			
 			@Override
 			public void handle(long now) {
 				// TODO Auto-generated method stub
-				if(currentTime <= 0 ) {
+				if(currentTime < 0 ) {
 					EndGameController.updateYourScore(EndGameController.getGc());
 					screendrawing.MainGameScreen.getInstance().endGame.setVisible(true);
 					getAnimationTimer().stop();
-					
 				}
+				
 				MainGameScreen.getInstance().run();
 				
 				lastTimeTriggered = (lastTimeTriggered < 0 ? now : lastTimeTriggered);
 				
 				if (now - lastTimeTriggered >= 1000000000)
 				{
-					currentTime--;
 					drawCurrentTimeString(gc);
+					currentTime--;
 					lastTimeTriggered = now;
 				}
 			}
 		});
 		getAnimationTimer().start();
 		playMainGameSound();
-	}
-	
-	public static AnimationTimer getMainGameSound() {
-		return mainGameSound;
-	}
-
-	public static void setMainGameSound(AnimationTimer mainGameSound) {
-		Timer.mainGameSound = mainGameSound;
 	}
 
 	public void playMainGameSound() {
@@ -87,11 +67,21 @@ public class Timer extends Canvas{
 		gc.drawImage(sharedObject.RenderableHolder.clock, 0, 0, 40, 40);
 		gc.fillText("" + this.currentTime, this.getWidth()/2, this.getHeight() / 2 +12);
 	}
+	
 	public static AnimationTimer getAnimationTimer() {
 		return animationTimer;
 	}
+	
 	public static void setAnimationTimer(AnimationTimer animationTimer) {
 		Timer.animationTimer = animationTimer;
+	}
+	
+	public static AnimationTimer getMainGameSound() {
+		return mainGameSound;
+	}
+
+	public static void setMainGameSound(AnimationTimer mainGameSound) {
+		Timer.mainGameSound = mainGameSound;
 	}
 	
 

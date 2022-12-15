@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,14 +15,10 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import screendrawing.GameScreen;
 import screendrawing.MainGameScreen;
 
 public class EndGameController implements Initializable{
@@ -38,7 +31,7 @@ public class EndGameController implements Initializable{
 	@FXML
 	private Button noBtn;
 	@FXML
-	private ImageView yesImg;//editt
+	private ImageView yesImg;
 	@FXML
 	private ImageView noImg;
 	@FXML
@@ -94,16 +87,6 @@ public class EndGameController implements Initializable{
 		});
 	}
 	
-
-	public static GraphicsContext getGc() {
-		return gc;
-	}
-
-
-	public static void setGc(GraphicsContext gc) {
-		EndGameController.gc = gc;
-	}
-
 	public static void updateYourScore(GraphicsContext gc) {
 		gc.setFont(sharedObject.RenderableHolder.endgameFont);
 		gc.setFill(Color.WHITE);
@@ -116,7 +99,6 @@ public class EndGameController implements Initializable{
 		Timer.getMainGameSound().stop();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		MainGameScreen.restart();
-//		screendrawing.MainGameScreen.setInstance(null);
 		scene = MainGameScreen.getInstance();
 		stage.setScene(scene);
 		stage.show();
@@ -132,5 +114,14 @@ public class EndGameController implements Initializable{
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+	}
+
+	public static GraphicsContext getGc() {
+		return gc;
+	}
+
+
+	public static void setGc(GraphicsContext gc) {
+		EndGameController.gc = gc;
 	}
 }

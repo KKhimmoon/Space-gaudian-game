@@ -42,14 +42,14 @@ public class Shot extends Entity implements Updateable,Collidable {
 			gc.drawImage(sharedObject.RenderableHolder.bombshot,Math.min(745,getPosX()), posY, size+50, size+50);
 		}else {
 			if (GameLogic.bulletState == 1) {
-				gc.drawImage(sharedObject.RenderableHolder.shot2,Math.min(745,getPosX()), posY, size, size+25);
+				gc.drawImage(sharedObject.RenderableHolder.shot2,Math.min(742,getPosX()-5), posY, size+10, size+25);
 			} else if  (GameLogic.bulletState == 2) {
 				gc.drawImage(sharedObject.RenderableHolder.shot3,Math.min(745,getPosX()), posY, size, size+25);
 			} else if  (GameLogic.bulletState >= 3) {
 				gc.drawImage(sharedObject.RenderableHolder.shot3,Math.min(745,getPosX()+ size/2 + 1), posY, size, size+25);
 				gc.drawImage(sharedObject.RenderableHolder.shot3,Math.min(745,getPosX()- size/2 - 1), posY, size, size+25);
 			}else {
-				gc.drawImage(sharedObject.RenderableHolder.shot1,Math.min(745,getPosX()), posY, size, size+25);
+				gc.drawImage(sharedObject.RenderableHolder.shot1,Math.min(748,getPosX()+1), posY, size-2, size+25);
 			}
 		}
 	}

@@ -1,19 +1,10 @@
 package gui;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,17 +17,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import logic.GameLogic;
 
 public class SelectedController implements Initializable {
 	
@@ -67,7 +51,6 @@ public class SelectedController implements Initializable {
 	private static Image selectedSpaceShip;
 	private Stage stage;
 	private Scene scene;
-	private Parent root;
 	private boolean isSelected1;
 	private boolean isSelected2;
 	private boolean isSelected3;
@@ -270,36 +253,7 @@ public class SelectedController implements Initializable {
 		});
 	}
 
-	public boolean isSelected1() {
-		return isSelected1;
-	}
-
-	public void setSelected1(boolean isSelected1) {
-		this.isSelected1 = isSelected1;
-	}
-	public boolean isSelected2() {
-		return isSelected2;
-	}
-
-	public void setSelected2(boolean isSelected2) {
-		this.isSelected2 = isSelected2;
-	}
-	public boolean isSelected3() {
-		return isSelected3;
-	}
-
-	public void setSelected3(boolean isSelected3) {
-		this.isSelected3 = isSelected3;
-	}
-
-	public static Image getSelectedSpaceShip() {
-		return selectedSpaceShip;
-	}
-
-	public void setSelectedSpaceShip(Image selectedSpaceShip) {
-		this.selectedSpaceShip = selectedSpaceShip;
-	}
-
+	
 	public void switchToHome(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.homeSound.stop();
@@ -335,5 +289,35 @@ public class SelectedController implements Initializable {
 		 
 	}
 	
+	public boolean isSelected1() {
+		return isSelected1;
+	}
+
+	public void setSelected1(boolean isSelected1) {
+		this.isSelected1 = isSelected1;
+	}
+	public boolean isSelected2() {
+		return isSelected2;
+	}
+
+	public void setSelected2(boolean isSelected2) {
+		this.isSelected2 = isSelected2;
+	}
+	public boolean isSelected3() {
+		return isSelected3;
+	}
+
+	public void setSelected3(boolean isSelected3) {
+		this.isSelected3 = isSelected3;
+	}
+
+	public static Image getSelectedSpaceShip() {
+		return selectedSpaceShip;
+	}
+
+	public static void setSelectedSpaceShip(Image selectedSpaceShip) {
+		SelectedController.selectedSpaceShip = selectedSpaceShip;
+	}
+
 
 }
