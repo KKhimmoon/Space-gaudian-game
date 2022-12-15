@@ -47,11 +47,6 @@ public class Space extends Entity implements Updateable,Collidable{
 	public void explode() {
 		setExploding(true);
 	}
-//	@Override
-//	public int getZ() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
 	public boolean collide(Space other) {
 		int d = GameLogic.distance(this.getPosX() + size/2,this.posY + size/2, other.getPosX() + other.getSize()/2,other.getPosY() + other.getSize()/2);
 		return d < other.getSize()/2 + this.getSize()/2;

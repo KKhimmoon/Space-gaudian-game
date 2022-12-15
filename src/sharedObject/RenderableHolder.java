@@ -11,10 +11,8 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 
 public class RenderableHolder {
-	private ArrayList<IRenderable> entities;
-	private Comparator<IRenderable> comparator;
-	private static final RenderableHolder instance = new RenderableHolder();
-	
+
+
 	//images
 	public static Image selectedBg;
 	public static Image titleTxt;
@@ -134,37 +132,5 @@ public class RenderableHolder {
 		//font
 		endgameFont = Font.loadFont(ClassLoader.getSystemResource(font + "SpaceRacer-DOPlR.otf").toString(), 20);
 	}
-	public void update() {
-		Collections.sort(entities, comparator);
-		for (int i = entities.size() - 1; i >= 0; i--) {
-			if (entities.get(i) instanceof Updateable) {
-				((Updateable) entities.get(i)).update();
-			}
-		}
-		for (int i1 = entities.size() - 1; i1 >= 0; i1--) {
-			if (!entities.get(i1).isDestroyed()) {
-				entities.remove(i1);
-			}
-		}
-	}
-	public void add(IRenderable entity) {
-		entities.add(entity);
-		Collections.sort(entities, comparator);
-	}
-	
-	public RenderableHolder() {
-		entities = new ArrayList<IRenderable>();
-		comparator = (IRenderable o1, IRenderable o2) -> {
-			if (o1.getZ() > o2.getZ()) {
-				return 1;
-			}
-		return -1;
-		};
-	}
-	public static RenderableHolder getInstance() {
-		return instance;
-	}
-	public ArrayList<IRenderable> getEntities() {
-		return entities;
-	}
+
 }

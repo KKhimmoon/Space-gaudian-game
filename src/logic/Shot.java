@@ -89,9 +89,5 @@ public class Shot extends Entity implements Updateable,Collidable {
 		if(isRemove) {setDestroyed(isRemove);}
 		setPosY(getPosY()-getSpeed());
 	}
-//	@Override
-//	public int getZ() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+
 }

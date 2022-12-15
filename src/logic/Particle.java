@@ -35,11 +35,6 @@ public class Particle extends Entity {
 	public boolean isBombDone() {
 		return getCounterTime() >= getCountTime();
 	}
-//	@Override
-//	public int getZ() {
-//		// TODO Auto-generated method stub
-//		return 99;
-//	}
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
