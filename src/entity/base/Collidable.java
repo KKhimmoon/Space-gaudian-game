@@ -1,7 +1,7 @@
 package entity.base;
 
-import logic.Rocket;
+import logic.Space;
 
 public interface Collidable {
-	public abstract boolean collide(Rocket other);
+	public abstract boolean collide(Space other);
 }
