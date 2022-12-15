@@ -26,7 +26,6 @@ public class RenderableHolder {
 	public static Image meteorite;
 	public static Image enemy;
 	public static Image clock;
-	public static Image bomb;
 	public static Image bombItem;
 	public static Image bulletItem;
 	public static Image pausedTxt;
@@ -88,7 +87,6 @@ public class RenderableHolder {
 		meteorite = new Image(ClassLoader.getSystemResource(image+"meteorite.png").toString());
 		enemy = new Image(ClassLoader.getSystemResource(image+"enemy.png").toString());
 		clock = new Image(ClassLoader.getSystemResource(image+"clock.png").toString());
-		bomb = new Image(ClassLoader.getSystemResource(image+"bomb.png").toString());
 		bombItem = new Image(ClassLoader.getSystemResource(image+"bombitem.png").toString());
 		bulletItem = new Image(ClassLoader.getSystemResource(image+"bulletitem.png").toString());
 		resumeTxt = new Image(ClassLoader.getSystemResource(image+"text-resume.png").toString());
