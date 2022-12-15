@@ -1,6 +1,6 @@
 package logic;
 
-public class Item extends Rocket{
+public class Item extends Space{
 	private int speed;
 
 	public Item(int posX, int posY, int size) {
