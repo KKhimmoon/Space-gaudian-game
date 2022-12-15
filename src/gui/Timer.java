@@ -9,21 +9,21 @@ import screendrawing.MainGameScreen;
 
 public class Timer extends Canvas{
 	private int currentTime;
+	private long lastTimeTriggered;
 	public static AnimationTimer animationTimer;
 	public static AnimationTimer mainGameSound;
-	private long lastTimeTriggered;
 	
 	public Timer(int s) {
 		super(80,40);
-		this.currentTime = s;
-		this.lastTimeTriggered = 0;
+		setCurrentTime(s);
+		setLastTimeTriggered(0);
 		GraphicsContext gc = this.getGraphicsContext2D();
 		setAnimationTimer(new AnimationTimer() {
 			
 			@Override
 			public void handle(long now) {
 				// TODO Auto-generated method stub
-				if(currentTime < 0 ) {
+				if(getCurrentTime() < 0 ) {
 					EndGameController.updateYourScore(EndGameController.getGc());
 					screendrawing.MainGameScreen.getInstance().endGame.setVisible(true);
 					getAnimationTimer().stop();
@@ -31,13 +31,11 @@ public class Timer extends Canvas{
 				
 				MainGameScreen.getInstance().run();
 				
-				lastTimeTriggered = (lastTimeTriggered < 0 ? now : lastTimeTriggered);
-				
-				if (now - lastTimeTriggered >= 1000000000)
+				if (now - getLastTimeTriggered() >= 1000000000)
 				{
 					drawCurrentTimeString(gc);
-					currentTime--;
-					lastTimeTriggered = now;
+					setCurrentTime(getCurrentTime()-1);
+					setLastTimeTriggered(now);
 				}
 			}
 		});
@@ -65,7 +63,7 @@ public class Timer extends Canvas{
 		gc.setFont(Font.loadFont(path,15));
 		gc.clearRect(0, 0, this.getWidth(), this.getHeight());
 		gc.drawImage(sharedObject.RenderableHolder.clock, 0, 0, 40, 40);
-		gc.fillText("" + this.currentTime, this.getWidth()/2, this.getHeight() / 2 +12);
+		gc.fillText("" + getCurrentTime(), this.getWidth()/2, this.getHeight() / 2 +12);
 	}
 	
 	public static AnimationTimer getAnimationTimer() {
@@ -82,6 +80,22 @@ public class Timer extends Canvas{
 
 	public static void setMainGameSound(AnimationTimer mainGameSound) {
 		Timer.mainGameSound = mainGameSound;
+	}
+
+	public int getCurrentTime() {
+		return currentTime;
+	}
+
+	public void setCurrentTime(int currentTime) {
+		this.currentTime = currentTime;
+	}
+
+	public long getLastTimeTriggered() {
+		return lastTimeTriggered;
+	}
+
+	public void setLastTimeTriggered(long lastTimeTriggered) {
+		this.lastTimeTriggered = lastTimeTriggered;
 	}
 	
 

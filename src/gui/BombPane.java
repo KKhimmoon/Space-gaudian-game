@@ -15,14 +15,14 @@ public class BombPane extends HBox{
 
 	public BombPane(){
 		this.setMinSize(100, 50);
-		bombImg = new ImageView(sharedObject.RenderableHolder.bombItem);
-		bombImg.setFitHeight(40);
-		bombImg.setFitWidth(40);
+		setBombImg(new ImageView(sharedObject.RenderableHolder.bombItem));
+		getBombImg().setFitHeight(40);
+		getBombImg().setFitWidth(40);
 		this.setPadding(new Insets(0, 0, 20, 0));
-		canvas = new Canvas(40,30);
-		gc = canvas.getGraphicsContext2D();
-		drawCurrentAmount(gc);
-		this.getChildren().addAll(bombImg,canvas);
+		setCanvas(new Canvas(40,30)); 
+		setGc(getCanvas().getGraphicsContext2D());
+		drawCurrentAmount(getGc());
+		this.getChildren().addAll(getBombImg(),getCanvas());
 	}
 	
 	public static void drawCurrentAmount(GraphicsContext gc) {
@@ -31,6 +31,23 @@ public class BombPane extends HBox{
 		gc.clearRect(0, 0,canvas.getWidth(), canvas.getHeight());
 		gc.fillText( ""+ logic.GameLogic.getAmountBomb() , canvas.getWidth() / 2-10 , canvas.getHeight() / 2+5);
 	}
+	
+	public static Canvas getCanvas() {
+		return canvas;
+	}
+
+	public static void setCanvas(Canvas canvas) {
+		BombPane.canvas = canvas;
+	}
+
+	public ImageView getBombImg() {
+		return bombImg;
+	}
+
+	public void setBombImg(ImageView bombImg) {
+		this.bombImg = bombImg;
+	}
+
 	public static GraphicsContext getGc() {
 		return gc;
 	}

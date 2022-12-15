@@ -129,11 +129,13 @@ public class PauseController extends Pane implements Initializable{
 			}
 		});
 	}
+
 	public void onClickResume(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
 		Timer.getAnimationTimer().start();
 		screendrawing.MainGameScreen.getInstance().pauseScene.setVisible(false);
 	}
+	
 	public void onClickExit(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.mainGameSound.stop();
@@ -145,5 +147,5 @@ public class PauseController extends Pane implements Initializable{
 		 stage.setScene(scene);
 		 stage.show();
 	}
-
+	
 }

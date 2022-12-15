@@ -257,7 +257,7 @@ public class SelectedController implements Initializable {
 	public void switchToHome(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.homeSound.stop();
-		HomeController.homeSound.stop();
+		HomeController.getHomeSound().stop();
 		 Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene = new Scene(root);
@@ -280,8 +280,8 @@ public class SelectedController implements Initializable {
 		sharedObject.RenderableHolder.onClickSound.play();
 		if(sharedObject.RenderableHolder.homeSound.isPlaying()||sharedObject.RenderableHolder.mainGameSound.isPlaying()) {
 			sharedObject.RenderableHolder.homeSound.stop();
+			HomeController.getHomeSound().stop();
 		}
-		HomeController.homeSound.stop();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = screendrawing.MainGameScreen.getInstance();
 		stage.setScene(scene);

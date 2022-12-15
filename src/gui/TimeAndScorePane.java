@@ -15,11 +15,11 @@ public class TimeAndScorePane extends VBox{
 
 	public TimeAndScorePane() {
 		super();
-		this.canvas = new Canvas(120,50);
-		gc = this.canvas.getGraphicsContext2D();
+		setCanvas(new Canvas(120,50));
+		gc = getCanvas().getGraphicsContext2D();
 		this.setPadding(new Insets(10, 0, 0, 0));
 		this.setAlignment(Pos.BASELINE_RIGHT);
-		this.getChildren().addAll(this.canvas,new Timer(100));
+		this.getChildren().addAll(getCanvas(),new Timer(100));
 	}
 	
 	public static void updateScore(GraphicsContext gc) {
@@ -36,5 +36,13 @@ public class TimeAndScorePane extends VBox{
 	
 	public static void setGc(GraphicsContext gc) {
 		TimeAndScorePane.gc = gc;
+	}
+
+	public Canvas getCanvas() {
+		return canvas;
+	}
+
+	public void setCanvas(Canvas canvas) {
+		this.canvas = canvas;
 	}
 }

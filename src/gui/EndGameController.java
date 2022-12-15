@@ -53,11 +53,11 @@ public class EndGameController implements Initializable{
 		upImg.setImage(sharedObject.RenderableHolder.upTxt);
 		playAgainImg.setImage(sharedObject.RenderableHolder.playagainTxt);
 		
-		canvas = new Canvas(500,100);
-		gc = canvas.getGraphicsContext2D();
-		canvas.setTranslateX(110);
-		canvas.setTranslateY(80);
-		popUp.getChildren().add(canvas);
+		setCanvas(new Canvas(500,100));
+		setGc(getCanvas().getGraphicsContext2D());
+		getCanvas().setTranslateX(110);
+		getCanvas().setTranslateY(80);
+		popUp.getChildren().add(getCanvas());
 		
 		yesBtn.setOnMouseClicked(new EventHandler<Event>() {
 
@@ -120,8 +120,15 @@ public class EndGameController implements Initializable{
 		return gc;
 	}
 
-
 	public static void setGc(GraphicsContext gc) {
 		EndGameController.gc = gc;
+	}
+
+	public Canvas getCanvas() {
+		return canvas;
+	}
+
+	public void setCanvas(Canvas canvas) {
+		this.canvas = canvas;
 	}
 }

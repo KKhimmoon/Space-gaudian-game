@@ -137,7 +137,7 @@ public class HomeController implements Initializable {
 		homeBg.getChildren().add(howToPlay);
 	}
 	public void playHomeSound() {
-		homeSound = new AnimationTimer() {
+		setHomeSound(new AnimationTimer() {
 			
 			@Override
 			public void handle(long arg0) {
@@ -146,8 +146,8 @@ public class HomeController implements Initializable {
 					sharedObject.RenderableHolder.homeSound.play();
 				}
 			}
-		};
-		homeSound.start();
+		});
+		getHomeSound().start();
 	}
 	public void switchToHowToPlayScene(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
@@ -180,6 +180,12 @@ public class HomeController implements Initializable {
 				howToPlay.setVisible(false);
 			}
 		});
+	}
+	public static AnimationTimer getHomeSound() {
+		return homeSound;
+	}
+	public static void setHomeSound(AnimationTimer homeSound) {
+		HomeController.homeSound = homeSound;
 	}
 	
 
