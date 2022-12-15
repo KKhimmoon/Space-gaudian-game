@@ -44,7 +44,7 @@ public class Timer extends Canvas{
 	}
 
 	public void playMainGameSound() {
-		mainGameSound = new AnimationTimer() {
+		setMainGameSound(new AnimationTimer() {
 			
 			@Override
 			public void handle(long arg0) {
@@ -53,8 +53,8 @@ public class Timer extends Canvas{
 					sharedObject.RenderableHolder.mainGameSound.play();
 				}
 			}
-		};
-		mainGameSound.start();
+		});
+		getMainGameSound().start();
 	}
 	
 	public void drawCurrentTimeString(GraphicsContext gc){
