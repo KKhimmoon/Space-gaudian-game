@@ -110,9 +110,9 @@ public class RenderableHolder {
 		//gif
 		homeBg = new Image(ClassLoader.getSystemResource(image+"spaceBg.gif").toString());
 		destroyGif = new Image(ClassLoader.getSystemResource(image+"destroy.gif").toString());
+		
 		//sound
 		homeSound = new AudioClip(ClassLoader.getSystemResource(sound+"homesound.mp3").toString());
-//		homeSound.setVolume(0.05);
 		mainGameSound = new AudioClip(ClassLoader.getSystemResource(sound+"maingamesound.mp3").toString());
 		onClickSound = new AudioClip(ClassLoader.getSystemResource(sound+"buttonsound.mp3").toString());
 		stopSound = new AudioClip(ClassLoader.getSystemResource(sound+"stopsound.mp3").toString());
