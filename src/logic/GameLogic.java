@@ -90,6 +90,42 @@ public class GameLogic {
 		setHasAlien(false);
 	}
 	
+	public static ConcurrentLinkedQueue<Shot> getAllEnemysShots() {
+		return allEnemysShots;
+	}
+	public static void setAllEnemysShots(ConcurrentLinkedQueue<Shot> allEnemysShots) {
+		GameLogic.allEnemysShots = allEnemysShots;
+	}
+	public static ConcurrentLinkedQueue<BombItem> getAllBombitems() {
+		return allBombitems;
+	}
+	public static void setAllBombitems(ConcurrentLinkedQueue<BombItem> allBombitems) {
+		GameLogic.allBombitems = allBombitems;
+	}
+
+	public static ConcurrentLinkedQueue<BulletItem> getAllBulletitems() {
+		return allBulletitems;
+	}
+
+	public static void setAllBulletitems(ConcurrentLinkedQueue<BulletItem> allBulletitems) {
+		GameLogic.allBulletitems = allBulletitems;
+	}
+
+	public static ConcurrentLinkedQueue<Enemy> getAllEnemys() {
+		return allEnemys;
+	}
+	public static void setAllEnemys(ConcurrentLinkedQueue<Enemy> allEnemys) {
+		GameLogic.allEnemys = allEnemys;
+	}
+
+	public static ConcurrentLinkedQueue<Particle> getAllParticles() {
+		return allParticles;
+	}
+
+	public static void setAllParticles(ConcurrentLinkedQueue<Particle> allParticles) {
+		GameLogic.allParticles = allParticles;
+	}
+
 	public static int getAmountBomb() {
 		return amountBomb;
 	}
@@ -132,7 +168,6 @@ public class GameLogic {
 	public static void setHasAlien(boolean hasAlien) {
 		GameLogic.hasAlien = hasAlien;
 	}
-
 
 	public static int getCountBomb() {
 		return countBomb;
@@ -332,7 +367,7 @@ public class GameLogic {
 					}
 					if(x.getBlood() == 0) {
 							x.explode();
-							score += x.getOwnScore();
+							setScore(getScore()+ x.getOwnScore());
 						}
 					}
 				if(!(x instanceof BigMeteorite ||x instanceof SmallMeteorite) && x.isExploding()) {
