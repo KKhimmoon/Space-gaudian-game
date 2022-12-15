@@ -283,7 +283,7 @@ public class SelectedController implements Initializable {
 			HomeController.getHomeSound().stop();
 		}
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = screendrawing.MainGameScreen.getInstance();
+		scene = screenDrawing.MainGameScreen.getInstance();
 		stage.setScene(scene);
 		stage.show();
 		 

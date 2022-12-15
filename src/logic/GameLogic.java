@@ -36,7 +36,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import screendrawing.MainGameScreen;
+import screenDrawing.MainGameScreen;
 import sharedObject.RenderableHolder;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -238,7 +238,7 @@ public static void setBulletState(int bulletState) {
 		checkAllParticles(allParticles);
 		player.update();
 		player.draw(gc);
-		player.setPosX((int) screendrawing.MainGameScreen.getInstance().getMouseX());
+		player.setPosX((int) screenDrawing.MainGameScreen.getInstance().getMouseX());
 	}
 
 	public static void collideEnemyShot(ConcurrentLinkedQueue<Shot> allEnemysShots,Space player) {

@@ -19,7 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import screendrawing.MainGameScreen;
+import screenDrawing.MainGameScreen;
 
 public class EndGameController implements Initializable{
 	private Stage stage;

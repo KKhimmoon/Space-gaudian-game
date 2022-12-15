@@ -5,7 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import screendrawing.MainGameScreen;
+import screenDrawing.MainGameScreen;
 
 public class Timer extends Canvas{
 	private int currentTime;
@@ -25,7 +25,7 @@ public class Timer extends Canvas{
 				// TODO Auto-generated method stub
 				if(getCurrentTime() < 0 ) {
 					EndGameController.updateYourScore(EndGameController.getGc());
-					screendrawing.MainGameScreen.getInstance().endGame.setVisible(true);
+					screenDrawing.MainGameScreen.getInstance().getEndGameScene().setVisible(true);
 					getAnimationTimer().stop();
 				}
 				

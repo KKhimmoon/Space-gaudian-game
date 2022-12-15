@@ -19,7 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import screendrawing.MainGameScreen;
+import screenDrawing.MainGameScreen;
 public class PauseController extends Pane implements Initializable{
 	
 	@FXML
@@ -49,7 +49,7 @@ public class PauseController extends Pane implements Initializable{
             public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				sharedObject.RenderableHolder.stopSound.play();
-				MainGameScreen.getInstance().pauseScene.setVisible(true);
+				MainGameScreen.getInstance().getPauseScene().setVisible(true);
 				Timer.getAnimationTimer().stop();
 			}
 		});
@@ -133,13 +133,13 @@ public class PauseController extends Pane implements Initializable{
 	public void onClickResume(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
 		Timer.getAnimationTimer().start();
-		screendrawing.MainGameScreen.getInstance().pauseScene.setVisible(false);
+		screenDrawing.MainGameScreen.getInstance().getPauseScene().setVisible(false);
 	}
 	
 	public void onClickExit(Event event) throws IOException {
 		sharedObject.RenderableHolder.onClickSound.play();
 		sharedObject.RenderableHolder.mainGameSound.stop();
-		screendrawing.MainGameScreen.restart();
+		screenDrawing.MainGameScreen.restart();
 		Timer.getMainGameSound().stop();
 		Parent root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();

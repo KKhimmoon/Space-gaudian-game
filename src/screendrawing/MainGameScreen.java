@@ -1,4 +1,4 @@
-package screendrawing;
+package screenDrawing;
 
 import java.io.IOException;
 
@@ -25,28 +25,24 @@ import logic.GameLogic;
 
 
 public class MainGameScreen extends Scene{
-	private  GraphicsContext gc;
-	public  Pane root;
-	public  Parent endGame;
-	public	Parent pauseScene;
-	private static TimeAndScorePane timerAndScorePane;
+	private Canvas canvas;
+	private GraphicsContext gc;
+	private Pane root;
+	private Parent endGameScene;
+	private	Parent pauseScene;
 	private double mouseX;
 	private BombPane bombPane ;
+	private TimeAndScorePane timeAndScorePane;
 	private static MainGameScreen instance;
 	
-	public static MainGameScreen getInstance() {
-		if (instance == null) instance = new MainGameScreen();
-		return instance;
-	}
-
 	private MainGameScreen() {
 		// TODO Auto-generated method stub
 		super(new Pane(),GameLogic.WIDTH,GameLogic.HEIGHT);
-		Canvas canvas = new Canvas(GameLogic.WIDTH,GameLogic.HEIGHT);
-		gc = canvas.getGraphicsContext2D();
-		canvas.setCursor(Cursor.MOVE);
-		canvas.setOnMouseMoved(e-> mouseX = e.getX());
-		canvas.setOnMouseClicked(new EventHandler<Event>() {
+		setCanvas(new Canvas(GameLogic.WIDTH,GameLogic.HEIGHT));
+		setGc(getCanvas().getGraphicsContext2D());
+		getCanvas().setCursor(Cursor.MOVE);
+		getCanvas().setOnMouseMoved(e-> setMouseX(e.getX()));
+		getCanvas().setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event e) {
@@ -69,62 +65,105 @@ public class MainGameScreen extends Scene{
             	}
 			}
 		});
-		timerAndScorePane = new TimeAndScorePane();
-		timerAndScorePane.setTranslateX(680);
+		
+		timeAndScorePane = new TimeAndScorePane();
+		timeAndScorePane.setTranslateX(680);
 		bombPane = new BombPane();
 		bombPane.setAlignment(Pos.BOTTOM_RIGHT);
-		
-		try {
-			endGame = FXMLLoader.load(getClass().getClassLoader().getResource("gui/EndGameScene.fxml"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			pauseScene = FXMLLoader.load(getClass().getClassLoader().getResource("gui/PauseScene.fxml"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		PauseController pause = new PauseController();
-		pause.setTranslateX(10);
-		pause.setTranslateY(10);
-		pauseScene.setVisible(false);
-		endGame.setVisible(false);
 		bombPane.setTranslateX(700);
 		bombPane.setTranslateY(520);
-		root.getChildren().addAll(canvas,timerAndScorePane,bombPane,pause,endGame,pauseScene);
+		PauseController pauseBtn = new PauseController();
+		pauseBtn.setTranslateX(10);
+		pauseBtn.setTranslateY(10);
+		initializeEndGameScene();
+		initializePauseScene();
+		root.getChildren().addAll(getCanvas(),timeAndScorePane,bombPane,pauseBtn,getEndGameScene(),getPauseScene());
 		this.setRoot(root);
 	}
 
 	public void run() {
 		bombPane.drawCurrentAmount(BombPane.getGc());
-		timerAndScorePane.updateScore(timerAndScorePane.getGc());
+		timeAndScorePane.updateScore(timeAndScorePane.getGc());
 		Platform.runLater(new Runnable() {
 			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				gc.drawImage(sharedObject.RenderableHolder.mainGameBg,0,0, GameLogic.WIDTH,GameLogic.HEIGHT);
-				GameLogic.runGameScence(gc);
+				getGc().drawImage(sharedObject.RenderableHolder.mainGameBg,0,0, GameLogic.WIDTH,GameLogic.HEIGHT);
+				GameLogic.runGameScence(getGc());
 			}
 		});
 		
 	}
 	
+	public void initializeEndGameScene() {
+		try {
+			setEndGameScene(FXMLLoader.load(getClass().getClassLoader().getResource("gui/EndGameScene.fxml")));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		getEndGameScene().setVisible(false);
+	}
+	
+	public void initializePauseScene() {
+		try {
+			setPauseScene(FXMLLoader.load(getClass().getClassLoader().getResource("gui/PauseScene.fxml")));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		getPauseScene().setVisible(false);
+	}
+	
+	public static void restart(){
+		GameLogic.InitializeGame();
+		MainGameScreen.instance = null;
+	}
+	
+	public static MainGameScreen getInstance() {
+		if (instance == null) instance = new MainGameScreen();
+		return instance;
+	}
+	
 	public GraphicsContext getGc() {
 		return gc;
+	}
+	
+	public void setGc(GraphicsContext gc) {
+		this.gc = gc;
 	}
 
 	public double getMouseX() {
 		return mouseX;
 	}
+	
 	public void setMouseX(double mouseX) {
 		this.mouseX = mouseX;
 	}
-	public static void restart(){
-		GameLogic.InitializeGame();
-		MainGameScreen.instance = null;
+	
+	public Canvas getCanvas() {
+		return canvas;
+	}
+
+	public void setCanvas(Canvas canvas) {
+		this.canvas = canvas;
+	}
+
+	public Parent getEndGameScene() {
+		return endGameScene;
+	}
+
+	public void setEndGameScene(Parent endGameScene) {
+		this.endGameScene = endGameScene;
+	}
+
+	public Parent getPauseScene() {
+		return pauseScene;
+	}
+
+	public void setPauseScene(Parent pauseScene) {
+		this.pauseScene = pauseScene;
 	}
 	
 }
