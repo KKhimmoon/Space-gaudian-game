@@ -9,19 +9,19 @@ import sharedObject.RenderableHolder;
 public class Enemy extends Rocket{
 	    private int  blood;
 		private int speed;
-		private int ownscore;
+		private int ownScore;
 		public Enemy(int posX, int posY, int size) {
 			super(posX,posY,size);
 			setSpeed(3);
 			setBlood(30);
-			setOwnscore(15);
+			setOwnScore(15);
 			// TODO Auto-generated constructor stub
 		}
-		public int getOwnscore() {
-			return ownscore;
+		public int getOwnScore() {
+			return ownScore;
 		}
-		public void setOwnscore(int ownscore) {
-			this.ownscore = ownscore;
+		public void setOwnScore(int ownScore) {
+			this.ownScore = ownScore;
 		}
 
 		public int getSpeed() {
@@ -59,4 +59,5 @@ public class Enemy extends Rocket{
 				gc.drawImage(sharedObject.RenderableHolder.enemy,getPosX(),getPosY(),getSize(),getSize());
 		   }
 		}
+
 }

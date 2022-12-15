@@ -10,7 +10,7 @@ public class Shot extends Entity implements Updateable,Collidable {
 	public boolean isRemove;
 	private String name;
 	private int speed;
-	static final int size = 6;
+	public static final int size = 6;
 	public Shot(int posX,int posY,String name) {
 		super();
 		setPosX(posX);
@@ -78,7 +78,7 @@ public class Shot extends Entity implements Updateable,Collidable {
 		this.speed = speed;
 	}
 	@Override
-	public boolean colide(Rocket other) {
+	public boolean collide(Rocket other) {
 		// TODO Auto-generated method stub
 		int d = GameLogic.distance(this.getPosX() + size/5,this.posY + size/5, other.getPosX() + other.getSize()/5,other.getPosY() + other.getSize()/5);
 		return d < other.getSize()/3 + other.getSize()/3;
@@ -86,6 +86,7 @@ public class Shot extends Entity implements Updateable,Collidable {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		
 		setPosY(getPosY()-getSpeed());
 	}
 	@Override

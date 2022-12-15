@@ -10,13 +10,11 @@ import javafx.scene.image.Image;
 public class Rocket extends Entity implements Updateable,Collidable{
 	private int power;
 	private int size;
-	private boolean exploding;
-	private int explosionStep;
+	private boolean isExploding;
 	public Rocket(int posX,int posY,int size) {
 		setPosX(posX);
 		setPosY(posY);
 		setSize(size);
-//		setExplosionStep(0);
 		setDestroyed(false);
 		setExploding(false);
 		setPower(5);
@@ -41,29 +39,22 @@ public class Rocket extends Entity implements Updateable,Collidable{
 	}
 
 	public boolean isExploding() {
-		return exploding;
+		return isExploding;
 	}
-	public void setExploding(boolean exploding) {
-		this.exploding = exploding;
+	public void setExploding(boolean isExploding) {
+		this.isExploding = isExploding;
 	}
 	public void explode() {
 		setExploding(true);
-//		setExplosionStep(-1);
-	}
-	public int getExplosionStep() {
-		return explosionStep;
-	}
-	public void setExplosionStep(int explosionStep) {
-		this.explosionStep = explosionStep;
 	}
 	@Override
 	public int getZ() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	public boolean colide(Rocket other) {
+	public boolean collide(Rocket other) {
 		int d = GameLogic.distance(this.getPosX() + size/2,this.posY + size/2, other.getPosX() + other.getSize()/2,other.getPosY() + other.getSize()/2);
-		return d < other.getSize()/2 + other.getSize()/2;
+		return d < other.getSize()/2 + this.getSize()/2;
 	}
 	@Override
 	public void update() {

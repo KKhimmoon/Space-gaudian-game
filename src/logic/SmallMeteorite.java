@@ -9,7 +9,7 @@ public class SmallMeteorite extends Enemy{
 		super(posX, posY, 80);
 		setSpeed(3);
 		setBlood(5);
-		setOwnscore(2);
+		setOwnScore(2);
 		// TODO Auto-generated constructor stub
 	}
 	public void draw(GraphicsContext gc) {

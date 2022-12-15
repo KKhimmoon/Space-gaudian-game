@@ -213,7 +213,7 @@ public class GameLogic {
 			}
 			shot.update();
 			shot.draw(gc);
-			if(shot.colide(player)) {
+			if(shot.collide(player)) {
 					score--;
 					shot.setRemove(true);
 			}
@@ -247,7 +247,7 @@ public class GameLogic {
 	}
 	public static void collideBombItem(ConcurrentLinkedQueue<BombItem> allBombitems,Rocket player) {
 		 for(BombItem x: allBombitems) {
-			if(player.colide(x) && !player.isExploding()) {
+			if(player.collide(x) && !player.isExploding()) {
 				sharedObject.RenderableHolder.collectedSound.play();
 				x.explode();
 				setAmountBomb(getAmountBomb()+1);
@@ -256,7 +256,7 @@ public class GameLogic {
 	}	
 	public static void collideBulletItem(ConcurrentLinkedQueue<BulletItem> allBulletitems,Rocket player) {
 		for(BulletItem x: allBulletitems) {
-			if(player.colide(x) && !player.isExploding()) {
+			if(player.collide(x) && !player.isExploding()) {
 				sharedObject.RenderableHolder.collectedSound.play();
 				x.explode();
 				bulletState += 1;
@@ -322,7 +322,7 @@ public class GameLogic {
 			shot.update();
 			shot.draw(gc);
 			for(Enemy x: allEnemys) {
-				if(shot.colide(x) && !x.isExploding()) {
+				if(shot.collide(x) && !x.isExploding()) {
 					shot.setRemove(true);
 					x.attack(player);
 					if(shot.getName() == "Bomb Shot") {
@@ -332,7 +332,7 @@ public class GameLogic {
 					}
 					if(x.getBlood() == 0) {
 							x.explode();
-							score += x.getOwnscore();
+							score += x.getOwnScore();
 						}
 					}
 				if(!(x instanceof BigMeteorite ||x instanceof SmallMeteorite) && x.isExploding()) {

@@ -9,7 +9,7 @@ public class BigMeteorite extends Enemy {
 		super(posX, posY, 150);
 		setSpeed(2);
 		setBlood(15);
-		setOwnscore(5);
+		setOwnScore(5);
 		// TODO Auto-generated constructor stub
 	}
 	public void draw(GraphicsContext gc) {
