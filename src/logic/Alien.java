@@ -41,7 +41,7 @@ public class Alien extends Enemy {
 	  } 
    }
 	public Shot shoot() {
-		return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY() +getSize()/2 ,-10);
+		return new Shot(getPosX()+getSize()/2 - Shot.SIZE/2,getPosY() +getSize()/2 ,-10);
 	}
 	public void draw(GraphicsContext gc) {
 		if(!isExploding()) {

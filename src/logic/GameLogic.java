@@ -360,7 +360,7 @@ public static void setBulletState(int bulletState) {
 				if(shot.collide(x) && !x.isExploding()) {
 					shot.setRemove(true);
 					x.attack(player);
-					if(shot.getName() == "Bomb Shot") {
+					if(shot.getName().equals("Bomb Shot")) {
 							sharedObject.RenderableHolder.destroySound.play();
 							allParticles.add(new Particle(shot.getPosX(),shot.getPosY()));
 							x.explode();

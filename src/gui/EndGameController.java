@@ -22,8 +22,6 @@ import javafx.stage.Stage;
 import screenDrawing.MainGameScreen;
 
 public class EndGameController implements Initializable{
-	private Stage stage;
-	private Scene scene;
 	@FXML 
 	private Pane popUp;
 	@FXML 
@@ -41,6 +39,8 @@ public class EndGameController implements Initializable{
 	@FXML
 	private ImageView playAgainImg;
 	
+	private Stage stage;
+	private Scene scene;
 	private Canvas canvas;
 	private static GraphicsContext gc;
 

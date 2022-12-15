@@ -59,7 +59,7 @@ public class Space extends Entity implements Updateable,Collidable{
 		}
 	}	
 	public Shot shoot(String name) {
-		return new Shot(getPosX()+getSize()/2 - Shot.size/2,getPosY() - Shot.size,name);
+		return new Shot(getPosX()+getSize()/2 - Shot.SIZE/2,getPosY() - Shot.SIZE,name);
 	}
 	
 	@Override
