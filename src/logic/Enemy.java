@@ -6,7 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import sharedObject.RenderableHolder;
 
-public class Enemy extends Rocket{
+public class Enemy extends Space{
 	    private int  blood;
 		private int speed;
 		private int ownScore;
@@ -40,7 +40,7 @@ public class Enemy extends Rocket{
 				this.blood = blood;
 			}
 		}
-		public void attack(Rocket other) {
+		public void attack(Space other) {
 			if(getBlood() <= other.getPower()) {
 				setBlood(0);
 			}else {

@@ -44,7 +44,7 @@ import javafx.scene.layout.BackgroundImage;
 
 public class GameLogic {
 
-	private static Rocket player;
+	private static Space player;
 	private static ConcurrentLinkedQueue<Shot> allShots;
 	private static ConcurrentLinkedQueue<Shot> allEnemysShots;
 	private static ConcurrentLinkedQueue<BombItem> allBombitems;
@@ -60,9 +60,9 @@ public class GameLogic {
 	private static boolean hasAlien;
 	public static int amountBomb;
 	public static int countBomb;
-	public static int countterBomb;
+	public static int counterBomb;
 	public static int countBullet;
-	public static int countterBullet;
+	public static int counterBullet;
 	public static int bulletState;
 
 	
@@ -79,11 +79,11 @@ public class GameLogic {
 		allBombitems = new ConcurrentLinkedQueue<>();
 		allEnemys = new ConcurrentLinkedQueue<>();
 		allParticles = new ConcurrentLinkedQueue<>();
-		player = new Rocket(WIDTH/2,HEIGHT-PLAYER_SIZE-30,PLAYER_SIZE);
+		player = new Space(WIDTH/2,HEIGHT-PLAYER_SIZE-30,PLAYER_SIZE);
 		setAmountBomb(0);
-		setCountterBomb(0);
+		setCounterBomb(0);
 		setCountBullet(1200);
-		setCountterBullet(0);
+		setCounterBullet(0);
 		setCountBomb(1000);
 		setBulletState(0);
 		setScore(0);
@@ -134,12 +134,12 @@ public class GameLogic {
 		GameLogic.amountBomb = amountBomb;
 	}
 
-	public static int getCountterBomb() {
-		return countterBomb;
+	public static int getCounterBomb() {
+		return counterBomb;
 	}
 
-	public static void setCountterBomb(int countterBomb) {
-		GameLogic.countterBomb = countterBomb;
+	public static void setCounterBomb(int counterBomb) {
+		GameLogic.counterBomb = counterBomb;
 	}
 
 	public static int getCountBullet() {
@@ -150,12 +150,12 @@ public class GameLogic {
 		GameLogic.countBullet = countBullet;
 	}
 
-	public static int getCountterBullet() {
-		return countterBullet;
+	public static int getCounterBullet() {
+		return counterBullet;
 	}
 
-	public static void setCountterBullet(int countterBullet) {
-		GameLogic.countterBullet = countterBullet;
+	public static void setCounterBullet(int countterBullet) {
+		GameLogic.counterBullet = countterBullet;
 	}
 
 	public static int distance(int x1,int y1,int x2,int y2) {
@@ -180,8 +180,9 @@ public class GameLogic {
 	public static int getBulletState() {
 		return bulletState;
 	}
-	public static void setBulletState(int bulletState) {
-		bulletState = bulletState;
+	
+public static void setBulletState(int bulletState) {
+		GameLogic.bulletState = bulletState;
 	}
 	public static int getScore() {
 		return score;
@@ -204,10 +205,10 @@ public class GameLogic {
 	public static BigMeteorite newBigMeteo() {
 		return new BigMeteorite(10 + RAND.nextInt(WIDTH-120),0,PLAYER_SIZE);
 	}
-	public static Rocket getPlayer() {
+	public static Space getPlayer() {
 		return player;
 	}
-	public static void setPlayer(Rocket player) {
+	public static void setPlayer(Space player) {
 		GameLogic.player = player;
 	}
 	public static ConcurrentLinkedQueue<Shot> getAllShots() {
@@ -228,11 +229,11 @@ public class GameLogic {
 		collideEnemyShot(allEnemysShots,player);
 		addBulletItems(allBulletitems);
 		addBombItems(allBombitems);
-		releaseBulletItem(allBulletitems,getCountterBullet(),getCountBullet());
-		releaseBombItem(allBombitems,getCountterBomb(),getCountBomb());
 		collideBombItem(allBombitems,player);
 		collideBulletItem(allBulletitems,player);
 		removeDeadEnemy(allEnemys);
+		releaseBulletItem(allBulletitems,getCounterBullet(),getCountBullet());
+		releaseBombItem(allBombitems,getCounterBomb(),getCountBomb());
 		attackAllEnemys(allShots,allEnemys);
 		checkAllParticles(allParticles);
 		player.update();
@@ -240,7 +241,7 @@ public class GameLogic {
 		player.setPosX((int) screendrawing.MainGameScreen.getInstance().getMouseX());
 	}
 
-	public static void collideEnemyShot(ConcurrentLinkedQueue<Shot> allEnemysShots,Rocket player) {
+	public static void collideEnemyShot(ConcurrentLinkedQueue<Shot> allEnemysShots,Space player) {
 		for(Shot shot: allEnemysShots) {
 			if(shot.getPosY()< 0 || shot.isRemove) {
 				allEnemysShots.remove(shot);
@@ -249,19 +250,19 @@ public class GameLogic {
 			shot.update();
 			shot.draw(gc);
 			if(shot.collide(player)) {
-					score--;
+					setScore(getScore()-1);
 					shot.setRemove(true);
 			}
 		}
 	}
 	public static void releaseBulletItem(ConcurrentLinkedQueue<BulletItem> allBulletitems,int countterBullet,int countBullet){
 		for(BulletItem x: allBulletitems) {
-			setCountterBullet(getCountterBullet()+1);
-			if(getCountterBullet() >=  getCountBullet()) {
+			setCounterBullet(getCounterBullet()+1);
+			if(getCounterBullet() >=  getCountBullet()) {
 				x.draw(gc);
 				x.update();
 				if(x.isDestroyed() || x.isExploding()) {
-					setCountterBullet(0);
+					setCounterBullet(0);
 					allBulletitems.remove(x);
 				}
 			}
@@ -269,18 +270,18 @@ public class GameLogic {
 	}
 	public static void releaseBombItem(ConcurrentLinkedQueue<BombItem> allBombitems,int countterBomb,int countBomb) {
 		for(BombItem x: allBombitems) {
-			setCountterBomb(getCountterBomb()+1);
-			if(getCountterBomb() >= getCountBomb()) {
+			setCounterBomb(getCounterBomb()+1);
+			if(getCounterBomb() >= getCountBomb()) {
 				x.draw(gc);
 				x.update();
 				if(x.isDestroyed() || x.isExploding()) {
-					setCountterBomb(0);
+					setCounterBomb(0);
 					allBombitems.remove(x);
 			}
 		 }
 	  }
 	}
-	public static void collideBombItem(ConcurrentLinkedQueue<BombItem> allBombitems,Rocket player) {
+	public static void collideBombItem(ConcurrentLinkedQueue<BombItem> allBombitems,Space player) {
 		 for(BombItem x: allBombitems) {
 			if(player.collide(x) && !player.isExploding()) {
 				sharedObject.RenderableHolder.collectedSound.play();
@@ -289,12 +290,12 @@ public class GameLogic {
 			}
 		  }
 	}	
-	public static void collideBulletItem(ConcurrentLinkedQueue<BulletItem> allBulletitems,Rocket player) {
+	public static void collideBulletItem(ConcurrentLinkedQueue<BulletItem> allBulletitems,Space player) {
 		for(BulletItem x: allBulletitems) {
 			if(player.collide(x) && !player.isExploding()) {
 				sharedObject.RenderableHolder.collectedSound.play();
 				x.explode();
-				bulletState += 1;
+				setBulletState(getBulletState()+1);
 				player.setPower(player.getPower() + 3);
 			}
 		}
@@ -322,7 +323,6 @@ public class GameLogic {
 	public static void addShotsEnemy(ConcurrentLinkedQueue<Enemy> allEnemys,ConcurrentLinkedQueue<Shot> alleEnemysShots) {
 		for(Enemy x: allEnemys) {
 			if(x instanceof Alien) {
-//				x.update();
 				if(x.isExploding()|| x.isDestroyed()) {
 					allEnemys.remove(x); 
 					continue;

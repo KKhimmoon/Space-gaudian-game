@@ -41,11 +41,11 @@ public class Shot extends Entity implements Updateable,Collidable {
 		}else if(getName() == "Bomb Shot") {
 			gc.drawImage(sharedObject.RenderableHolder.bombshot,Math.min(745,getPosX()), posY, size+50, size+50);
 		}else {
-			if (GameLogic.bulletState == 1) {
+			if (GameLogic.getBulletState() == 1) {
 				gc.drawImage(sharedObject.RenderableHolder.shot2,Math.min(742,getPosX()-5), posY, size+10, size+25);
-			} else if  (GameLogic.bulletState == 2) {
+			} else if  (GameLogic.getBulletState() == 2) {
 				gc.drawImage(sharedObject.RenderableHolder.shot3,Math.min(745,getPosX()), posY, size, size+25);
-			} else if  (GameLogic.bulletState >= 3) {
+			} else if  (GameLogic.getBulletState() >= 3) {
 				gc.drawImage(sharedObject.RenderableHolder.shot3,Math.min(745,getPosX()+ size/2 + 1), posY, size, size+25);
 				gc.drawImage(sharedObject.RenderableHolder.shot3,Math.min(745,getPosX()- size/2 - 1), posY, size, size+25);
 			}else {
@@ -78,7 +78,7 @@ public class Shot extends Entity implements Updateable,Collidable {
 		this.speed = speed;
 	}
 	@Override
-	public boolean collide(Rocket other) {
+	public boolean collide(Space other) {
 		// TODO Auto-generated method stub
 		int d = GameLogic.distance(this.getPosX() + size/5,this.posY + size/5, other.getPosX() + other.getSize()/5,other.getPosY() + other.getSize()/5);
 		return d < other.getSize()/3 + other.getSize()/3;
@@ -86,12 +86,12 @@ public class Shot extends Entity implements Updateable,Collidable {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+		if(isRemove) {setDestroyed(isRemove);}
 		setPosY(getPosY()-getSpeed());
 	}
-	@Override
-	public int getZ() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	@Override
+//	public int getZ() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 }
